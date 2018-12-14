@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="HaProxy,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="HAProxy: LB Cluster: 四层：   lvs, nginx(stream)，haproxy(mode tcp)  七层： http: nginx(http, ngx_http_upstream_module), haproxy(mode http), httpd, ats, perlbal, pound…     HAProxy：  http://www.haproxy.org h">
+<meta name="keywords" content="HaProxy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HaProxy">
+<meta property="og:url" content="http://boke.buxunxian.com/2018/12/13/other/HaPorxy/index.html">
+<meta property="og:site_name" content="步荀仙的博客">
+<meta property="og:description" content="HAProxy: LB Cluster: 四层：   lvs, nginx(stream)，haproxy(mode tcp)  七层： http: nginx(http, ngx_http_upstream_module), haproxy(mode http), httpd, ats, perlbal, pound…     HAProxy：  http://www.haproxy.org h">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/1.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/2.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/3.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/4.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/5.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/6.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/7.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/8.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/9.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/10.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/11.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/12.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/13.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/14.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/15.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/16.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/17.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/18.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/19.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/20.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/21.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/22.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/23.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/24.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/25.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/26.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/27.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/28.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/45.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/46.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/47.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/48.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/49.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/50.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/51.png">
+<meta property="og:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/52.png">
+<meta property="og:updated_time" content="2018-12-13T13:01:26.680Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HaProxy">
+<meta name="twitter:description" content="HAProxy: LB Cluster: 四层：   lvs, nginx(stream)，haproxy(mode tcp)  七层： http: nginx(http, ngx_http_upstream_module), haproxy(mode http), httpd, ats, perlbal, pound…     HAProxy：  http://www.haproxy.org h">
+<meta name="twitter:image" content="http://www.buxunxian.com/wp-content/uploads/2018/06/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://boke.buxunxian.com/2018/12/13/other/HaPorxy/">
+
+
+
+
+
+  <title>HaProxy | 步荀仙的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">步荀仙的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2018/12/13/other/HaPorxy/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="步荀仙">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kyz.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="步荀仙的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HaProxy</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-13T21:01:26+08:00">
+                2018-12-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/other/" itemprop="url" rel="index">
+                    <span itemprop="name">other</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="HAProxy"><a href="#HAProxy" class="headerlink" title="HAProxy:"></a>HAProxy:</h1><ul>
+<li>LB Cluster:<ul>
+<li>四层：</li>
+</ul>
+</li>
+<li><p>lvs, nginx(stream)，haproxy(mode tcp)</p>
+<ul>
+<li>七层：<ul>
+<li>http: nginx(http, ngx_http_upstream_module), haproxy(mode http), httpd, ats, perlbal, pound…</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>HAProxy：</p>
+<ul>
+<li><a href="http://www.haproxy.org" target="_blank" rel="noopener">http://www.haproxy.org</a></li>
+<li><a href="http://www.haproxy.com" target="_blank" rel="noopener">http://www.haproxy.com</a> </li>
+</ul>
+</li>
+<li><p>文档：</p>
+<ul>
+<li><a href="http://cbonte.github.io/haproxy-dconv/" target="_blank" rel="noopener">http://cbonte.github.io/haproxy-dconv/</a></li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>HAProxy is a TCP/HTTP reverse proxy which is particularly suited for high availability environments. Indeed, it can:<ul>
+<li>route HTTP requests depending on statically assigned cookies</li>
+<li>spread load among several servers while assuring server persistence</li>
+<li>through the use of HTTP cookies</li>
+<li>switch to backup servers in the event a main server fails</li>
+<li>accept connections to special ports dedicated to service monitoring</li>
+<li>stop accepting connections without breaking existing ones</li>
+<li>add, modify, and delete HTTP headers in both directions</li>
+<li>block requests matching particular patterns</li>
+<li>report detailed status to authenticated users from a URI intercepted by the application</li>
+</ul>
+</li>
+</ul>
+<p>版本：1.4, 1.5, 1.6, 1.7</p>
+<ul>
+<li><p>程序环境：</p>
+<ul>
+<li>主程序：/usr/sbin/haproxy</li>
+<li>主配置文件：/etc/haproxy/haproxy.cfg</li>
+<li>Unit file：/usr/lib/systemd/system/haproxy.servic e</li>
+</ul>
+</li>
+<li><p>配置段：</p>
+<ul>
+<li>global：全局配置段<ul>
+<li>进程及安全配置相关的参数</li>
+<li>性能调整相关参数</li>
+<li>Debug参数</li>
+</ul>
+</li>
+<li>proxies：代理配置段<ul>
+<li>defaults：为frontend, listen, backend提供默认配置；</li>
+<li>fronted：前端，相当于nginx, server {}</li>
+<li>backend：后端，相当于nginx, upstream {}</li>
+<li>listen：同时拥前端和后端</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>简单的配置示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">frontend web</span><br><span class="line">bind *:80</span><br><span class="line">default_backend     websrvs</span><br><span class="line"> </span><br><span class="line">backend websrvs</span><br><span class="line">balance roundrobin</span><br><span class="line">server srv1 172.16.100.6:80 check</span><br><span class="line">server srv2 172.16.100.7:80 check</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>global配置参数：</p>
+<ul>
+<li><p>进程及安全管理：chroot, deamon，user, group, uid, gid</p>
+<ul>
+<li>log：定义全局的syslog服务器；最多可以定义两个；<ul>
+<li>log <address> [len <length>] <facility> [max level [min level]]</facility></length></address></li>
+</ul>
+</li>
+<li>nbproc <number>：要启动的haproxy的进程数量；（单进程模式）</number></li>
+<li>ulimit-n <number>：每个haproxy进程可打开的最大文件数；</number></li>
+</ul>
+</li>
+<li><p>性能调整：</p>
+<ul>
+<li>maxconn <number>：设定每个haproxy进程所能接受的最大并发连接数；Sets the maximum per-process number of concurrent connections to <number>.定义一次性接受多少数据</number></number></li>
+<li>maxconnrate <number>：Sets the maximum per-process number of connections per second to <number>. 每个进程每秒种所能创建的最大连接数量；每秒钟接入的请求书</number></number></li>
+<li>maxsessrate <number>：每秒钟处理的会话数</number></li>
+<li>maxsslconn <number>: Sets the maximum per-process number of concurrent SSL connections to <number>.spread-checks &lt;0..50, in percent&gt;处理ssl连接速率</number></number></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>代理配置段：</p>
+<ul>
+<li>defaults <name></name></li>
+<li>frontend <name></name></li>
+<li>backend  <name></name></li>
+<li>listen   <name>：没有后端只有前端的时候也可以使用前段</name></li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>A “frontend” section describes a set of listening sockets accepting client connections.</p>
+</blockquote>
+<blockquote>
+<p>A “backend” section describes a set of servers to which the proxy will connect to forward incoming connections.</p>
+</blockquote>
+<blockquote>
+<p>A “listen” section defines a complete proxy with its frontend and backend parts combined in one section. It is generally useful for TCP-only traffic.</p>
+</blockquote>
+<blockquote>
+<p>All proxy names must be formed from upper and lower case letters, digits, ‘-‘ (dash), ‘_’ (underscore) , ‘.’ (dot) and ‘:’ (colon). 区 分字符大小写；</p>
+</blockquote>
+<ul>
+<li>配置参数：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bind：Define one or several listening addresses and/or ports in a frontend.</span><br><span class="line">bind [&lt;address&gt;]:&lt;port_range&gt; [, ...] [param*]</span><br><span class="line">用来在前段中监听端口的，可以监听多个端口</span><br><span class="line">listen http_proxy</span><br><span class="line">bind :80,:443</span><br><span class="line">bind 10.0.0.1:10080,10.0.0.1:10443</span><br><span class="line">bind /var/run/ssl-frontend.sock user root mode 600 accept-proxy</span><br></pre></td></tr></table></figure>
+<ul>
+<li>balance：后端服务器组内的服务器调度算法<ul>
+<li>balance <algorithm> [ <arguments> ]</arguments></algorithm></li>
+<li>balance url_param <param> [check_post]                                <ul>
+<li>静态：</li>
+<li>动态：</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>算法：</p>
+<ul>
+<li>roundrobin：Each server is used in turns, according to their weights.<ul>
+<li>server options： weight #</li>
+<li>动态算法：支持权重的运行时调整，支持慢启动；每个后端中最多支持4095个server；</li>
+</ul>
+</li>
+<li><p>static-rr：</p>
+<ul>
+<li>静态算法：不支持权重的运行时调整及慢启动；后端主机数量无上限；</li>
+</ul>
+</li>
+<li><p>leastconn：</p>
+<ul>
+<li>推荐使用在具有较长会话的场景中，例如MySQL、LDAP等；</li>
+</ul>
+</li>
+<li>first：<ul>
+<li>根据服务器在列表中的位置，自上而下进行调度；前面服务器的连接数达到上限，新请求才会分配给下一台服务；（用于弹性调度，最大化的利用服务器的利用率）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>source：源地址hash；</p>
+<ul>
+<li>除权取余法：</li>
+<li><p>一致性哈希：<br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/1.png" alt=""></p>
+</li>
+<li><p>绑定访问地址<br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/2.png" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/3.png" alt=""></p>
+<ul>
+<li>uri：<ul>
+<li>对URI的左半部分做hash计算，并由服务器总权重相除以后派发至某挑出的服务器；<ul>
+<li><scheme>://<user>:<password>@<host>:<port>/<path>;<params>?<queiy>#<frag><ul>
+<li>左半部分：/<path>;<params></params></path></li>
+<li>整个uri：/<path>;<params>?<query>#<frag><br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/4.png" alt=""></frag></query></params></path></li>
+</ul>
+</frag></queiy></params></path></port></host></password></user></scheme></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/5.png" alt=""></p>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/6.png" alt=""></p>
+<pre><code>- 提升缓存命中率
+</code></pre><ul>
+<li>url_param：对用户请求的uri听<params>部分中的参数的值作hash计算，并由服务器总权重相除以后派发至某挑出的服务器；通常用于追踪用户，以确保来自同一个用户的请求始终发往同一个Backend Server；<ul>
+<li><params> 基于URL重定向的方式对用户请求进行绑定的，根据URL中用户所指定的值，来帮顶后端服务</params></li>
+</ul>
+</params></li>
+</ul>
+<ul>
+<li><p>hdr(<name>)：对于每个http请求，此处由<name>指定的http首部将会被取出做hash计算； 并由服务器总权重相除以后派发至某挑出的服务器；没有有效值的会被轮询调度； </name></name></p>
+<ul>
+<li>hdr(Cookie)</li>
+<li>rdp-cookie   3389   远程桌面协议</li>
+<li>rdp-cookie(<name>)        </name></li>
+</ul>
+</li>
+<li><p>hash-type：哈希算法</p>
+<ul>
+<li>hash-type <method> <function> <modifier></modifier></function></method></li>
+<li>map-based：除权取余法，哈希数据结构是静态的数组；</li>
+<li>consistent：一致性哈希，哈希数据结构是一个树；</li>
+</ul>
+</li>
+<li><p><function> is the hash function to be used : 哈希函数</function></p>
+<ul>
+<li>sdbm</li>
+<li>djb2</li>
+<li>wt6</li>
+</ul>
+</li>
+</ul>
+<p>default_backend <backend><br>设定默认的backend，用于frontend中；</backend></p>
+<p>default-server [param*]<br>为backend中的各server设定默认选项；</p>
+<ul>
+<li>回顾：<ul>
+<li>tcp/http reverse proxy；</li>
+<li>haproxy.cfg<ul>
+<li>global, proxies</li>
+<li>proxies：<ul>
+<li>defaults</li>
+<li>frontend</li>
+<li>listen</li>
+<li>backend</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>proxies：bind、balance、hash-type、default_backend、server</p>
+<ul>
+<li>balance：<ul>
+<li>roundrobin、static-rr、leastconn、first、source、uri、hdr(<header>)、url_param、…</header></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>HAProxy(2)</p>
+<ul>
+<li><p>server <name> <address>[:[port]] [param*]</address></name></p>
+<ul>
+<li>定义后端主机的各服务器及其选项；<ul>
+<li>server <name> <address>[:port] [settings …]</address></name></li>
+<li>default-server [settings …]</li>
+</ul>
+</li>
+<li><name>：服务器在haproxy上的内部名称；出现在日志及警告信息；</name></li>
+<li><address>：服务器地址，支持使用主机名；</address></li>
+<li>[:[port]]：端口映射；省略时，表示同bind中绑定的端口；</li>
+<li><p>[param*]：参数</p>
+<ul>
+<li>maxconn <maxconn>：当前server的最大并发连接数；</maxconn></li>
+<li>backlog <backlog>：当前server的连接数达到上限后的后援队列长度；</backlog></li>
+<li>backup：设定当前server为备用服务器；</li>
+<li>check：对当前server做健康状态检测；<ul>
+<li>addr ：检测时使用的IP地址；</li>
+<li>port ：针对此端口进行检测；</li>
+<li>inter <delay>：连续两次检测之间的时间间隔，默认为2000ms; </delay></li>
+<li>rise <count>：连续多少次检测结果为“成功”才标记服务器为可用；默认为2；</count></li>
+<li>fall <count>：连续多少次检测结果为“失败”才标记服务器为不可用；默认为3； <blockquote>
+<p>注意：httpchk，”smtpchk”, “mysql-check”, “pgsql-check” and “ssl-hello-chk” 用于定义应用层检测方法；</p>
+</blockquote>
+</count></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>cookie <value>：为当前server指定其cookie值，用于实现基于cookie的会话黏性；</value></p>
+</li>
+<li>disabled：标记为不可用；</li>
+<li>redir <prefix>：将发往此server的所有GET和HEAD类的请求重定向至指定的URL；</prefix></li>
+<li>weight <weight>：权重，默认为1;<br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/7.png" alt=""></weight></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/8.png" alt=""></p>
+<p>试例<br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/9.png" alt=""></p>
+<p>*</p>
+<pre><code>* 1000毫秒做一次检查，
+* 成功一次则表示存在
+* 失败两次则表示不存在
+* 最大连接数时2000
+* 后援队列连接数是500 
+</code></pre><blockquote>
+<p>disabled 关闭服务器</p>
+</blockquote>
+<ul>
+<li>统计接口启用相关的参数：<ul>
+<li>stats enable<ul>
+<li>启用统计页；基于默认的参数启用stats page；<ul>
+<li>stats uri   : /haproxy?stats</li>
+<li>stats realm : “HAProxy Statistics”</li>
+<li>stats auth  : no authentication</li>
+<li>stats scope : no restriction<br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/10.png" alt=""></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/11.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stats auth &lt;user&gt;:&lt;passwd&gt;</span><br><span class="line">认证时的账号和密码，可使用多次；</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stats realm &lt;realm&gt;</span><br><span class="line">认证时的realm；</span><br></pre></td></tr></table></figure>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/12.png" alt=""></p>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/13.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stats uri &lt;prefix&gt;</span><br><span class="line">自定义stats page uri</span><br></pre></td></tr></table></figure>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/14.png" alt=""><br>大写<br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/15.png" alt=""><br>小写<br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/16.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stats refresh &lt;delay&gt;</span><br><span class="line">设定自动刷新时间间隔；</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stats admin &#123; if | unless &#125; &lt;cond&gt;</span><br><span class="line">启用stats page中的管理功能</span><br></pre></td></tr></table></figure>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/17.png" alt=""></p>
+<p>TURE：认证通过则为真</p>
+<p>LOCALHOST：仅本机才能访问</p>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/18.png" alt=""></p>
+<ul>
+<li>配置示例：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">listen stats </span><br><span class="line">	bind :9099</span><br><span class="line">	stats enable</span><br><span class="line">	stats realm HAPorxy\ Stats\ Page</span><br><span class="line">	stats auth admin:admin</span><br><span class="line">	stats admin if TRUE</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/19.png" alt=""></p>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/20.png" alt=""></p>
+<ul>
+<li><p>maxconn <conns>：为指定的frontend定义其最大并发连接数；默认为2000；</conns></p>
+<ul>
+<li>Fix the maximum number of concurrent connections on a frontend.  </li>
+</ul>
+</li>
+<li><p>mode { tcp|http|health }</p>
+<ul>
+<li>定义haproxy的工作模式；<ul>
+<li>tcp：基于layer4实现代理；可代理mysql, pgsql, ssh, ssl等协议；</li>
+<li>http：仅当代理的协议为http时使用；</li>
+<li>health：工作为健康状态检查的响应模式，当连接请求到达时回应“OK”后即断开连接；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>示例：<br>ssh测试连接<br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/21.png" alt=""></p>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/22.png" alt=""></p>
+<p>mysql连接测试<br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/23.png" alt=""></p>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/24.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">listen ssh</span><br><span class="line">bind :22022</span><br><span class="line">balance leastconn</span><br><span class="line">mode tcp</span><br><span class="line">server sshsrv1 172.16.100.6:22 check</span><br><span class="line">server sshsrv2 172.16.100.7:22 check</span><br></pre></td></tr></table></figure>
+<ul>
+<li>cookie <name> [ rewrite | insert | prefix ] [ indirect ] [ nocache ]  [ postonly ] [ preserve ] [ httponly ] [ secure ]  [ domain <domain> ]* [ maxidle <idle> ] [ maxlife <life> ]<ul>
+<li><name>：is the name of the cookie which will be monitored, modified or inserted in order to bring persistence.<ul>
+<li>rewirte：重写；</li>
+<li>insert：插入；</li>
+<li>prefix：前缀；</li>
+</ul>
+</name></li>
+<li>基于cookie的session sticky的实现：<br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/25.png" alt=""></li>
+</ul>
+</life></idle></domain></name></li>
+</ul>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/26.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">backend websrvs</span><br><span class="line">cookie WEBSRV insert nocache indirect</span><br><span class="line">server srv1 172.16.100.6:80 weight 2 check rise 1 fall 2 maxconn 3000 cookie srv1</span><br><span class="line">server srv2 172.16.100.7:80 weight 1 check rise 1 fall 2 maxconn 3000 cookie srv2</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>option forwardfor [ except <network> ] [ header <name> ] [ if-none ]</name></network></p>
+<ul>
+<li><p>Enable insertion of the X-Forwarded-For header to requests sent to servers</p>
+<blockquote>
+<p>在由haproxy发往后端主机的请求报文中添加“X-Forwarded-For”首部，其值前端客户端的地址；用于向后端主发送真实的客户端IP；</p>
+</blockquote>
+<blockquote>
+<p>X-Forwarded-For：在后端服务器中HTTPD的配置文件中，这样haproxy会向后端服务器提供客户端地址</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/27.png" alt=""></p>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/28.png" alt=""></p>
+<p>[ except <network> ]：请求报请来自此处指定的网络时不予添加此首部；<br>[ header <name> ]：使用自定义的首部名称，而非“X-Forwarded-For”；</name></network></p>
+<ul>
+<li><p>errorfile <code> <file></file></code></p>
+<ul>
+<li><p>Return a file contents instead of errors generated by HAProxy</p>
+</li>
+<li><p><code>：is the HTTP status code. Currently, HAProxy is capable of  generating codes 200, 400, 403, 408, 500, 502, 503, and 504.</code></p>
+</li>
+<li><file>：designates a file containing the full HTTP response.</file></li>
+</ul>
+</li>
+</ul>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">errorfile 400 /etc/haproxy/errorfiles/400badreq.http</span><br><span class="line">errorfile 408 /dev/null  # workaround Chrome pre-connect bug</span><br><span class="line">errorfile 403 /etc/haproxy/errorfiles/403forbid.http</span><br><span class="line">errorfile 503 /etc/haproxy/errorfiles/503sorry.http        </span><br><span class="line"></span><br><span class="line">errorloc &lt;code&gt; &lt;url&gt;</span><br><span class="line">errorloc302 &lt;code&gt; &lt;url&gt;</span><br><span class="line"> </span><br><span class="line">errorfile 403 http://www.magedu.com/error_pages/403.html</span><br><span class="line">``` </span><br><span class="line"> </span><br><span class="line">* reqadd  &lt;string&gt; [&#123;if | unless&#125; &lt;cond&gt;]</span><br><span class="line">	* Add a header at the end of the HTTP request</span><br><span class="line">	* 向一个请求报文添加首部</span><br><span class="line"> </span><br><span class="line">* rspadd &lt;string&gt; [&#123;if | unless&#125; &lt;cond&gt;]</span><br><span class="line">	* Add a header at the end of the HTTP response</span><br><span class="line">	* 向相应报文添加首部</span><br><span class="line">	* rspadd X-Via:\ HAPorxy</span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/29.png)</span><br><span class="line"></span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/30.png)</span><br></pre></td></tr></table></figure></p>
+<p>reqdel  <search> [{if | unless} <cond>]</cond></search></p>
+<p>reqidel <search> [{if | unless} <cond>]  (ignore case)      [i]区分字符大小写   reqdel不区分字符大小写 </cond></search></p>
+<p>Delete all headers matching a regular expression in an HTTP request</p>
+<p>rspdel  <search> [{if | unless} <cond>]</cond></search></p>
+<p>rspidel <search> [{if | unless} <cond>]  (ignore case)   [i]区分字符大小写   reqdel不区分字符大小写 </cond></search></p>
+<p>Delete all headers matching a regular expression in an HTTP response</p>
+<p>rspidel  Server.*<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">实例:屏蔽Server信息</span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/31.png)</span><br><span class="line"></span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/32.png)</span><br><span class="line"></span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/33.png)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">* 日志系统：                        </span><br><span class="line">	* log：</span><br><span class="line">		* log global</span><br><span class="line">		* log &lt;address&gt; [len &lt;length&gt;] &lt;facility&gt; [&lt;level&gt; [&lt;minlevel&gt;]]</span><br><span class="line">		* no log</span><br><span class="line"> </span><br><span class="line">* 注意：</span><br><span class="line">	* 默认发往本机的日志服务器；</span><br><span class="line">		* (1) local2.*      /var/log/local2.log </span><br><span class="line">		* (2) $ModLoad imudp</span><br><span class="line">		* $UDPServerRun 514</span><br><span class="line"> </span><br><span class="line">* log-format &lt;string&gt;：</span><br><span class="line">	* 课外实践：参考文档实现combined格式的记录</span><br></pre></td></tr></table></figure></p>
+<p>capture cookie <name> len <length><br>Capture and log a cookie in the request and in the response.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; 捕获并记录请求和相应报文中的cookie</span><br></pre></td></tr></table></figure></length></name></p>
+<p>capture request header <name> len <length><br>Capture and log the last occurrence of the specified request header.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; 捕获请求报文的首部</span><br></pre></td></tr></table></figure></length></name></p>
+<p>capture request header X-Forwarded-For len 15</p>
+<p>capture response header <name> len <length><br>Capture and log the last occurrence of the specified response header.</length></name></p>
+<p>capture response header Content-length len 9</p>
+<p>capture response header Location len 15<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">为指定的MIME类型启用压缩传输功能</span><br></pre></td></tr></table></figure></p>
+<p>compression algo <algorithm> …：启用http协议的压缩机制，指明压缩算法gzip, deflate；<br>compression type <mime type=""> …：指明压缩的MIMI类型；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/34.png)</span><br><span class="line"> </span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/35.png)</span><br><span class="line"></span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/36.png)</span><br><span class="line"></span><br><span class="line">对后端服务器做http协议的健康状态检测：</span><br></pre></td></tr></table></figure></mime></algorithm></p>
+<p>option httpchk<br>option httpchk <uri></uri></p>
+<p>option httpchk <method> <uri>   需要配置指定的内容时需要http-check-expect</uri></method></p>
+<p>option httpchk <method> <uri> <version><br>定义基于http协议的7层健康状态检测机制；</version></uri></method></p>
+<p>http-check expect [!] <match> <pattern><br>Make HTTP health checks consider response contents or specific status codes.<br>期望对方返回指定的内容<br>status:匹配响应码<br>rstatus:基于正则表达式匹配响应码<br>string:匹配相应内容<br>rstring:基于正则表达式匹配对方相应内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">添加option httpchk</span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/37.png)</span><br><span class="line"> </span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/38.png)</span><br><span class="line"></span><br><span class="line">指明具体的URI</span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/39.png)</span><br><span class="line"></span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/40.png)</span><br></pre></td></tr></table></figure></pattern></match></p>
+<p>option httpchk <method> <uri><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">匹配响应码</span><br><span class="line"></span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/41.png)</span><br><span class="line"></span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/42.png)</span><br><span class="line"></span><br><span class="line">正则匹配响应码</span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/43.png)</span><br><span class="line"></span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/44.png)</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">连接超时时长：</span><br><span class="line">```       </span><br><span class="line">timeout client &lt;timeout&gt;</span><br><span class="line">	Set the maximum inactivity time on the client side. 默认单位是毫秒; </span><br><span class="line"> </span><br><span class="line">timeout server &lt;timeout&gt;</span><br><span class="line">	Set the maximum inactivity time on the server side.</span><br><span class="line"> </span><br><span class="line">timeout http-keep-alive &lt;timeout&gt;</span><br></pre></td></tr></table></figure></uri></method></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">持久连接的持久时长；</span><br><span class="line"> </span><br><span class="line">timeout http-request &lt;timeout&gt;等待客户端发请求报文的超时时长</span><br><span class="line">	Set the maximum allowed time to wait for a complete HTTP request</span><br><span class="line"> </span><br><span class="line">timeout connect &lt;timeout&gt;  </span><br><span class="line">	Set the maximum time to wait for a connection attempt to a server to succeed.</span><br><span class="line"> </span><br><span class="line">timeout client-fin &lt;timeout&gt;   维持半连接  优化访问速度   客户端面对haproxy         实现会话复用</span><br><span class="line">	Set the inactivity timeout on the client side for half-closed connections.</span><br><span class="line">	半连接的超时时长</span><br><span class="line"> </span><br><span class="line">timeout server-fin &lt;timeout&gt; 维持半连接  优化访问速度   haproxy面向后端服务器的  实现会话复用</span><br><span class="line">	Set the inactivity timeout on the server side for half-closed connections.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ACL    F模式   L模式   B模式   </span><br><span class="line">	use_backend &lt;backend&gt; [&#123;if | unless&#125; &lt;condition&gt;]</span><br><span class="line">		Switch to a specific backend if/unless an ACL-based condition is matched.</span><br><span class="line">		当符合指定的条件时使用特定的backend；</span><br></pre></td></tr></table></figure>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/45.png" alt=""></p>
+<p>当用户访问    /static /images 开头的……或者.jpg .gif .png 结尾的  则调度到 static服务组上，<br>不符合条件则调度到   default_backend   app上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">block &#123; if | unless &#125; &lt;condition&gt;</span><br><span class="line">Block a layer 7 request if/unless a condition is matched</span><br><span class="line">如果源ip时172.18.17.100的则阻断该地址访问</span><br></pre></td></tr></table></figure>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/46.png" alt=""></p>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/47.png" alt=""></p>
+<p>定义错误页<br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/48.png" alt=""></p>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/49.png" alt=""></p>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/50.png" alt=""></p>
+<p>错误重定向<br><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/51.png" alt=""></p>
+<p><img src="http://www.buxunxian.com/wp-content/uploads/2018/06/52.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">acl invalid_src src 172.16.200.2</span><br><span class="line">block if invalid_src</span><br><span class="line">errorfile 403 /etc/fstab</span><br></pre></td></tr></table></figure>
+<ul>
+<li>http-request { allow | deny } [ { if | unless } <condition> ]<ul>
+<li>Access control for Layer 7 requests</li>
+<li>7层访问控制   3、4、7都能控制</li>
+</ul>
+</condition></li>
+</ul>
+<ul>
+<li>tcp-request connection {accept|reject}  [{if | unless} <condition>]<ul>
+<li>Perform an action on an incoming connection depending on a layer 4 condition</li>
+<li>4层访问控制    只能对3、4层控制</li>
+</ul>
+</condition></li>
+</ul>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">listen ssh</span><br><span class="line">bind :22022</span><br><span class="line">balance leastconn</span><br><span class="line">acl invalid_src src 172.16.200.2</span><br><span class="line">tcp-request connection reject if invalid_src</span><br><span class="line">mode tcp</span><br><span class="line">server sshsrv1 172.16.100.6:22 check</span><br><span class="line">server sshsrv2 172.16.100.7:22 check backup</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>acl：</p>
+<ul>
+<li>The use of Access Control Lists (ACL) provides a flexible solution to perform content switching and generally to take decisions based on content extracted from the request, the response or any environmental status.</li>
+<li>分类请求或相应保卫并继而根据分类结果进行访问控制</li>
+<li>acl <aclname> acl名称<criterion>标准 [flags]标志位 [operator] 判断标准[<value>] 值…</value></criterion></aclname></li>
+<li><aclname>：ACL names must be formed from upper and lower case letters, digits, ‘-‘ (dash), ‘_’ (underscore) , ‘.’ (dot) and ‘:’ (colon).ACL names are case-sensitive.<blockquote>
+<p>其匹配不同内容时，采用或者关系</p>
+</blockquote>
+</aclname></li>
+</ul>
+</li>
+<li><p><value>的类型：</value></p>
+<ul>
+<li>boolean布尔型值</li>
+<li>integer or integer range 整数值</li>
+<li>IP address / network       IP地址\网络地址</li>
+<li>string (exact, substring, suffix, prefix, subdir, domain)    字符串（精确匹配、字串匹配、后缀匹配、前缀匹配、子路径匹配、域名字串匹配）</li>
+<li>regular expression    正则表达式匹配</li>
+<li>hex block 16进制数据快</li>
+</ul>
+</li>
+<li><p><flags>标志位</flags></p>
+<ul>
+<li>-i : ignore case during matching of all subsequent patterns.  忽略大小写</li>
+<li>-m : use a specific pattern matching method  使用特殊的模式匹配方法</li>
+<li>-n : forbid the DNS resolutions   进制DNS做解析</li>
+<li>-u : force the unique id of the ACL   要求ACL必须使用唯一ID</li>
+<li>– : force end of flags. Useful when a string looks like one of the flags    强制结束flags 做flags的结束符标 </li>
+</ul>
+</li>
+<li><p>[operator] </p>
+<ul>
+<li>匹配整数值：eq、ge、gt、le、lt<ul>
+<li>匹配字符串：<ul>
+<li>exact match   精确匹配  (-m str) : the extracted string must exactly match the patterns ;</li>
+<li>substring match 字串匹配 (-m sub) : the patterns are looked up inside the extracted string, and the ACL matches if any of them is found inside ;</li>
+<li>prefix match   前缀匹配 (-m beg) : the patterns are compared with the beginning of the extracted string, and the ACL matches if any of them matches.</li>
+<li>suffix match 后缀匹配   (-m end) : the patterns are compared with the end of the extracted string, and the ACL matches if any of them matches.</li>
+<li>subdir match  子路径匹配  (-m dir) : the patterns are looked up inside the extracted string, delimited with slashes (“/“), and the ACL matches if any of them matches.<br>/var/www/html –&gt; www,html</li>
+<li>domain match 域名字串匹配   (-m dom) : the patterns are looked up inside the extracted string, delimited with dots (“.”), and the ACL matches if any of them matches.<br><a href="http://www.magedu.com" target="_blank" rel="noopener">www.magedu.com</a> –&gt; magedu</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>acl作为条件时的逻辑关系：</p>
+<ul>
+<li>AND (implicit)</li>
+<li>OR  (explicit with the “or” keyword or the “||” operator)</li>
+<li>Negation with the exclamation mark (“!”)<ul>
+<li>if invalid_src invalid_port</li>
+<li>if invalid_src || invalid_port</li>
+<li>if ! invalid_src invalid_port</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><criterion> ：</criterion></p>
+<ul>
+<li>dst : ip    目标</li>
+<li>dst_port : integer</li>
+<li>src : ip      源</li>
+<li>src_port : integer</li>
+</ul>
+</li>
+</ul>
+<p>acl invalid_src  src  172.16.200.2</p>
+<ul>
+<li><p>7层控制标准：只能匹配URL中的条件  path : string</p>
+<ul>
+<li>This extracts the request’s URL path, which starts at the first slash and ends before the question mark (without the host part).</li>
+<li>/path;<params>   <ul>
+<li>path     : exact string match  精确匹配</li>
+<li>path_beg : prefix match  前缀匹配</li>
+<li>path_dir : subdir match 路径字串匹配</li>
+<li>path_dom : domain match  域名字串匹配</li>
+<li>path_end : suffix match  后缀匹配</li>
+<li>path_len : length match 长度匹配</li>
+<li>path_reg : regex match  正则匹配</li>
+<li>path_sub : substring match字串匹配</li>
+</ul>
+</params></li>
+</ul>
+</li>
+<li><p>url : string    This extracts the request’s URL as presented in the request. A typical use is with prefetch-capable caches, and with portals which need to aggregate multiple information from databases and keep them in caches. </p>
+<ul>
+<li>url     : exact string match</li>
+<li>url_beg : prefix match</li>
+<li>url_dir : subdir match</li>
+<li>url_dom : domain match</li>
+<li>url_end : suffix match</li>
+<li>url_len : length match</li>
+<li>url_reg : regex match</li>
+<li>url_sub : substring match</li>
+</ul>
+</li>
+<li><p>根据其他条件匹配  (比如限制浏览器)</p>
+<ul>
+<li>req.hdr([<name>[,<occ>]]) : string      <ul>
+<li>This extracts the last occurrence of header <name> in an HTTP request.</name></li>
+<li>匹配同一个报文中条件匹配出现值的最后一次<ul>
+<li>hdr([<name>[,<occ>]])     : exact string match</occ></name></li>
+<li>hdr_beg([<name>[,<occ>]]) : prefix match</occ></name></li>
+<li>hdr_dir([<name>[,<occ>]]) : subdir match</occ></name></li>
+<li>hdr_dom([<name>[,<occ>]]) : domain match</occ></name></li>
+<li>hdr_end([<name>[,<occ>]]) : suffix match</occ></name></li>
+<li>hdr_len([<name>[,<occ>]]) : length match</occ></name></li>
+<li>hdr_reg([<name>[,<occ>]]) : regex match</occ></name></li>
+<li>hdr_sub([<name>[,<occ>]]) : substring match                                        </occ></name></li>
+</ul>
+</li>
+</ul>
+</occ></name></li>
+</ul>
+</li>
+</ul>
+<p>示例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<p>acl bad_curl hdr_sub(User-Agent) -i curl<br>block if bad_curl<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">禁止请求报文中有windows存在的报文响应，禁止weindows系统访问</span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/53.png)</span><br><span class="line"></span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/54.png)</span><br><span class="line"></span><br><span class="line">![](http://www.buxunxian.com/wp-content/uploads/2018/06/55.png)</span><br><span class="line"></span><br><span class="line">* status : integer</span><br><span class="line">	* Returns an integer containing the HTTP status code in the HTTP response.</span><br></pre></td></tr></table></figure></p>
+<p>Pre-defined ACLs        ACL内建的参数/方法<br>    ACL name        Equivalent to        Usage<br>    FALSE        always_false        never match<br>    HTTP        req_proto_http        match if protocol is valid HTTP<br>    HTTP_1.0        req_ver 1.0        match HTTP version 1.0<br>    HTTP_1.1        req_ver 1.1        match HTTP version 1.1<br>    HTTP_CONTENT        hdr_val(content-length) gt 0        match an existing content-length<br>    HTTP_URL_ABS        url_reg ^[^/:]<em>://        match absolute URL with scheme<br>    HTTP_URL_SLASH        url_beg /        match URL beginning with “/“<br>    HTTP_URL_STAR        url </em>        match URL equal to “*”<br>    LOCALHOST        src 127.0.0.1/8        match connection from local host<br>    METH_CONNECT        method CONNECT        match HTTP CONNECT method<br>    METH_GET        method GET HEAD        match HTTP GET or HEAD method<br>    METH_HEAD        method HEAD        match HTTP HEAD method<br>    METH_OPTIONS        method OPTIONS        match HTTP OPTIONS method<br>    METH_POST        method POST        match HTTP POST method<br>    METH_TRACE        method TRACE        match HTTP TRACE method<br>    RDP_COOKIE        req_rdp_cookie_cnt gt 0        match presence of an RDP cookie<br>    REQ_CONTENT        req_len gt 0        match data in the request buffer<br>    TRUE        always_true        always match<br>    WAIT_END        wait_end        wait for end of content analysis<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"> </span><br><span class="line">* HAProxy：global, proxies（fronted, backend, listen, defaults）</span><br><span class="line">	* balance：</span><br><span class="line">		* roundrobin, static-rr</span><br><span class="line">		* leastconn</span><br><span class="line">		* first</span><br><span class="line">		* source</span><br><span class="line">		* hdr(&lt;name&gt;)</span><br><span class="line">		* uri (hash-type)</span><br><span class="line">		* url_param</span><br><span class="line"> </span><br><span class="line">&gt; Nginx调度算法：ip_hash, hash, leastconn, </span><br><span class="line"></span><br><span class="line">&gt; lvs调度算法：</span><br><span class="line"></span><br><span class="line">&gt; rr/wrr/sh/dh, lc/wlc/sed/nq/lblc/lblcr</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">基于ACL的动静分离示例：</span><br></pre></td></tr></table></figure></p>
+<p>frontend  web *:80<br>    acl url_static       path_beg       -i  /static /images /javascript /stylesheets<br>    acl url_static       path_end       -i  .jpg .gif .png .css .js .html .txt .htm</p>
+<pre><code>use_backend staticsrvs          if url_static
+default_backend             appsrvs
+</code></pre><p>backend staticsrvs<br>    balance     roundrobin<br>    server      stcsrv1 172.16.100.6:80 check</p>
+<p>backend appsrvs<br>    balance     roundrobin<br>    server  app1 172.16.100.7:80 check<br>    server  app1 172.16.100.7:8080 check</p>
+<p>listen stats<br>    bind :9091<br>    stats enable<br>    stats auth admin:admin<br>    stats admin if TRUE<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">* 配置HAProxy支持https协议： </span><br><span class="line">	* 1 支持ssl会话；</span><br><span class="line">		* bind *:443 ssl crt /PATH/TO/SOME_PEM_FILE</span><br><span class="line">		* crt后的证书文件要求PEM格式，且同时包含证书和与之匹配的所有私钥；</span><br><span class="line">			* cat  demo.crt demo.key &gt; demo.pem </span><br><span class="line"></span><br><span class="line">* 2 把80端口的请求重向定443；</span><br></pre></td></tr></table></figure></p>
+<pre><code>bind *:80
+redirect scheme https if !{ ssl_fc }
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3 如何向后端传递用户请求的协议和端口</span><br></pre></td></tr></table></figure>
+<p>http_request set-header X-Forwarded-Port %[dst_port]<br>http_request add-header X-Forwared-Proto https if { ssl_fc }<br><code>`</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HaProxy/" rel="tag"># HaProxy</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/13/other/Go_Get/" rel="next" title="Go Get无法获取golang.org包解决办法">
+                <i class="fa fa-chevron-left"></i> Go Get无法获取golang.org包解决办法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/kyz.jpg" alt="步荀仙">
+            
+              <p class="site-author-name" itemprop="name">步荀仙</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HAProxy"><span class="nav-number">1.</span> <span class="nav-text">HAProxy:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">步荀仙</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
