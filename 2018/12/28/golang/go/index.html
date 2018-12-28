@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://github.com/TianRandai111/buxunxian/blob/master/Day4/Image/Image-1.png?raw=true">
 <meta property="og:image" content="https://github.com/TianRandai111/buxunxian/blob/master/Day4/Image/Image-2.png?raw=true">
 <meta property="og:image" content="https://github.com/TianRandai111/buxunxian/blob/master/Day4/Image/Image-3.png?raw=true">
-<meta property="og:updated_time" content="2018-12-28T07:02:21.429Z">
+<meta property="og:updated_time" content="2018-12-28T07:20:43.322Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Go教程">
 <meta name="twitter:description" content="Day-1 golang语言基础 Day-2 数据类型与操作符 Day-3 字符串处理包与函数 Day-4 数组、切片、map、package介绍 Day-5 结构体、方法 Day-6 接口、反射 Day-7 终端读写&amp;gt; Day-8 并发与Chan Day-1 golang语言基础 Day-1笔记 Day-1笔记Golang语言的特性 1.垃圾回收  a.内存自动回收，再也不需要开发人员管理">
@@ -437,8 +437,9 @@
 <li><a href="#2-3">常量和变量</a></li>
 <li><a href="#2-7">值类型和引用类型</a></li>
 <li><a href="#2-4">数据类型和操作符</a></li>
-<li><p><a href="#2-5">字符串类型</a></p>
-</li>
+<li><a href="#2-5">字符串类型</a></li>
+</ul>
+<h3 id="文件名-amp-关键字-amp-标识符"><a href="#文件名-amp-关键字-amp-标识符" class="headerlink" title="文件名&amp;关键字&amp;标识符"></a>文件名&amp;关键字&amp;标识符</h3><ul>
 <li><p><a id="2-1">文件名&amp;关键字&amp;标识符</a></p>
 <ul>
 <li>1.所有<code>go</code>源码以<code>.go</code>结尾</li>
@@ -451,6 +452,8 @@
 </li>
 </ul>
 </li>
+</ul>
+<h3 id="Go程序基本结"><a href="#Go程序基本结" class="headerlink" title="Go程序基本结"></a>Go程序基本结</h3><ul>
 <li><p><a id="2-2">Go程序基本结构</a></p>
   <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">pacakge main </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span>(</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"><span class="comment">//main函数是程序入口</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"hello,world"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -485,19 +488,8 @@
 <p><a href="https://github.com/TianRandai111/buxunxian/tree/master/Day2/LivingExample-4/add/add.go" target="_blank" rel="noopener">代码位置: Day2/LivingExample-4/add/add.go</a></p>
 </blockquote>
 </li>
-<li><p><a id="2-6">函数的声明和注释</a></p>
-<ul>
-<li><p>1.函数声明：<code>func函数名字(参数列表)(返回值列表){}</code></p>
-  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">举例</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span> <span class="params">(a <span class="keyword">int</span>,b <span class="keyword">int</span>)</span><span class="title">int</span></span> &#123;&#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span> <span class="params">(a <span class="keyword">int</span>,b <span class="keyword">int</span>)</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2.注释，两种注释，单行注释：<code>//</code>多行注释：<code>/*...*/</code></p>
-  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//add计算两个证书的和，并返回结果</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(a <span class="keyword">int</span>, b <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;&#125;</span><br></pre></td></tr></table></figure>
-  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*add计算两个证书的和，并返回结果*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(a <span class="keyword">int</span>, b <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;&#125;</span><br></pre></td></tr></table></figure>
-</li>
 </ul>
-</li>
+<h3 id="常量和变量"><a href="#常量和变量" class="headerlink" title="常量和变量"></a>常量和变量</h3><ul>
 <li><p><a id="2-3">常量和变量</a></p>
 <ul>
 <li>1.常量使用<code>const</code>修饰，代表永远只读，不能修改。</li>
@@ -546,21 +538,6 @@
 </li>
 </ul>
 </li>
-<li><p><a id="2-7">值类型和引用类型</a></p>
-<ul>
-<li>1.值类型：变量直接存储值，内存通常在栈中分配<ul>
-<li>a.值类型：基本数据类型<code>int</code>、<code>float</code>、<code>bool</code>、<code>string</code>已经数组和<code>struct.</code></li>
-</ul>
-</li>
-<li>2.应用类型：变量存储的是一个地址，这个地址存储最终的值。内存通常在对战分配，通过GC回收<ul>
-<li>a.引用类型：指针、<code>slice</code>、<code>map</code>、<code>chan</code>等都是引用类型。<blockquote>
-<p>go语言交换值独有的方式<a href="https://github.com/TianRandai111/buxunxian/tree/master/Day2/LivingExample-9/main/main.go" target="_blank" rel="noopener">代码位置: Day2/LivingExample-9/main/main.go</a></p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
 <li><p><a id="2-4">数据类型和操作符</a></p>
 </li>
 <li><p>1.<code>bool</code>类型，只能存<code>true</code>和<code>false</code></p>
@@ -572,7 +549,8 @@
 <p>请问<code>!a</code>、<code>!b</code>、<code>a&amp;&amp;b</code>、<code>a||b</code>的值分别是多少</p>
 </blockquote>
 </li>
-<li>3.数字类型，主要有<ul>
+<li><p>3.数字类型，主要有</p>
+<ul>
 <li>3.1<code>int</code>整形(由正负)<ul>
 <li><code>int</code>、<code>int8</code>、<code>int16</code>、<code>int32</code>、<code>int68</code></li>
 </ul>
@@ -592,11 +570,45 @@
 </li>
 </ol>
 </li>
+</ul>
+<h3 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h3><ul>
 <li><p><a id="2-5">字符串类型</a></p>
 <ul>
 <li><p>字符串拼装操作<a href="https://github.com/TianRandai111/buxunxian/tree/master/Day2/LivingExample-12/main.go" target="_blank" rel="noopener">代码位置: Day2/LivingExample-12/main.go</a></p>
 </li>
 <li><p>字符串反转：<a href="https://github.com/TianRandai111/buxunxian/tree/master/Day2/LivingExample-13/main/main.go" target="_blank" rel="noopener">代码位置: Day2/LivingExample-13/main/main.go</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="函数的声明和注释"><a href="#函数的声明和注释" class="headerlink" title="函数的声明和注释"></a>函数的声明和注释</h3><ul>
+<li><p><a id="2-6">函数的声明和注释</a></p>
+<ul>
+<li><p>1.函数声明：<code>func函数名字(参数列表)(返回值列表){}</code></p>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">举例</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span> <span class="params">(a <span class="keyword">int</span>,b <span class="keyword">int</span>)</span><span class="title">int</span></span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span> <span class="params">(a <span class="keyword">int</span>,b <span class="keyword">int</span>)</span><span class="params">(<span class="keyword">int</span>,<span class="keyword">int</span>)</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2.注释，两种注释，单行注释：<code>//</code>多行注释：<code>/*...*/</code></p>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//add计算两个证书的和，并返回结果</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(a <span class="keyword">int</span>, b <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*add计算两个证书的和，并返回结果*/</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">add</span><span class="params">(a <span class="keyword">int</span>, b <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="值类型和引用类型"><a href="#值类型和引用类型" class="headerlink" title="值类型和引用类型"></a>值类型和引用类型</h3><ul>
+<li><p><a id="2-7">值类型和引用类型</a></p>
+<ul>
+<li>1.值类型：变量直接存储值，内存通常在栈中分配<ul>
+<li>a.值类型：基本数据类型<code>int</code>、<code>float</code>、<code>bool</code>、<code>string</code>已经数组和<code>struct.</code></li>
+</ul>
+</li>
+<li>2.应用类型：变量存储的是一个地址，这个地址存储最终的值。内存通常在对战分配，通过GC回收<ul>
+<li>a.引用类型：指针、<code>slice</code>、<code>map</code>、<code>chan</code>等都是引用类型。<blockquote>
+<p>go语言交换值独有的方式<a href="https://github.com/TianRandai111/buxunxian/tree/master/Day2/LivingExample-9/main/main.go" target="_blank" rel="noopener">代码位置: Day2/LivingExample-9/main/main.go</a></p>
+</blockquote>
+</li>
+</ul>
 </li>
 </ul>
 </li>
@@ -625,7 +637,7 @@
 </ul>
 <pre><code>- 变量赋值的区别
 &gt;[代码位置: Day2/Assignment/main.go](https://github.com/TianRandai111/buxunxian/tree/master/Day2/Assignment/main.go)
-</code></pre><h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a><a id="3">Outline</a></h2><ul>
+</code></pre><h2 id="字符串处理包与函数"><a href="#字符串处理包与函数" class="headerlink" title="字符串处理包与函数"></a><a id="3">字符串处理包与函数</a></h2><ul>
 <li><a href="#3-1">1. strings和strconv的使用</a></li>
 <li><a href="#3-2">2. Go中的时间和日期类型</a></li>
 <li><a href="#3-3">3. 指针类型</a></li>
@@ -633,7 +645,7 @@
 <li><a href="#3-4">4. 函数详解</a></li>
 <li><a href="#3-5">5. 课后作业</a></li>
 </ul>
-<ul>
+<h3 id="strings和strconv的使"><a href="#strings和strconv的使" class="headerlink" title="strings和strconv的使"></a><code>strings</code>和<code>strconv</code>的使</h3><ul>
 <li><p><a id="3-1">1. <code>strings</code>和<code>strconv</code>的使用</a> </p>
 <ul>
 <li><p>1.1. <code>strings.HasPrefix(s string, prefix string) bool</code>：判断字符串s是否以prefix开头</p>
@@ -706,6 +718,8 @@
 </li>
 </ul>
 </li>
+</ul>
+<h3 id="2-Go中的时间和日期类型"><a href="#2-Go中的时间和日期类型" class="headerlink" title="2. Go中的时间和日期类型"></a>2. Go中的时间和日期类型</h3><ul>
 <li><p><a id="3-2">2. Go中的时间和日期类型</a></p>
 <ul>
 <li>2.1 <code>time</code>包</li>
@@ -738,7 +752,7 @@
 &gt; 练习6：写一个程序，获取当前时间，并格式化成 2017/06/15 08:05:00形式[代码位置: Day3/LivingExample-9/main.go](https://github.com/TianRandai111/buxunxian/tree/master/Day3/LivingExample-9/main.go)
 
 &gt; 练习7：写一个程序，统计一段代码的执行耗时，单位精确到微秒。[代码位置: Day3/LivingExample-10/main.go](https://github.com/TianRandai111/buxunxian/tree/master/Day3/LivingExample-10/main.go)
-</code></pre><ul>
+</code></pre><h3 id="3-指针类型"><a href="#3-指针类型" class="headerlink" title="3. 指针类型"></a>3. 指针类型</h3><ul>
 <li><p><a id="3-3">3. 指针类型</a></p>
 <ul>
 <li><ol>
@@ -791,6 +805,8 @@
 </li>
 </ul>
 </li>
+</ul>
+<h3 id="4-函数详解"><a href="#4-函数详解" class="headerlink" title="4. 函数详解"></a>4. 函数详解</h3><ul>
 <li><p><a id="3-4">4. 函数详解</a></p>
 <ul>
 <li><p>1.语法声明：<code>func 函数名(参数列表) [(返回值列表)] {}</code></p>
@@ -858,7 +874,7 @@
 </ul>
 </li>
 </ul>
-<ul>
+<h3 id="5-课后作业"><a href="#5-课后作业" class="headerlink" title="5. 课后作业"></a>5. 课后作业</h3><ul>
 <li><a id="3-5">5. 课后作业</a><ul>
 <li>1.编写程序，在终端输出九九乘法表。<a href="https://github.com/TianRandai111/buxunxian/tree/master/Day3/Assignment/one/main.go" target="_blank" rel="noopener">代码位置: Day3/Assignment/one/main.go</a></li>
 <li>2.一个数如果恰好等于它的因子之和，这个数就称为”完数”。例如<code>6=1＋2＋3</code>.编程找出1000以内的所有完数。<a href="https://github.com/TianRandai111/buxunxian/tree/master/Day3/Assignment/two/main.go" target="_blank" rel="noopener">代码位置: Day3/Assignment/two/main.go</a></li>
@@ -870,13 +886,13 @@
 </ul>
 </li>
 </ul>
-<p><a id="4">数组、切片、map、package介绍</a></p>
+<h2 id="数组、切片、map、package介"><a href="#数组、切片、map、package介" class="headerlink" title="数组、切片、map、package介"></a>数组、切片、map、package介</h2><p><a id="4">数组、切片、map、package介绍</a></p>
 <p><a href="#4-1">1.内置函数、递归函数、闭包</a></p>
 <p><a href="#4-2">2.数组与切片</a></p>
 <p><a href="#4-3">3.map数组结构</a></p>
 <p><a href="#4-4">4.package介绍</a></p>
 <p><a href="#4-5">5.课后作业</a></p>
-<p><a id="4-1">1.内置函数、递归函数、闭包</a></p>
+<h3 id="1-内置函数、递归函数、闭包"><a href="#1-内置函数、递归函数、闭包" class="headerlink" title="1.内置函数、递归函数、闭包"></a>1.内置函数、递归函数、闭包</h3><p><a id="4-1">1.内置函数、递归函数、闭包</a></p>
 <ul>
 <li><p>1.1. 内置函数</p>
 <ul>
@@ -911,7 +927,7 @@
 </ul>
 </li>
 </ul>
-<p><a id="4-2">2.数组与切片</a></p>
+<h3 id="2-数组与切片"><a href="#2-数组与切片" class="headerlink" title="2.数组与切片"></a>2.数组与切片</h3><p><a id="4-2">2.数组与切片</a></p>
 <ul>
 <li><p>2.1 数组</p>
 <ul>
@@ -1011,7 +1027,7 @@
     - d. ``sort.SearchFloats(a []float64, b float64)`` 从数组``a``中查找``b``，前提是``a``必须有序
     - f. ``sort.SearchStrings(a []string, b string) ``从数组``a``中查找``b``，前提是``a``必须有序
     - [代码位置: Day4/LivingExample-17/main.go](https://github.com/TianRandai111/buxunxian/blob/master/Day4/LivingExample-17/main.go)
-</code></pre><p><a id="4-3">3.map数组结构</a></p>
+</code></pre><h3 id="3-map数组结构"><a href="#3-map数组结构" class="headerlink" title="3.map数组结构"></a>3.map数组结构</h3><p><a id="4-3">3.map数组结构</a></p>
 <ul>
 <li><p>3.1. map简介:key-value的数据结构，又叫字典或关联数组</p>
 <ul>
@@ -1051,7 +1067,7 @@
 </ul>
 </li>
 </ul>
-<p><a id="4-4">4.package介绍</a></p>
+<h3 id="4-package介绍"><a href="#4-package介绍" class="headerlink" title="4.package介绍"></a>4.package介绍</h3><p><a id="4-4">4.package介绍</a></p>
 <ul>
 <li><p>4.1. golang中的包</p>
 <ul>
@@ -1069,7 +1085,7 @@
 <li><p>4.3. go get安装第三方包</p>
 </li>
 </ul>
-<p><a id="4-5">5.课后作业</a></p>
+<h3 id="5-课后作业-1"><a href="#5-课后作业-1" class="headerlink" title="5.课后作业"></a>5.课后作业</h3><p><a id="4-5">5.课后作业</a></p>
 <ul>
 <li><p>5.1. 实现一个冒泡排序</p>
 <ul>
@@ -1096,11 +1112,11 @@
 </ul>
 </li>
 </ul>
-<p><a id="5">Day-5 结构体、方法、接口</a></p>
+<h2 id="Day-5-结构体、方法、接口"><a href="#Day-5-结构体、方法、接口" class="headerlink" title="Day-5 结构体、方法、接口"></a>Day-5 结构体、方法、接口</h2><p><a id="5">Day-5 结构体、方法、接口</a></p>
 <p><a href="#5-1">1. 结构体</a></p>
 <p><a href="#5-2">2. 方法</a></p>
 <p><a href="#5-4">3. 作业</a></p>
-<p><a id="5-1">1. 结构体</a></p>
+<h3 id="1-1-结构体"><a href="#1-1-结构体" class="headerlink" title="1.1 结构体"></a>1.1 结构体</h3><p><a id="5-1">1. 结构体</a></p>
 <ul>
 <li><p>1.1 结构体的定义</p>
 <ul>
@@ -1178,7 +1194,7 @@
 <blockquote>
 <p><a href="https://github.com/TianRandai111/buxunxian/blob/master/Day5/LivingExample-7/main.go" target="_blank" rel="noopener">代码位置: Day5/LivingExample-7/main.go</a></p>
 </blockquote>
-<p><a id="5-2">2. 方法</a></p>
+<h3 id="2-方法"><a href="#2-方法" class="headerlink" title="2. 方法"></a>2. 方法</h3><p><a id="5-2">2. 方法</a></p>
 <ul>
 <li><p>2.0 方法 go中的方法是作用在特定类型的变量上，因此自定义类型，都可以有方法，而不仅仅是struct</p>
 <ul>
@@ -1228,7 +1244,7 @@
 </ul>
 </li>
 </ul>
-<p><a id="5-4">3. 作业</a></p>
+<h3 id="3-作业"><a href="#3-作业" class="headerlink" title="3. 作业"></a>3. 作业</h3><p><a id="5-4">3. 作业</a></p>
 <ul>
 <li><ol>
 <li>实现一个图书管理系统，具有以下功能：<ul>
@@ -1242,12 +1258,12 @@
 </ol>
 </li>
 </ul>
-<p><a id="6">Day-6 接口、反射</a></p>
+<h2 id="Day-6-接口、反射"><a href="#Day-6-接口、反射" class="headerlink" title="Day-6 接口、反射"></a>Day-6 接口、反射</h2><p><a id="6">Day-6 接口、反射</a></p>
 <p><a href="#6-1">1.接口</a></p>
 <p><a href="#6-2">2.反射</a></p>
 <p><a href="#6-3">3.作业</a></p>
 <p><a id="6-1">1.接口</a></p>
-<p><a id="6-1">1. 接口</a></p>
+<h3 id="1-接口"><a href="#1-接口" class="headerlink" title="1. 接口"></a>1. 接口</h3><p><a id="6-1">1. 接口</a></p>
 <ul>
 <li>1.1. 定义<ul>
 <li>1.1.1 Interface类型可以定义一组方法，但是这些不需要实现。并且interface不能包含任何变量。</li>
@@ -1324,7 +1340,7 @@
 </code></pre></li>
 <li>1.14. 实现一个负载均衡调度算法，支持随机、轮训等算法</li>
 </ul>
-<p><a id="6-2">2.反射</a></p>
+<h3 id="2-反射"><a href="#2-反射" class="headerlink" title="2.反射"></a>2.反射</h3><p><a id="6-2">2.反射</a></p>
 <ul>
 <li>2.1. 反射：可以在运行时动态获取变量的相关信息Import (“reflect”)<ul>
 <li>两个函数：</li>
@@ -1342,10 +1358,10 @@
 <figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> (</span><br><span class="line">        Invalid Kind = <span class="literal">iota</span></span><br><span class="line">        Bool</span><br><span class="line">        Int</span><br><span class="line">        Int8</span><br><span class="line">        Int16</span><br><span class="line">        Int32</span><br><span class="line">        Int64</span><br><span class="line">        Uint</span><br><span class="line">        Uint8</span><br><span class="line">        Uint16</span><br><span class="line">        Uint32</span><br><span class="line">        Uint64</span><br><span class="line">        Uintptr</span><br><span class="line">        Float32</span><br><span class="line">        Float64</span><br><span class="line">        Complex64</span><br><span class="line">        Complex128</span><br><span class="line">        Array</span><br><span class="line">        Chan</span><br><span class="line">        Func</span><br><span class="line">        Interface</span><br><span class="line">        Map</span><br><span class="line">        Ptr</span><br><span class="line">        Slice</span><br><span class="line">        String</span><br><span class="line">        Struct</span><br><span class="line">        UnsafePointer</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>2.3. 练习：</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x <span class="keyword">float64</span> = <span class="number">3.4</span></span><br><span class="line">	fmt.Println(<span class="string">"type:"</span>, reflect.TypeOf(x))</span><br><span class="line">	v := reflect.ValueOf(x)</span><br><span class="line">	fmt.Println(<span class="string">"value:"</span>, v)</span><br><span class="line">	fmt.Println(<span class="string">"type:"</span>, v.Type())</span><br><span class="line">	fmt.Println(<span class="string">"kind:"</span>, v.Kind())</span><br><span class="line">	fmt.Println(<span class="string">"value:"</span>, v.Float())</span><br><span class="line"></span><br><span class="line">	fmt.Println(v.Interface())</span><br><span class="line">	fmt.Printf(<span class="string">"value is %5.2e\n"</span>, v.Interface())</span><br><span class="line">	y := v.Interface().(<span class="keyword">float64</span>)</span><br><span class="line">	fmt.Println(y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> x <span class="keyword">float64</span> = <span class="number">3.4</span></span><br><span class="line">    fmt.Println(<span class="string">"type:"</span>, reflect.TypeOf(x))</span><br><span class="line">    v := reflect.ValueOf(x)</span><br><span class="line">    fmt.Println(<span class="string">"value:"</span>, v)</span><br><span class="line">    fmt.Println(<span class="string">"type:"</span>, v.Type())</span><br><span class="line">    fmt.Println(<span class="string">"kind:"</span>, v.Kind())</span><br><span class="line">    fmt.Println(<span class="string">"value:"</span>, v.Float())</span><br><span class="line"></span><br><span class="line">    fmt.Println(v.Interface())</span><br><span class="line">    fmt.Printf(<span class="string">"value is %5.2e\n"</span>, v.Interface())</span><br><span class="line">    y := v.Interface().(<span class="keyword">float64</span>)</span><br><span class="line">    fmt.Println(y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> x <span class="keyword">float64</span> = <span class="number">3.4</span></span><br><span class="line">	fmt.Println(<span class="string">"type:"</span>, reflect.TypeOf(x))</span><br><span class="line">	v := reflect.ValueOf(x)</span><br><span class="line">	fmt.Println(<span class="string">"value:"</span>, v)</span><br><span class="line">	fmt.Println(<span class="string">"type:"</span>, v.Type())</span><br><span class="line">	fmt.Println(<span class="string">"kind:"</span>, v.Kind())</span><br><span class="line">	fmt.Println(<span class="string">"value:"</span>, v.Float())</span><br><span class="line"></span><br><span class="line">	fmt.Println(v.Interface())</span><br><span class="line">	fmt.Printf(<span class="string">"value is %5.2e\n"</span>, v.Interface())</span><br><span class="line">	y := v.Interface().(<span class="keyword">float64</span>)</span><br><span class="line">	fmt.Println(y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> x <span class="keyword">float64</span> = <span class="number">3.4</span></span><br><span class="line">    fmt.Println(<span class="string">"type:"</span>, reflect.TypeOf(x))</span><br><span class="line">    v := reflect.ValueOf(x)</span><br><span class="line">    fmt.Println(<span class="string">"value:"</span>, v)</span><br><span class="line">    fmt.Println(<span class="string">"type:"</span>, v.Type())</span><br><span class="line">    fmt.Println(<span class="string">"kind:"</span>, v.Kind())</span><br><span class="line">    fmt.Println(<span class="string">"value:"</span>, v.Float())</span><br><span class="line"></span><br><span class="line">    fmt.Println(v.Interface())</span><br><span class="line">    fmt.Printf(<span class="string">"value is %5.2e\n"</span>, v.Interface())</span><br><span class="line">    y := v.Interface().(<span class="keyword">float64</span>)</span><br><span class="line">    fmt.Println(y)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>2.4. 获取变量的值：</li>
 </ul>
@@ -1367,7 +1383,7 @@
 <li><p><a href="https://github.com/TianRandai111/buxunxian/blob/master/Day6/LivingExample-8/main.go" target="_blank" rel="noopener">代码位置: Day6/LivingExample-8main.go</a></p>
 </li>
 <li><p>2.6. 练习</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> a <span class="keyword">float64</span></span><br><span class="line">	fv := reflect.ValueOf(a)</span><br><span class="line">	fv.SetFloat(<span class="number">3.3</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"%v\n"</span>, a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> a <span class="keyword">float64</span></span><br><span class="line">    fv := reflect.ValueOf(a)</span><br><span class="line">    fv.SetFloat(<span class="number">3.3</span>)</span><br><span class="line">    fmt.Printf(<span class="string">"%v\n"</span>, a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>2.7. 崩溃的原因</p>
 <ul>
@@ -1377,7 +1393,7 @@
 </ul>
 </li>
 <li><p>2.8. 解决方法，传地址！</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">var</span> a <span class="keyword">float64</span></span><br><span class="line">	fv := reflect.ValueOf(&amp;a)</span><br><span class="line">	fv.Elem().SetFloat(<span class="number">3.3</span>)</span><br><span class="line">	fmt.Printf(<span class="string">"%v\n"</span>, a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> a <span class="keyword">float64</span></span><br><span class="line">    fv := reflect.ValueOf(&amp;a)</span><br><span class="line">    fv.Elem().SetFloat(<span class="number">3.3</span>)</span><br><span class="line">    fmt.Printf(<span class="string">"%v\n"</span>, a)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <blockquote>
@@ -1394,16 +1410,16 @@
 <ul>
 <li>2.10. 练习</li>
 </ul>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	“reflect<span class="string">"</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">type NotknownType struct &#123;</span></span><br><span class="line"><span class="string">	s1 string</span></span><br><span class="line"><span class="string">	s2 string</span></span><br><span class="line"><span class="string">	s3 string</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">func (n NotknownType) String() string &#123;</span></span><br><span class="line"><span class="string">	return n.s1 + "</span>-<span class="string">" + n.s2 + "</span>-<span class="string">" + n.s3</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">var secret interface&#123;&#125; = NotknownType&#123;"</span>Ada<span class="string">", "</span>Go<span class="string">", "</span>Oberon<span class="string">"&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">func main() &#123;</span></span><br><span class="line"><span class="string">	value := reflect.ValueOf(secret) // &lt;main.NotknownType Value&gt;</span></span><br><span class="line"><span class="string">	typ := reflect.TypeOf(secret)    // main.NotknownType</span></span><br><span class="line"><span class="string">	fmt.Println(typ)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	knd := value.Kind() // struct</span></span><br><span class="line"><span class="string">	fmt.Println(knd)</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">	for i := 0; i &lt; value.NumField(); i++ &#123;</span></span><br><span class="line"><span class="string">		fmt.Printf("</span>Field %d: %v\n<span class="string">", i, value.Field(i))</span></span><br><span class="line"><span class="string">		//value.Field(i).SetString("</span>C#<span class="string">")</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">	results := value.Method(0).Call(nil)</span></span><br><span class="line"><span class="string">	fmt.Println(results) // [Ada - Go - Oberon]</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    “reflect<span class="string">"</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">type NotknownType struct &#123;</span></span><br><span class="line"><span class="string">    s1 string</span></span><br><span class="line"><span class="string">    s2 string</span></span><br><span class="line"><span class="string">    s3 string</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">func (n NotknownType) String() string &#123;</span></span><br><span class="line"><span class="string">    return n.s1 + "</span>-<span class="string">" + n.s2 + "</span>-<span class="string">" + n.s3</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">var secret interface&#123;&#125; = NotknownType&#123;"</span>Ada<span class="string">", "</span>Go<span class="string">", "</span>Oberon<span class="string">"&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">func main() &#123;</span></span><br><span class="line"><span class="string">    value := reflect.ValueOf(secret) // &lt;main.NotknownType Value&gt;</span></span><br><span class="line"><span class="string">    typ := reflect.TypeOf(secret)    // main.NotknownType</span></span><br><span class="line"><span class="string">    fmt.Println(typ)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    knd := value.Kind() // struct</span></span><br><span class="line"><span class="string">    fmt.Println(knd)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    for i := 0; i &lt; value.NumField(); i++ &#123;</span></span><br><span class="line"><span class="string">        fmt.Printf("</span>Field %d: %v\n<span class="string">", i, value.Field(i))</span></span><br><span class="line"><span class="string">        //value.Field(i).SetString("</span>C#<span class="string">")</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    results := value.Method(0).Call(nil)</span></span><br><span class="line"><span class="string">    fmt.Println(results) // [Ada - Go - Oberon]</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>2.11. 练习，通过反射操作结构体</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	“reflect<span class="string">"</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">type NotknownType struct &#123;</span></span><br><span class="line"><span class="string">	s1 string</span></span><br><span class="line"><span class="string">	s2 string</span></span><br><span class="line"><span class="string">	s3 string</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">func (n NotknownType) String() string &#123;</span></span><br><span class="line"><span class="string">	return n.s1 + "</span>-<span class="string">" + n.s2 + "</span>-<span class="string">" + n.s3</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">var secret interface&#123;&#125; = NotknownType&#123;"</span>Ada<span class="string">", "</span>Go<span class="string">", "</span>Oberon<span class="string">"&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">func main() &#123;</span></span><br><span class="line"><span class="string">	value := reflect.ValueOf(secret) // &lt;main.NotknownType Value&gt;</span></span><br><span class="line"><span class="string">	typ := reflect.TypeOf(secret)    // main.NotknownType</span></span><br><span class="line"><span class="string">	fmt.Println(typ)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	knd := value.Kind() // struct</span></span><br><span class="line"><span class="string">	fmt.Println(knd)</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">	for i := 0; i &lt; value.NumField(); i++ &#123;</span></span><br><span class="line"><span class="string">		fmt.Printf("</span>Field %d: %v\n<span class="string">", i, value.Field(i))</span></span><br><span class="line"><span class="string">		//value.Field(i).SetString("</span>C#<span class="string">")</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string">	</span></span><br><span class="line"><span class="string">	results := value.Method(0).Call(nil)</span></span><br><span class="line"><span class="string">	fmt.Println(results) // [Ada - Go - Oberon]</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    “reflect<span class="string">"</span></span><br><span class="line"><span class="string">)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">type NotknownType struct &#123;</span></span><br><span class="line"><span class="string">    s1 string</span></span><br><span class="line"><span class="string">    s2 string</span></span><br><span class="line"><span class="string">    s3 string</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">func (n NotknownType) String() string &#123;</span></span><br><span class="line"><span class="string">    return n.s1 + "</span>-<span class="string">" + n.s2 + "</span>-<span class="string">" + n.s3</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">var secret interface&#123;&#125; = NotknownType&#123;"</span>Ada<span class="string">", "</span>Go<span class="string">", "</span>Oberon<span class="string">"&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">func main() &#123;</span></span><br><span class="line"><span class="string">    value := reflect.ValueOf(secret) // &lt;main.NotknownType Value&gt;</span></span><br><span class="line"><span class="string">    typ := reflect.TypeOf(secret)    // main.NotknownType</span></span><br><span class="line"><span class="string">    fmt.Println(typ)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    knd := value.Kind() // struct</span></span><br><span class="line"><span class="string">    fmt.Println(knd)</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    for i := 0; i &lt; value.NumField(); i++ &#123;</span></span><br><span class="line"><span class="string">        fmt.Printf("</span>Field %d: %v\n<span class="string">", i, value.Field(i))</span></span><br><span class="line"><span class="string">        //value.Field(i).SetString("</span>C#<span class="string">")</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    results := value.Method(0).Call(nil)</span></span><br><span class="line"><span class="string">    fmt.Println(results) // [Ada - Go - Oberon]</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>2.12. 练习2，通过反射修改结构体</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> T <span class="keyword">struct</span> &#123;</span><br><span class="line">	A <span class="keyword">int</span></span><br><span class="line">	B <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	t := T&#123;<span class="number">23</span>, <span class="string">"skidoo"</span>&#125;</span><br><span class="line">	s := reflect.ValueOf(&amp;t).Elem()</span><br><span class="line">	typeOfT := s.Type()</span><br><span class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; s.NumField(); i++ &#123;</span><br><span class="line">		f := s.Field(i)</span><br><span class="line">		fmt.Printf(<span class="string">"%d: %s %s = %v\n"</span>, i,</span><br><span class="line">			typeOfT.Field(i).Name, f.Type(), f.Interface())</span><br><span class="line">	&#125;</span><br><span class="line">	s.Field(<span class="number">0</span>).SetInt(<span class="number">77</span>)</span><br><span class="line">	s.Field(<span class="number">1</span>).SetString(<span class="string">"Sunset Strip"</span>)</span><br><span class="line">	fmt.Println(<span class="string">"t is now"</span>, t)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> T <span class="keyword">struct</span> &#123;</span><br><span class="line">    A <span class="keyword">int</span></span><br><span class="line">    B <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    t := T&#123;<span class="number">23</span>, <span class="string">"skidoo"</span>&#125;</span><br><span class="line">    s := reflect.ValueOf(&amp;t).Elem()</span><br><span class="line">    typeOfT := s.Type()</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; s.NumField(); i++ &#123;</span><br><span class="line">        f := s.Field(i)</span><br><span class="line">        fmt.Printf(<span class="string">"%d: %s %s = %v\n"</span>, i,</span><br><span class="line">            typeOfT.Field(i).Name, f.Type(), f.Interface())</span><br><span class="line">    &#125;</span><br><span class="line">    s.Field(<span class="number">0</span>).SetInt(<span class="number">77</span>)</span><br><span class="line">    s.Field(<span class="number">1</span>).SetString(<span class="string">"Sunset Strip"</span>)</span><br><span class="line">    fmt.Println(<span class="string">"t is now"</span>, t)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>2<br><a id="6-2">3.作业</a></p>
+<h3 id="3-作业-1"><a href="#3-作业-1" class="headerlink" title="3.作业"></a>3.作业</h3><p><a id="6-2">3.作业</a></p>
 <ul>
 <li><ol>
 <li>实现一个图书管理系统v2，具有以下功能：<ul>
@@ -1417,12 +1433,12 @@
 </li>
 </ul>
 <p><a id="#7">Day-7 终端读写</a></p>
-<p><a href="#7-1">Day-7 终端读写</a></p>
-<p><a href="#7-2">Day-7 文件读写</a></p>
-<p><a href="#7-3">Day-7 命令行参数处理</a></p>
-<p><a href="#7-4">Day-7 json协议</a></p>
-<p><a href="#7-5">Day-7 错误处理</a></p>
-<p><a id="7-1">Day-7 终端读写</a></p>
+<p><a href="#7-1">终端读写</a></p>
+<p><a href="#7-2">文件读写</a></p>
+<p><a href="#7-3">命令行参数处理</a></p>
+<p><a href="#7-4">json协议</a></p>
+<p><a href="#7-5">错误处理</a></p>
+<h3 id="7-1-终端读写"><a href="#7-1-终端读写" class="headerlink" title="7.1 终端读写"></a>7.1 终端读写</h3><p><a id="7-1">Day-7 终端读写</a></p>
 <ul>
 <li><p>os.stdin</p>
 </li>
@@ -1461,7 +1477,7 @@
 </ul>
 </li>
 </ul>
-<p><a id="7-2">7.2 文件读写</a></p>
+<h3 id="7-2-文件读"><a href="#7-2-文件读" class="headerlink" title="7.2 文件读"></a>7.2 文件读</h3><p><a id="7-2">7.2 文件读写</a></p>
 <ul>
 <li><p>7.2.1 os.File封装所有文件相关操作，之前讲的 os.Stdin,os.Stdout, os.Stderr都是 os.File</p>
 <ul>
@@ -1528,7 +1544,7 @@
 <blockquote>
 <p><a href="https://github.com/TianRandai111/buxunxian/blob/master/Day7/LivingExample-9/main.go" target="_blank" rel="noopener">代码位置: Day7/LivingExample-9main.go</a></p>
 </blockquote>
-<p><a id="7-3">7.3 命令行参数处理</a></p>
+<h3 id="7-3-命令行参数处"><a href="#7-3-命令行参数处" class="headerlink" title="7.3 命令行参数处"></a>7.3 命令行参数处</h3><p><a id="7-3">7.3 命令行参数处理</a></p>
 <ul>
 <li><p>7.3.1 os.Args是一个string的切片，用来存储所有的命令行参数</p>
 <blockquote>
@@ -1546,7 +1562,7 @@
 </ul>
 </li>
 </ul>
-<p><a id="7-4">7.4 json协议</a></p>
+<h3 id="7-4-json协议"><a href="#7-4-json协议" class="headerlink" title="7.4 json协议"></a>7.4 json协议</h3><p><a id="7-4">7.4 json协议</a></p>
 <p>(Golang) -序列化-&gt; (Json字符串) -网络传输-&gt; (程序) -反序列化-&gt; (其他语言)</p>
 <ul>
 <li><ol>
@@ -1572,7 +1588,7 @@
 </blockquote>
 </li>
 </ul>
-<p><a id="7-5">7.5 错误处理</a></p>
+<h3 id="7-5-错误处理"><a href="#7-5-错误处理" class="headerlink" title="7.5 错误处理"></a>7.5 错误处理</h3><p><a id="7-5">7.5 错误处理</a></p>
 <ul>
 <li><p>7.5.1. 定义错误</p>
   <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"errors"</span></span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> errNotFound error = errors.New(<span class="string">"Not found error"</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"error: %v"</span>, errNotFound)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1584,19 +1600,19 @@
 <ul>
 <li>练习</li>
 </ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="comment">//	"fmt"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> PathError <span class="keyword">struct</span> &#123;</span><br><span class="line">	Op   <span class="keyword">string</span></span><br><span class="line">	Path <span class="keyword">string</span></span><br><span class="line">	err <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *PathError)</span> <span class="title">Error</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> e.Op + <span class="string">" "</span> + e.Path + <span class="string">": "</span> + e.Err.Error()</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span> <span class="title">error</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;PathError&#123;</span><br><span class="line">		Op:   <span class="string">"op"</span>,</span><br><span class="line">		Path: <span class="string">"path"</span>,</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	test()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line"><span class="comment">//  "fmt"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">type</span> PathError <span class="keyword">struct</span> &#123;</span><br><span class="line">    Op   <span class="keyword">string</span></span><br><span class="line">    Path <span class="keyword">string</span></span><br><span class="line">    err <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *PathError)</span> <span class="title">Error</span><span class="params">()</span> <span class="title">string</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> e.Op + <span class="string">" "</span> + e.Path + <span class="string">": "</span> + e.Err.Error()</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">test</span><span class="params">()</span> <span class="title">error</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> &amp;PathError&#123;</span><br><span class="line">        Op:   <span class="string">"op"</span>,</span><br><span class="line">        Path: <span class="string">"path"</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    test()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><a href="https://github.com/TianRandai111/buxunxian/blob/master/Day7/LivingExample-14/main.go" target="_blank" rel="noopener">代码位置: Day7/LivingExample-14main.go</a></p>
 </blockquote>
 <blockquote>
 <p><a href="https://github.com/TianRandai111/buxunxian/blob/master/Day7/LivingExample-15/main.go" target="_blank" rel="noopener">代码位置: Day7/LivingExample-15main.go</a></p>
 </blockquote>
-<p><a id="8">Day-8 并发与Chan</a></p>
+<h2 id="Day-8-并发与Chan"><a href="#Day-8-并发与Chan" class="headerlink" title="Day-8 并发与Chan"></a>Day-8 并发与Chan</h2><p><a id="8">Day-8 并发与Chan</a></p>
 <p><a href="#8-1">Day-8.1 Goroute</a></p>
 <p><a href="#8-2">Day-8.2 Channel</a></p>
 <p><a href="#8-3">Day-8.3 单元测试</a></p>
 <p><a href="#8-4">Day-8.4 课后作业</a></p>
-<p><a id="8-1">Day-8.1 Goroute</a></p>
+<h3 id="8-1-Goroute"><a href="#8-1-Goroute" class="headerlink" title="8.1 Goroute"></a>8.1 Goroute</h3><p><a id="8-1">Day-8.1 Goroute</a></p>
 <ul>
 <li>1.进程和线程<ul>
 <li>a.进程是程序在操作系统的一次执行过程，系统进行资源费配合调度的一个独立单位。</li>
@@ -1644,7 +1660,7 @@
 <blockquote>
 <p><a href="https://github.com/TianRandai111/buxunxian/blob/master/Day8/LivingExample-3/main.go" target="_blank" rel="noopener">代码位置: Day8/LivingExample-3main.go</a></p>
 </blockquote>
-<p><a id="8-2">Day-8.2 Channel</a></p>
+<h3 id="8-2-Channel"><a href="#8-2-Channel" class="headerlink" title="8.2 Channel"></a>8.2 Channel</h3><p><a id="8-2">Day-8.2 Channel</a></p>
 <ul>
 <li><p>1.不同的goroutine之间是如何通信的</p>
 <ul>
@@ -1693,8 +1709,8 @@
 </ul>
 </li>
 </ul>
-<p><a id="8-3">Day-8.3 单元测试</a></p>
-<p><a id="8-4">Day-8.4 课后作业</a></p>
+<h3 id="8-3-单元测试"><a href="#8-3-单元测试" class="headerlink" title="8.3 单元测试"></a>8.3 单元测试</h3><p><a id="8-3">Day-8.3 单元测试</a></p>
+<h3 id="8-4-课后作业"><a href="#8-4-课后作业" class="headerlink" title="8.4 课后作业"></a>8.4 课后作业</h3><p><a id="8-4">Day-8.4 课后作业</a></p>
 
       
     </div>
@@ -1867,7 +1883,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-1笔记"><span class="nav-number">1.</span> <span class="nav-text">Day-1笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Golang语言的特性"><span class="nav-number">1.1.</span> <span class="nav-text">Golang语言的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高并发测试-一个测试"><span class="nav-number">1.2.</span> <span class="nav-text">高并发测试(一个测试)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个golang程序"><span class="nav-number">1.3.</span> <span class="nav-text">第一个golang程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包的概念"><span class="nav-number">1.4.</span> <span class="nav-text">包的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包的实战"><span class="nav-number">1.5.</span> <span class="nav-text">包的实战</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-2笔记"><span class="nav-number">2.</span> <span class="nav-text">Day-2笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一部分：基本数据类型和操作符"><span class="nav-number">2.1.</span> <span class="nav-text">第一部分：基本数据类型和操作符</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Outline"><span class="nav-number">3.</span> <span class="nav-text">Outline</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-1笔记"><span class="nav-number">1.</span> <span class="nav-text">Day-1笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Golang语言的特性"><span class="nav-number">1.1.</span> <span class="nav-text">Golang语言的特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高并发测试-一个测试"><span class="nav-number">1.2.</span> <span class="nav-text">高并发测试(一个测试)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个golang程序"><span class="nav-number">1.3.</span> <span class="nav-text">第一个golang程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包的概念"><span class="nav-number">1.4.</span> <span class="nav-text">包的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#包的实战"><span class="nav-number">1.5.</span> <span class="nav-text">包的实战</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-2笔记"><span class="nav-number">2.</span> <span class="nav-text">Day-2笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一部分：基本数据类型和操作符"><span class="nav-number">2.1.</span> <span class="nav-text">第一部分：基本数据类型和操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件名-amp-关键字-amp-标识符"><span class="nav-number">2.2.</span> <span class="nav-text">文件名&amp;关键字&amp;标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Go程序基本结"><span class="nav-number">2.3.</span> <span class="nav-text">Go程序基本结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量和变量"><span class="nav-number">2.4.</span> <span class="nav-text">常量和变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串类型"><span class="nav-number">2.5.</span> <span class="nav-text">字符串类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数的声明和注释"><span class="nav-number">2.6.</span> <span class="nav-text">函数的声明和注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#值类型和引用类型"><span class="nav-number">2.7.</span> <span class="nav-text">值类型和引用类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串处理包与函数"><span class="nav-number">3.</span> <span class="nav-text">字符串处理包与函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#strings和strconv的使"><span class="nav-number">3.1.</span> <span class="nav-text">strings和strconv的使</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Go中的时间和日期类型"><span class="nav-number">3.2.</span> <span class="nav-text">2. Go中的时间和日期类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-指针类型"><span class="nav-number">3.3.</span> <span class="nav-text">3. 指针类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-函数详解"><span class="nav-number">3.4.</span> <span class="nav-text">4. 函数详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-课后作业"><span class="nav-number">3.5.</span> <span class="nav-text">5. 课后作业</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组、切片、map、package介"><span class="nav-number">4.</span> <span class="nav-text">数组、切片、map、package介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-内置函数、递归函数、闭包"><span class="nav-number">4.1.</span> <span class="nav-text">1.内置函数、递归函数、闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-数组与切片"><span class="nav-number">4.2.</span> <span class="nav-text">2.数组与切片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-map数组结构"><span class="nav-number">4.3.</span> <span class="nav-text">3.map数组结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-package介绍"><span class="nav-number">4.4.</span> <span class="nav-text">4.package介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-课后作业-1"><span class="nav-number">4.5.</span> <span class="nav-text">5.课后作业</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-5-结构体、方法、接口"><span class="nav-number">5.</span> <span class="nav-text">Day-5 结构体、方法、接口</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-结构体"><span class="nav-number">5.1.</span> <span class="nav-text">1.1 结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-方法"><span class="nav-number">5.2.</span> <span class="nav-text">2. 方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-作业"><span class="nav-number">5.3.</span> <span class="nav-text">3. 作业</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-6-接口、反射"><span class="nav-number">6.</span> <span class="nav-text">Day-6 接口、反射</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-接口"><span class="nav-number">6.1.</span> <span class="nav-text">1. 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-反射"><span class="nav-number">6.2.</span> <span class="nav-text">2.反射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-作业-1"><span class="nav-number">6.3.</span> <span class="nav-text">3.作业</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-终端读写"><span class="nav-number">6.4.</span> <span class="nav-text">7.1 终端读写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-文件读"><span class="nav-number">6.5.</span> <span class="nav-text">7.2 文件读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-命令行参数处"><span class="nav-number">6.6.</span> <span class="nav-text">7.3 命令行参数处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-json协议"><span class="nav-number">6.7.</span> <span class="nav-text">7.4 json协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-5-错误处理"><span class="nav-number">6.8.</span> <span class="nav-text">7.5 错误处理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Day-8-并发与Chan"><span class="nav-number">7.</span> <span class="nav-text">Day-8 并发与Chan</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-Goroute"><span class="nav-number">7.1.</span> <span class="nav-text">8.1 Goroute</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-Channel"><span class="nav-number">7.2.</span> <span class="nav-text">8.2 Channel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-单元测试"><span class="nav-number">7.3.</span> <span class="nav-text">8.3 单元测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-课后作业"><span class="nav-number">7.4.</span> <span class="nav-text">8.4 课后作业</span></a></li></ol></li></ol></div>
             
 
           </div>
