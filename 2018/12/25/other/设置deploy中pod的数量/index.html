@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="步荀仙的博客">
 <meta property="og:description" content="在dockerfile中将时区调整为上海时区">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-25T09:18:14.290Z">
+<meta property="og:updated_time" content="2018-12-25T23:45:40.601Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设置deploy中pod的数量">
 <meta name="twitter:description" content="在dockerfile中将时区调整为上海时区">
@@ -344,7 +344,12 @@
       
         <p>在<code>dockerfile</code>中将时区调整为上海时区</p>
 <a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl scale deploy myweb --replicas=1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl scale deploy -n  myweb --replicas=1</span><br></pre></td></tr></table></figure>
+<p>for i in <code>kubectl get deploy -n ennwifi-test|grep -v &quot;se-cim&quot;  | sed -n &#39;2,$p&#39; |awk &#39;{print $1}&#39;</code>;do kubectl scale deploy -n ennwifi-test $i –replicas=0;done</p>
+<p>yuntuyun.com</p>
+<p>123.58.243.100</p>
+<p>智慧物流</p>
+
       
     </div>
     
@@ -385,6 +390,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/28/other/GitLab配置ssh-key上传拉取代码/" rel="prev" title="GitLab配置ssh-key上传拉取代码">
+                GitLab配置ssh-key上传拉取代码 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -454,7 +463,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -465,7 +474,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -476,7 +485,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
