@@ -349,6 +349,25 @@
 <p><a href="#6">Day-6 接口、反射</a></p>
 <p><a href="#7">Day-7 终端读写</a>&gt;</p>
 <p><a href="#8">Day-8 并发与Chan</a></p>
+<p><a href="#3333">Day-1 golang语言基础</a></p>
+<p><a id="3333">Day-1笔记</a></p>
+<h2 id="Day-1笔记"><a href="#Day-1笔记" class="headerlink" title="Day-1笔记"></a><a id="1">Day-1笔记</a></h2><h3 id="Golang语言的特性"><a href="#Golang语言的特性" class="headerlink" title="Golang语言的特性"></a>Golang语言的特性</h3><ul>
+<li><p>1.垃圾回收</p>
+<ul>
+<li>a.内存自动回收，再也不需要开发人员管理内存</li>
+<li>b.开发人员专注业务实现，降低了心智负担</li>
+<li>c.只需要new分配内存，不需要释放</li>
+</ul>
+</li>
+<li><p>2.天然并发</p>
+<ul>
+<li>a.从语言层面支持并发，非常简单</li>
+<li>b.goroute，轻量级线程，创建成千上万个goroute成为可能</li>
+<li>c.基于CSP(Communicating Sequential Process)模型实现</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> fmt.Println(<span class="string">"hello"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/12/28/golang/go/#more" rel="contents">
