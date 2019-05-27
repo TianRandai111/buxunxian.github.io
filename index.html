@@ -422,179 +422,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/05/24/golang/Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="步荀仙">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/kyz.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="步荀仙的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/24/golang/Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错/" itemprop="url">Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-24T18:17:34+08:00">
-                2019-05-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux系统工具/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux系统工具</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/24/golang/Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/24/golang/Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Cenos-7-2-升级OpenSSH-8-0-升级步骤及排错"><a href="#Cenos-7-2-升级OpenSSH-8-0-升级步骤及排错" class="headerlink" title="Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错"></a>Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错</h2><h5 id="1-获取OpenSSH-8-0"><a href="#1-获取OpenSSH-8-0" class="headerlink" title="1.获取OpenSSH 8.0"></a>1.获取OpenSSH 8.0</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://openbsd.hk/pub/OpenBSD/OpenSSH/portable/openssh-8.0p1.tar.gz</span><br></pre></td></tr></table></figure>
-<h5 id="2-安装依赖并解压"><a href="#2-安装依赖并解压" class="headerlink" title="2.安装依赖并解压"></a>2.安装依赖并解压</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install openssl-devel -y</span><br><span class="line">tar xvf openssh-8.0p1.tar.gz</span><br></pre></td></tr></table></figure>
-<h5 id="3-编译"><a href="#3-编译" class="headerlink" title="3.编译"></a>3.编译</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> openssh-8.0p1</span><br><span class="line">./configure --prefix=/usr --sysconfdir=/etc/ssh</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<h5 id="4-处理报错"><a href="#4-处理报错" class="headerlink" title="4.处理报错"></a>4.处理报错</h5><p>编译后会出现以下错误</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/etc/ssh/sshd_config line 92: Unsupported option GSSAPIAuthentication</span><br><span class="line">/etc/ssh/sshd_config line 95: Unsupported option GSSAPICleanupCredentials</span><br><span class="line">/etc/ssh/sshd_config line 111: Unsupported option UsePAM</span><br><span class="line">/etc/ssh/sshd_config line 124: Deprecated option UsePrivilegeSeparation</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">Permissions 0640 <span class="keyword">for</span> <span class="string">'/etc/ssh/ssh_host_rsa_key'</span> are too open.</span><br><span class="line">It is required that your private key files are NOT accessible by others.</span><br><span class="line">This private key will be ignored.</span><br><span class="line">Unable to load host key <span class="string">"/etc/ssh/ssh_host_rsa_key"</span>: bad permissions</span><br><span class="line">Unable to load host key: /etc/ssh/ssh_host_rsa_key</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">@         WARNING: UNPROTECTED PRIVATE KEY FILE!          @</span><br><span class="line">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span><br><span class="line">Permissions 0640 <span class="keyword">for</span> <span class="string">'/etc/ssh/ssh_host_ecdsa_key'</span> are too open.</span><br><span class="line">It is required that your private key files are NOT accessible by others.</span><br><span class="line">This private key will be ignored.</span><br><span class="line">Unable to load host key <span class="string">"/etc/ssh/ssh_host_ecdsa_key"</span>: bad permissions</span><br><span class="line">Unable to load host key: /etc/ssh/ssh_host_ecdsa_key</span><br><span class="line">sshd: no hostkeys available -- exiting.</span><br><span class="line">make: [check-config] Error 1 (ignored)</span><br></pre></td></tr></table></figure>
-<ul>
-<li><p>a).删除对应的KEY</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /etc/ssh/ssh_host_dsa_key /etc/ssh/ssh_host_dsa_key.pub /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ecdsa_key.pub /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_rsa_key.pub</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>b).创建新的KEY</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key</span><br><span class="line">ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key</span><br><span class="line">ssh-keygen -t dsa -f /etc/ssh/ssh_host_ed25519_key</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>c).重新编译</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make install</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>d).注释掉报错行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sed -i s/GSSAPIAuthentication/<span class="comment">#GSSAPIAuthentication/g /etc/ssh/sshd_config</span></span><br><span class="line">sed -i s/GSSAPICleanupCredentials/<span class="comment">#GSSAPICleanupCredentials/g /etc/ssh/sshd_config</span></span><br><span class="line">sed -i s/UsePAM/<span class="comment">#UsePAM/g /etc/ssh/sshd_config</span></span><br><span class="line">sed -i s/UsePrivilegeSeparation/<span class="comment">#UsePrivilegeSeparation/g /etc/ssh/sshd_config</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>e).允许root登陆</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sed -i s/<span class="comment">#PermitRootLogin/PermitRootLogin/g /etc/ssh/sshd_config</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="5-查看版本并启动服务"><a href="#5-查看版本并启动服务" class="headerlink" title="5.查看版本并启动服务"></a>5.查看版本并启动服务</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看ssh的版本</span></span><br><span class="line">ssh -V</span><br><span class="line"></span><br><span class="line"><span class="comment">#开机启动sshd</span></span><br><span class="line">systemctl <span class="built_in">enable</span> sshd</span><br><span class="line"></span><br><span class="line"><span class="comment">#重启sshd刷新配置</span></span><br><span class="line">systemctl restart sshd</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/01/08/ansible/Ansible批量分发key/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1883,13 +1710,161 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2018/12/18/golang/golang_language/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="步荀仙">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kyz.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="步荀仙的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/18/golang/golang_language/" itemprop="url">golang_language教程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-18T17:36:17+08:00">
+                2018-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/golang/" itemprop="url" rel="index">
+                    <span itemprop="name">golang</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/18/golang/golang_language/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/18/golang/golang_language/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://github.com/TianRandai111/buxunxian" target="_blank" rel="noopener">golang_language教程</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
 
 
           </div>
@@ -1935,7 +1910,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
