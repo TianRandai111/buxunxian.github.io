@@ -249,6 +249,203 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/06/06/other/yum安装的nginx支持geoip2模块的方法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="步荀仙">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kyz.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="步荀仙的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/06/other/yum安装的nginx支持geoip2模块的方法/" itemprop="url">Centos系统yum安装的nginx如果何止GeoIP2模块</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-06T11:53:22+08:00">
+                2019-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/Centos/" itemprop="url" rel="index">
+                    <span itemprop="name">Centos</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/06/other/yum安装的nginx支持geoip2模块的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/06/other/yum安装的nginx支持geoip2模块的方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<h2 id="Centos系统yum安装的nginx如果何止GeoIP2模块"><a href="#Centos系统yum安装的nginx如果何止GeoIP2模块" class="headerlink" title="Centos系统yum安装的nginx如果何止GeoIP2模块"></a>Centos系统yum安装的nginx如果何止GeoIP2模块</h2><h4 id="前期步骤"><a href="#前期步骤" class="headerlink" title="前期步骤"></a>前期步骤</h4><blockquote>
+<p>nginx本身是没有GeoIP2的模块的需要对nginx进行重新编译才能使用</p>
+</blockquote>
+<blockquote>
+<p>查看nginx模块的详细信息</p>
+</blockquote>
+<p><code>nginx -V</code></p>
+<p><strong>仔细查看模块</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">nginx version: nginx/1.12.2</span><br><span class="line">built by gcc 4.8.5 20150623 (Red Hat 4.8.5-36) (GCC) </span><br><span class="line">built with OpenSSL 1.0.2k-fips  26 Jan 2017</span><br><span class="line">TLS SNI support enabled</span><br><span class="line">configure arguments: </span><br><span class="line">--prefix=/usr/share/nginx </span><br><span class="line">--sbin-path=/usr/sbin/nginx </span><br><span class="line">--modules-path=/usr/lib64/nginx/modules </span><br><span class="line">--conf-path=/etc/nginx/nginx.conf </span><br><span class="line">--error-log-path=/var/log/nginx/error.log </span><br><span class="line">--http-log-path=/var/log/nginx/access.log </span><br><span class="line">--http-client-body-temp-path=/var/lib/nginx/tmp/client_body </span><br><span class="line">--http-proxy-temp-path=/var/lib/nginx/tmp/proxy </span><br><span class="line">--http-fastcgi-temp-path=/var/lib/nginx/tmp/fastcgi </span><br><span class="line">--http-uwsgi-temp-path=/var/lib/nginx/tmp/uwsgi </span><br><span class="line">--http-scgi-temp-path=/var/lib/nginx/tmp/scgi </span><br><span class="line">--pid-path=/run/nginx.pid </span><br><span class="line">--lock-path=/run/lock/subsys/nginx </span><br><span class="line">--user=nginx </span><br><span class="line">--group=nginx </span><br><span class="line">--with-file-aio </span><br><span class="line">--with-ipv6 </span><br><span class="line">--with-http_auth_request_module </span><br><span class="line">--with-http_ssl_module </span><br><span class="line">--with-http_v2_module </span><br><span class="line">--with-http_realip_module </span><br><span class="line">--with-http_addition_module </span><br><span class="line">--with-http_xslt_module=dynamic </span><br><span class="line">--with-http_image_filter_module=dynamic </span><br><span class="line">--with-http_geoip_module=dynamic </span><br><span class="line">--with-http_sub_module </span><br><span class="line">--with-http_dav_module </span><br><span class="line">--with-http_flv_module </span><br><span class="line">--with-http_mp4_module </span><br><span class="line">--with-http_gunzip_module </span><br><span class="line">--with-http_gzip_static_module </span><br><span class="line">--with-http_random_index_module </span><br><span class="line">--with-http_secure_link_module </span><br><span class="line">--with-http_degradation_module </span><br><span class="line">--with-http_slice_module </span><br><span class="line">--with-http_stub_status_module </span><br><span class="line">--with-http_perl_module=dynamic </span><br><span class="line">--with-mail=dynamic </span><br><span class="line">--with-mail_ssl_module </span><br><span class="line">--with-pcre </span><br><span class="line">--with-pcre-jit </span><br><span class="line">--with-stream=dynamic </span><br><span class="line">--with-stream_ssl_module </span><br><span class="line">--with-google_perftools_module </span><br><span class="line">--with-debug </span><br><span class="line">--with-cc-opt=&apos;-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong </span><br><span class="line">--param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic&apos; </span><br><span class="line">--with-ld-opt=&apos;-Wl,-z,relro -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -Wl,-E&apos;</span><br></pre></td></tr></table></figure></p>
+<h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget perl-ExtUtils-Embed readline-devel zlib-devel pam-devel libxml2-devel libxslt-devel gd-devel GeoIP-devel autoconf-2.69-11.el7.noarch gcc libxml2 libxml2-dev openldap-devel python-devel gcc-c++  openssl-devel cmakepcre-develnanowget  gcc gcc-c++ ncurses-devel perl pcre-devel libtool libsysfs automake openssl openssl-devel redhat-rpm-config.noarch unzip libmaxminddb libunwind.x86_64  -y</span><br></pre></td></tr></table></figure>
+<h4 id="下载国家及城市数据"><a href="#下载国家及城市数据" class="headerlink" title="下载国家及城市数据"></a>下载国家及城市数据</h4><blockquote>
+<p>数据文件是.mmdb的文件，安装ngx_http_geoip2_module的依赖库libmaxminddb，libmaxminddb已经在yum安装依赖时安装，文章最后会在附录中拥有编译安装的方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz</span><br><span class="line">wget https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz</span><br><span class="line">mkdir /etc/nginx/GeoIP2/</span><br><span class="line">tar xvf GeoLite2-City.tar.gz -C /etc/nginx/GeoIP2/</span><br><span class="line">tar xvf GeoLite2-Country.tar.gz -C /etc/nginx/GeoIP2/</span><br><span class="line">mv /etc/nginx/GeoIP2/GeoLite2-City*/ /etc/nginx/GeoIP2/GeoLite2-City/ </span><br><span class="line">mv /etc/nginx/GeoIP2/GeoLite2-Country*/ /etc/nginx/GeoIP2/GeoLite2-Country/</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong><font cooler="#FF0000">验证数据文件</font></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">mmdblookup --file /etc/nginx/GeoIP2/GeoLite2-City/GeoLite2-City.mmdb --ip 8.8.8.8</span><br><span class="line">&#123;</span><br><span class="line">    &quot;continent&quot;: </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;code&quot;: </span><br><span class="line">          &quot;NA&quot; &lt;utf8_string&gt;</span><br><span class="line">        &quot;geoname_id&quot;: </span><br><span class="line">          6255149 &lt;uint32&gt;</span><br><span class="line">        &quot;names&quot;: </span><br><span class="line">          &#123;</span><br><span class="line">            &quot;de&quot;: </span><br><span class="line">              &quot;Nordamerika&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;en&quot;: </span><br><span class="line">              &quot;North America&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;es&quot;: </span><br><span class="line">              &quot;Norteamérica&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;fr&quot;: </span><br><span class="line">              &quot;Amérique du Nord&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ja&quot;: </span><br><span class="line">              &quot;北アメリカ&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;pt-BR&quot;: </span><br><span class="line">              &quot;América do Norte&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ru&quot;: </span><br><span class="line">              &quot;Северная Америка&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;zh-CN&quot;: </span><br><span class="line">              &quot;北美洲&quot; &lt;utf8_string&gt;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &quot;country&quot;: </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;geoname_id&quot;: </span><br><span class="line">          6252001 &lt;uint32&gt;</span><br><span class="line">        &quot;iso_code&quot;: </span><br><span class="line">          &quot;US&quot; &lt;utf8_string&gt;</span><br><span class="line">        &quot;names&quot;: </span><br><span class="line">          &#123;</span><br><span class="line">            &quot;de&quot;: </span><br><span class="line">              &quot;USA&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;en&quot;: </span><br><span class="line">              &quot;United States&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;es&quot;: </span><br><span class="line">              &quot;Estados Unidos&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;fr&quot;: </span><br><span class="line">              &quot;États-Unis&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ja&quot;: </span><br><span class="line">              &quot;アメリカ合衆国&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;pt-BR&quot;: </span><br><span class="line">              &quot;Estados Unidos&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ru&quot;: </span><br><span class="line">              &quot;США&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;zh-CN&quot;: </span><br><span class="line">              &quot;美国&quot; &lt;utf8_string&gt;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &quot;location&quot;: </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;accuracy_radius&quot;: </span><br><span class="line">          1000 &lt;uint16&gt;</span><br><span class="line">        &quot;latitude&quot;: </span><br><span class="line">          37.751000 &lt;double&gt;</span><br><span class="line">        &quot;longitude&quot;: </span><br><span class="line">          -97.822000 &lt;double&gt;</span><br><span class="line">        &quot;time_zone&quot;: </span><br><span class="line">          &quot;America/Chicago&quot; &lt;utf8_string&gt;</span><br><span class="line">      &#125;</span><br><span class="line">    &quot;registered_country&quot;: </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;geoname_id&quot;: </span><br><span class="line">          6252001 &lt;uint32&gt;</span><br><span class="line">        &quot;iso_code&quot;: </span><br><span class="line">          &quot;US&quot; &lt;utf8_string&gt;</span><br><span class="line">        &quot;names&quot;: </span><br><span class="line">          &#123;</span><br><span class="line">            &quot;de&quot;: </span><br><span class="line">              &quot;USA&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;en&quot;: </span><br><span class="line">              &quot;United States&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;es&quot;: </span><br><span class="line">              &quot;Estados Unidos&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;fr&quot;: </span><br><span class="line">              &quot;États-Unis&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ja&quot;: </span><br><span class="line">              &quot;アメリカ合衆国&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;pt-BR&quot;: </span><br><span class="line">              &quot;Estados Unidos&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ru&quot;: </span><br><span class="line">              &quot;США&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;zh-CN&quot;: </span><br><span class="line">              &quot;美国&quot; &lt;utf8_string&gt;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="下载geoip2模块的代码"><a href="#下载geoip2模块的代码" class="headerlink" title="下载geoip2模块的代码"></a>下载geoip2模块的代码</h4><blockquote>
+<p>此代码参与nginx的编译<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/leev/ngx_http_geoip2_module/archive/master.zip</span><br><span class="line">unzip master</span><br><span class="line">mv ngx_http_geoip2_module-master  /usr/local/src/ngx_http_geoip2_module</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>》</p>
+<h4 id="编译nginx需要-google-pertools进行辅助"><a href="#编译nginx需要-google-pertools进行辅助" class="headerlink" title="编译nginx需要 google-pertools进行辅助"></a>编译nginx需要 google-pertools进行辅助</h4><blockquote>
+<p>安装google-pertools前需要安装libunwind，libuwinde已经在yum安装依赖时安装，文章最后会在附录中拥有编译安装的方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">安装google-pertools</span><br><span class="line">wget -c -O gperftools-2.4.tar.gz  https://github.com/gperftools/gperftools/releases/download/gperftools-2.4/gperftools-2.4.tar.gz</span><br><span class="line">tar xvf gperftools-2.4.tar.gz</span><br><span class="line">cd gperftools-2.4</span><br><span class="line">./configure</span><br><span class="line">make check</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="下载nginx代码"><a href="#下载nginx代码" class="headerlink" title="下载nginx代码"></a>下载nginx代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-1.12.2.tar.gz</span><br><span class="line">tar xvf nginx-1.12.2.tar.gz</span><br><span class="line">cd nginx-1.12.2</span><br></pre></td></tr></table></figure>
+<h4 id="编译nginx代码"><a href="#编译nginx代码" class="headerlink" title="编译nginx代码"></a>编译nginx代码</h4><ul>
+<li><p>生成Markfile文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">./configure \</span><br><span class="line">--prefix=/usr/share/nginx \</span><br><span class="line">--sbin-path=/usr/sbin/nginx \</span><br><span class="line">--modules-path=/usr/lib64/nginx/modules \</span><br><span class="line">--conf-path=/etc/nginx/nginx.conf \</span><br><span class="line">--error-log-path=/var/<span class="built_in">log</span>/nginx/error.log \</span><br><span class="line">--http-log-path=/var/<span class="built_in">log</span>/nginx/access.log \</span><br><span class="line">--http-client-body-temp-path=/var/lib/nginx/tmp/client_body \</span><br><span class="line">--http-proxy-temp-path=/var/lib/nginx/tmp/proxy \</span><br><span class="line">--http-fastcgi-temp-path=/var/lib/nginx/tmp/fastcgi \</span><br><span class="line">--http-uwsgi-temp-path=/var/lib/nginx/tmp/uwsgi \</span><br><span class="line">--http-scgi-temp-path=/var/lib/nginx/tmp/scgi \</span><br><span class="line">--pid-path=/run/nginx.pid \</span><br><span class="line">--lock-path=/run/lock/subsys/nginx \</span><br><span class="line">--user=nginx \</span><br><span class="line">--group=nginx \</span><br><span class="line">--with-ipv6 \</span><br><span class="line">--with-http_auth_request_module \</span><br><span class="line">--with-http_ssl_module \</span><br><span class="line">--with-http_v2_module \</span><br><span class="line">--with-http_realip_module \</span><br><span class="line">--with-http_addition_module \</span><br><span class="line">--with-http_xslt_module=dynamic \</span><br><span class="line">--with-http_image_filter_module=dynamic \</span><br><span class="line">--with-http_sub_module \</span><br><span class="line">--with-file-aio \</span><br><span class="line">--with-http_dav_module \</span><br><span class="line">--with-http_flv_module \</span><br><span class="line">--with-http_mp4_module \</span><br><span class="line">--with-http_gunzip_module \</span><br><span class="line">--with-http_gzip_static_module \</span><br><span class="line">--with-http_random_index_module \</span><br><span class="line">--with-http_secure_link_module \</span><br><span class="line">--with-http_degradation_module \</span><br><span class="line">--with-http_slice_module \</span><br><span class="line">--with-http_stub_status_module \</span><br><span class="line">--with-http_perl_module=dynamic \</span><br><span class="line">--with-mail=dynamic \</span><br><span class="line">--with-mail_ssl_module \</span><br><span class="line">--with-pcre \</span><br><span class="line">--with-pcre-jit \</span><br><span class="line">--with-stream \</span><br><span class="line">--with-stream_ssl_module \</span><br><span class="line">--with-http_geoip_module=dynamic \</span><br><span class="line">--add-module=/usr/<span class="built_in">local</span>/src/ngx_http_geoip2_module \ <span class="comment">#源代码不懂加入此行</span></span><br><span class="line">--with-debug \</span><br><span class="line">--with-cc-opt=<span class="string">'-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic'</span> \</span><br><span class="line">--with-ld-opt=<span class="string">'-Wl,-z,relro -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -Wl,-E'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>加载动态链接库否则nginx 会报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;/usr/local/lib&quot; &gt;&gt; /etc/ld.so.conf</span><br><span class="line">ldconfig</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>编译好后执行编译出的nginx二进制文件,进行验证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>验证如果没有问题将nginx的二进制文件复制到/usr/sbin/即可，切记备份<font coler="#FF0000"><strong>源文件</strong></font></p>
+</blockquote>
+<h4 id="配置nginx配置文件"><a href="#配置nginx配置文件" class="headerlink" title="配置nginx配置文件"></a>配置nginx配置文件</h4><blockquote>
+<p>我们队GeoIP2的目的是输出到日志中</p>
+</blockquote>
+<p><code>vim /etc/nginx/nginx.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">user  nginx;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">error_log  /var/log/nginx/error.log warn;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    geoip2 /etc/nginx/GeoIP/GeoLite2-Country.mmdb&#123;</span><br><span class="line">        $geoip2_data_country_code  country iso_code ;</span><br><span class="line">        $geoip2_data_country_name  source=$http_x_forwarded_for default=中国 country names zh-CN;</span><br><span class="line">    &#125;</span><br><span class="line">    geoip2 /etc/nginx/GeoIP/GeoLite2-City.mmdb&#123;</span><br><span class="line">        $geoip2_data_city_name source=$http_x_forwarded_for default=北京 city names zh-CN;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">     </span><br><span class="line">    log_format  main escape=json &apos;$remote_addr - $remote_user [$time_local] &apos;</span><br><span class="line">                        &apos;&quot;$request&quot; $status $body_bytes_sent &apos;</span><br><span class="line">                        &apos;&quot;$http_referer&quot; &quot;$http_user_agent&quot; &apos;</span><br><span class="line">                        &apos;$request_time &apos;</span><br><span class="line">                        &apos;&quot;$geoip2_data_country_name&quot; &quot;$geoip2_data_city_name&quot; &apos;;</span><br><span class="line"></span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"></span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    #gzip  on;</span><br><span class="line"></span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>查看日志结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">192.168.138.0 -  [05/Jun/2019:11:14:59 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:09 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:16 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:27 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:28 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:29 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:29 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:29 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/06/05/other/pinpoint集群的安装配置/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -352,8 +549,8 @@
       
         
           
-            <!--mode-->
-<h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a><a href="#1">一、环境准备</a></h2><h2 id="二、搭建Pinpoint"><a href="#二、搭建Pinpoint" class="headerlink" title="二、搭建Pinpoint"></a><a href="#2">二、搭建Pinpoint</a></h2><h3 id="2-1、安装配置ansible"><a href="#2-1、安装配置ansible" class="headerlink" title="2.1、安装配置ansible"></a><a href="#2.1">2.1、安装配置ansible</a></h3><h3 id="2-2、配置ansible"><a href="#2-2、配置ansible" class="headerlink" title="2.2、配置ansible"></a><a href="#2.2">2.2、配置ansible</a></h3><h3 id="2-3、挂在磁盘"><a href="#2-3、挂在磁盘" class="headerlink" title="2.3、挂在磁盘"></a><a href="#2.3">2.3、挂在磁盘</a></h3><h2 id="三、获取组件"><a href="#三、获取组件" class="headerlink" title="三、获取组件"></a><a href="#3">三、获取组件</a></h2><h3 id="3-1、下载zookeeper"><a href="#3-1、下载zookeeper" class="headerlink" title="3.1、下载zookeeper"></a><a href="#3.1">3.1、下载zookeeper</a></h3><h3 id="3-2、下载hadoop"><a href="#3-2、下载hadoop" class="headerlink" title="3.2、下载hadoop"></a><a href="#3.2">3.2、下载hadoop</a></h3><h3 id="3-3、下载hbase"><a href="#3-3、下载hbase" class="headerlink" title="3.3、下载hbase"></a><a href="#3.3">3.3、下载hbase</a></h3><h3 id="3-4、下载jdk-手动打开该网址"><a href="#3-4、下载jdk-手动打开该网址" class="headerlink" title="3.4、下载jdk 手动打开该网址"></a><a href="#3.4">3.4、下载jdk 手动打开该网址</a></h3><h3 id="3-5、获取pinpoint"><a href="#3-5、获取pinpoint" class="headerlink" title="3.5、获取pinpoint"></a><a href="#3.6">3.5、获取pinpoint</a></h3><h3 id="3-6、获取tomcat"><a href="#3-6、获取tomcat" class="headerlink" title="3.6、获取tomcat"></a><a href="#3.6">3.6、获取tomcat</a></h3><h2 id="四、分发解压各个组建"><a href="#四、分发解压各个组建" class="headerlink" title="四、分发解压各个组建"></a><a href="#4">四、分发解压各个组建</a></h2><h3 id="4-1、分发软件"><a href="#4-1、分发软件" class="headerlink" title="4.1、分发软件"></a><a href="#4.1">4.1、分发软件</a></h3><h3 id="4-2、解压zoopeeper"><a href="#4-2、解压zoopeeper" class="headerlink" title="4.2、解压zoopeeper"></a><a href="#4.2">4.2、解压zoopeeper</a></h3><h3 id="4-3、解压hadoop"><a href="#4-3、解压hadoop" class="headerlink" title="4.3、解压hadoop"></a><a href="#4.3">4.3、解压hadoop</a></h3><h3 id="4-4、解压安装hadoop"><a href="#4-4、解压安装hadoop" class="headerlink" title="4.4、解压安装hadoop"></a><a href="#4.4">4.4、解压安装hadoop</a></h3><h3 id="4-5、安装jdk与jvsc并配置变量"><a href="#4-5、安装jdk与jvsc并配置变量" class="headerlink" title="4.5、安装jdk与jvsc并配置变量"></a><a href="#4.5">4.5、安装jdk与jvsc并配置变量</a></h3><h2 id="五、配置zookeeper"><a href="#五、配置zookeeper" class="headerlink" title="五、配置zookeeper"></a><a href="#5">五、配置zookeeper</a></h2><h3 id="5-1、拷贝配置文件"><a href="#5-1、拷贝配置文件" class="headerlink" title="5.1、拷贝配置文件"></a><a href="#5.1">5.1、拷贝配置文件</a></h3><h3 id="5-2、修改配置文件"><a href="#5-2、修改配置文件" class="headerlink" title="5.2、修改配置文件"></a><a href="#5.2">5.2、修改配置文件</a></h3><h3 id="5-3、批量配置"><a href="#5-3、批量配置" class="headerlink" title="5.3、批量配置"></a><a href="#5.3">5.3、批量配置</a></h3><h3 id="5-4、查看每个状态"><a href="#5-4、查看每个状态" class="headerlink" title="5.4、查看每个状态"></a><a href="#5.4">5.4、查看每个状态</a></h3><h2 id="六、配置hadoop"><a href="#六、配置hadoop" class="headerlink" title="六、配置hadoop"></a><a href="#6">六、配置hadoop</a></h2><h3 id="6-1、配置hdfs-site-xml文件"><a href="#6-1、配置hdfs-site-xml文件" class="headerlink" title="6.1、配置hdfs-site.xml文件"></a><a href="#6.1">6.1、配置hdfs-site.xml文件</a></h3><h3 id="6-2、hadoop-env-sh变量文件"><a href="#6-2、hadoop-env-sh变量文件" class="headerlink" title="6.2、hadoop-env.sh变量文件"></a><a href="#6.2">6.2、hadoop-env.sh变量文件</a></h3><h3 id="6-3、配置hdfs-site-xml文件"><a href="#6-3、配置hdfs-site-xml文件" class="headerlink" title="6.3、配置hdfs-site.xml文件"></a><a href="#6.3">6.3、配置hdfs-site.xml文件</a></h3><h3 id="6-4、配置yarn-site-xml"><a href="#6-4、配置yarn-site-xml" class="headerlink" title="6.4、配置yarn-site.xml"></a><a href="#6.4">6.4、配置yarn-site.xml</a></h3><h3 id="6-5、配置mapred-site-xml"><a href="#6-5、配置mapred-site-xml" class="headerlink" title="6.5、配置mapred-site.xml"></a><a href="#6.5">6.5、配置mapred-site.xml</a></h3><h3 id="6-6、配置core-site-xml"><a href="#6-6、配置core-site-xml" class="headerlink" title="6.6、配置core-site.xml"></a><a href="#6.6">6.6、配置core-site.xml</a></h3><h3 id="6-7、配置slave"><a href="#6-7、配置slave" class="headerlink" title="6.7、配置slave"></a><a href="#6.7">6.7、配置slave</a></h3><h3 id="6-8、分发配置文件"><a href="#6-8、分发配置文件" class="headerlink" title="6.8、分发配置文件"></a><a href="#6.8">6.8、分发配置文件</a></h3><h3 id="6-9、格式化hadoop"><a href="#6-9、格式化hadoop" class="headerlink" title="6.9、格式化hadoop"></a><a href="#6.9">6.9、格式化hadoop</a></h3><h3 id="6-10、查看端口状态"><a href="#6-10、查看端口状态" class="headerlink" title="6.10、查看端口状态"></a><a href="#6.10">6.10、查看端口状态</a></h3><h3 id="6-11、查看java状态"><a href="#6-11、查看java状态" class="headerlink" title="6.11、查看java状态"></a><a href="#6.11">6.11、查看java状态</a></h3><h2 id="七、Hbase配置"><a href="#七、Hbase配置" class="headerlink" title="七、Hbase配置"></a><a href="#7">七、Hbase配置</a></h2><h3 id="7-1、修改hbase变量配置文件"><a href="#7-1、修改hbase变量配置文件" class="headerlink" title="7.1、修改hbase变量配置文件"></a><a href="#7.1">7.1、修改hbase变量配置文件</a></h3><h3 id="7-2、修改hbase服务配置文件"><a href="#7-2、修改hbase服务配置文件" class="headerlink" title="7.2、修改hbase服务配置文件"></a><a href="#7.2">7.2、修改hbase服务配置文件</a></h3><h3 id="7-3、备用主节点与从节点配置文件"><a href="#7-3、备用主节点与从节点配置文件" class="headerlink" title="7.3、备用主节点与从节点配置文件"></a><a href="#7.3">7.3、备用主节点与从节点配置文件</a></h3><h3 id="7-3、分发-启动-初始化hbase"><a href="#7-3、分发-启动-初始化hbase" class="headerlink" title="7.3、分发,启动,初始化hbase"></a><a href="#7.4">7.3、分发,启动,初始化hbase</a></h3><h2 id="八、配置haproxy"><a href="#八、配置haproxy" class="headerlink" title="八、配置haproxy"></a><a href="#8">八、配置haproxy</a></h2><h3 id="8-1、安装haporxy"><a href="#8-1、安装haporxy" class="headerlink" title="8.1、安装haporxy"></a><a href="#8.1">8.1、安装haporxy</a></h3><h3 id="8-2、配置haporxy"><a href="#8-2、配置haporxy" class="headerlink" title="8.2、配置haporxy"></a><a href="#8.2">8.2、配置haporxy</a></h3><h3 id="8-3、查看状态"><a href="#8-3、查看状态" class="headerlink" title="8.3、查看状态"></a><a href="#8.3">8.3、查看状态</a></h3><h2 id="九、配置pinpoint"><a href="#九、配置pinpoint" class="headerlink" title="九、配置pinpoint"></a><a href="#9">九、配置pinpoint</a></h2><h3 id="9-1、解压tomcat"><a href="#9-1、解压tomcat" class="headerlink" title="9.1、解压tomcat"></a><a href="#9.1">9.1、解压tomcat</a></h3><h3 id="9-2、部署pinpoint-collector"><a href="#9-2、部署pinpoint-collector" class="headerlink" title="9.2、部署pinpoint-collector"></a><a href="#9.2">9.2、部署pinpoint-collector</a></h3><h3 id="9-3、修改配置文件"><a href="#9-3、修改配置文件" class="headerlink" title="9.3、修改配置文件"></a><a href="#9.3">9.3、修改配置文件</a></h3><h3 id="9-4、修改tomcat配置文件"><a href="#9-4、修改tomcat配置文件" class="headerlink" title="9.4、修改tomcat配置文件"></a><a href="#9.4">9.4、修改tomcat配置文件</a></h3><h3 id="9-5、修改server-xml"><a href="#9-5、修改server-xml" class="headerlink" title="9.5、修改server.xml"></a><a href="#9.5">9.5、修改server.xml</a></h3><h3 id="9-6、启动tomcat服务"><a href="#9-6、启动tomcat服务" class="headerlink" title="9.6、启动tomcat服务"></a><a href="#9.6">9.6、启动tomcat服务</a></h3><h2 id="十、配置mysql"><a href="#十、配置mysql" class="headerlink" title="十、配置mysql"></a><a href="#10">十、配置mysql</a></h2><h2 id="十一、部署pinpoint-web"><a href="#十一、部署pinpoint-web" class="headerlink" title="十一、部署pinpoint-web"></a><a href="#11">十一、部署pinpoint-web</a></h2><h3 id="11-1、修改tomcat配置文件"><a href="#11-1、修改tomcat配置文件" class="headerlink" title="11.1、修改tomcat配置文件"></a><a href="#11.1">11.1、修改tomcat配置文件</a></h3><h3 id="11-2、修改server-xml"><a href="#11-2、修改server-xml" class="headerlink" title="11.2、修改server.xml"></a><a href="#11.2">11.2、修改server.xml</a></h3><h3 id="11-3、部署pinpoint-web"><a href="#11-3、部署pinpoint-web" class="headerlink" title="11.3、部署pinpoint-web"></a><a href="#11.3">11.3、部署pinpoint-web</a></h3><h3 id="11-4、修改配置文件"><a href="#11-4、修改配置文件" class="headerlink" title="11.4、修改配置文件"></a><a href="#11.4">11.4、修改配置文件</a></h3><h3 id="11-5、配置数据库链接"><a href="#11-5、配置数据库链接" class="headerlink" title="11.5、配置数据库链接"></a><a href="#11.5">11.5、配置数据库链接</a></h3><h3 id="11-6、启动tomcat服务"><a href="#11-6、启动tomcat服务" class="headerlink" title="11.6、启动tomcat服务"></a><a href="#11.6">11.6、启动tomcat服务</a></h3><h3 id="11-7、分发tomcat-响应配置文件-并启动服务-此处不做修改。"><a href="#11-7、分发tomcat-响应配置文件-并启动服务-此处不做修改。" class="headerlink" title="11.7、分发tomcat,响应配置文件,并启动服务,此处不做修改。"></a><a href="#11.7">11.7、分发tomcat,响应配置文件,并启动服务,此处不做修改。</a></h3><h2 id="十二、haproxy配置"><a href="#十二、haproxy配置" class="headerlink" title="十二、haproxy配置"></a><a href="#12">十二、haproxy配置</a></h2><h3 id="12-1、修改hadoop配置文件"><a href="#12-1、修改hadoop配置文件" class="headerlink" title="12.1、修改hadoop配置文件 "></a><a href="#12.1">12.1、修改hadoop配置文件 </a></h3><h3 id="12-2、重启hadoop服务"><a href="#12-2、重启hadoop服务" class="headerlink" title="12.2、重启hadoop服务"></a><a href="#12.2">12.2、重启hadoop服务</a></h3><h3 id="12-3、查看端口"><a href="#12-3、查看端口" class="headerlink" title="12.3、查看端口"></a><a href="#12.3">12.3、查看端口</a></h3><h2 id="十三、pinpoint-agent"><a href="#十三、pinpoint-agent" class="headerlink" title="十三、pinpoint-agent"></a><a href="#1">十三、pinpoint-agent</a></h2><h3 id="13-1、将pinpoint的agent拷贝出来复制到客户端上"><a href="#13-1、将pinpoint的agent拷贝出来复制到客户端上" class="headerlink" title="13.1、将pinpoint的agent拷贝出来复制到客户端上"></a><a href="#1">13.1、将pinpoint的agent拷贝出来复制到客户端上</a></h3><h3 id="13-2、修改catalina文件"><a href="#13-2、修改catalina文件" class="headerlink" title="13.2、修改catalina文件"></a><a href="#1">13.2、修改catalina文件</a></h3><h3 id="13-3、启动tomcat即可"><a href="#13-3、启动tomcat即可" class="headerlink" title="13.3、启动tomcat即可"></a><a href="#1">13.3、启动tomcat即</a>可</h3><h2 id="一、环境准备-1"><a href="#一、环境准备-1" class="headerlink" title="一、环境准备"></a><a id="1">一、环境准备</a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">4台服务器</span><br><span class="line"></span><br><span class="line">haporxy 192.168.15.24</span><br><span class="line">pinpoint-1 192.168.15.30</span><br><span class="line">pinpoint-2 192.168.15.31</span><br><span class="line">pinpoint-2 192.168.15.32</span><br><span class="line">tomcat 192.168.6.150</span><br><span class="line">mysql 162.168.15.253</span><br></pre></td></tr></table></figure>
+            <h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a><a href="#1">一、环境准备</a></h2><h2 id="二、搭建Pinpoint"><a href="#二、搭建Pinpoint" class="headerlink" title="二、搭建Pinpoint"></a><a href="#2">二、搭建Pinpoint</a></h2><!--mode-->
+<h3 id="2-1、安装配置ansible"><a href="#2-1、安装配置ansible" class="headerlink" title="2.1、安装配置ansible"></a><a href="#2.1">2.1、安装配置ansible</a></h3><h3 id="2-2、配置ansible"><a href="#2-2、配置ansible" class="headerlink" title="2.2、配置ansible"></a><a href="#2.2">2.2、配置ansible</a></h3><h3 id="2-3、挂在磁盘"><a href="#2-3、挂在磁盘" class="headerlink" title="2.3、挂在磁盘"></a><a href="#2.3">2.3、挂在磁盘</a></h3><h2 id="三、获取组件"><a href="#三、获取组件" class="headerlink" title="三、获取组件"></a><a href="#3">三、获取组件</a></h2><h3 id="3-1、下载zookeeper"><a href="#3-1、下载zookeeper" class="headerlink" title="3.1、下载zookeeper"></a><a href="#3.1">3.1、下载zookeeper</a></h3><h3 id="3-2、下载hadoop"><a href="#3-2、下载hadoop" class="headerlink" title="3.2、下载hadoop"></a><a href="#3.2">3.2、下载hadoop</a></h3><h3 id="3-3、下载hbase"><a href="#3-3、下载hbase" class="headerlink" title="3.3、下载hbase"></a><a href="#3.3">3.3、下载hbase</a></h3><h3 id="3-4、下载jdk-手动打开该网址"><a href="#3-4、下载jdk-手动打开该网址" class="headerlink" title="3.4、下载jdk 手动打开该网址"></a><a href="#3.4">3.4、下载jdk 手动打开该网址</a></h3><h3 id="3-5、获取pinpoint"><a href="#3-5、获取pinpoint" class="headerlink" title="3.5、获取pinpoint"></a><a href="#3.6">3.5、获取pinpoint</a></h3><h3 id="3-6、获取tomcat"><a href="#3-6、获取tomcat" class="headerlink" title="3.6、获取tomcat"></a><a href="#3.6">3.6、获取tomcat</a></h3><h2 id="四、分发解压各个组建"><a href="#四、分发解压各个组建" class="headerlink" title="四、分发解压各个组建"></a><a href="#4">四、分发解压各个组建</a></h2><h3 id="4-1、分发软件"><a href="#4-1、分发软件" class="headerlink" title="4.1、分发软件"></a><a href="#4.1">4.1、分发软件</a></h3><h3 id="4-2、解压zoopeeper"><a href="#4-2、解压zoopeeper" class="headerlink" title="4.2、解压zoopeeper"></a><a href="#4.2">4.2、解压zoopeeper</a></h3><h3 id="4-3、解压hadoop"><a href="#4-3、解压hadoop" class="headerlink" title="4.3、解压hadoop"></a><a href="#4.3">4.3、解压hadoop</a></h3><h3 id="4-4、解压安装hadoop"><a href="#4-4、解压安装hadoop" class="headerlink" title="4.4、解压安装hadoop"></a><a href="#4.4">4.4、解压安装hadoop</a></h3><h3 id="4-5、安装jdk与jvsc并配置变量"><a href="#4-5、安装jdk与jvsc并配置变量" class="headerlink" title="4.5、安装jdk与jvsc并配置变量"></a><a href="#4.5">4.5、安装jdk与jvsc并配置变量</a></h3><h2 id="五、配置zookeeper"><a href="#五、配置zookeeper" class="headerlink" title="五、配置zookeeper"></a><a href="#5">五、配置zookeeper</a></h2><h3 id="5-1、拷贝配置文件"><a href="#5-1、拷贝配置文件" class="headerlink" title="5.1、拷贝配置文件"></a><a href="#5.1">5.1、拷贝配置文件</a></h3><h3 id="5-2、修改配置文件"><a href="#5-2、修改配置文件" class="headerlink" title="5.2、修改配置文件"></a><a href="#5.2">5.2、修改配置文件</a></h3><h3 id="5-3、批量配置"><a href="#5-3、批量配置" class="headerlink" title="5.3、批量配置"></a><a href="#5.3">5.3、批量配置</a></h3><h3 id="5-4、查看每个状态"><a href="#5-4、查看每个状态" class="headerlink" title="5.4、查看每个状态"></a><a href="#5.4">5.4、查看每个状态</a></h3><h2 id="六、配置hadoop"><a href="#六、配置hadoop" class="headerlink" title="六、配置hadoop"></a><a href="#6">六、配置hadoop</a></h2><h3 id="6-1、配置hdfs-site-xml文件"><a href="#6-1、配置hdfs-site-xml文件" class="headerlink" title="6.1、配置hdfs-site.xml文件"></a><a href="#6.1">6.1、配置hdfs-site.xml文件</a></h3><h3 id="6-2、hadoop-env-sh变量文件"><a href="#6-2、hadoop-env-sh变量文件" class="headerlink" title="6.2、hadoop-env.sh变量文件"></a><a href="#6.2">6.2、hadoop-env.sh变量文件</a></h3><h3 id="6-3、配置hdfs-site-xml文件"><a href="#6-3、配置hdfs-site-xml文件" class="headerlink" title="6.3、配置hdfs-site.xml文件"></a><a href="#6.3">6.3、配置hdfs-site.xml文件</a></h3><h3 id="6-4、配置yarn-site-xml"><a href="#6-4、配置yarn-site-xml" class="headerlink" title="6.4、配置yarn-site.xml"></a><a href="#6.4">6.4、配置yarn-site.xml</a></h3><h3 id="6-5、配置mapred-site-xml"><a href="#6-5、配置mapred-site-xml" class="headerlink" title="6.5、配置mapred-site.xml"></a><a href="#6.5">6.5、配置mapred-site.xml</a></h3><h3 id="6-6、配置core-site-xml"><a href="#6-6、配置core-site-xml" class="headerlink" title="6.6、配置core-site.xml"></a><a href="#6.6">6.6、配置core-site.xml</a></h3><h3 id="6-7、配置slave"><a href="#6-7、配置slave" class="headerlink" title="6.7、配置slave"></a><a href="#6.7">6.7、配置slave</a></h3><h3 id="6-8、分发配置文件"><a href="#6-8、分发配置文件" class="headerlink" title="6.8、分发配置文件"></a><a href="#6.8">6.8、分发配置文件</a></h3><h3 id="6-9、格式化hadoop"><a href="#6-9、格式化hadoop" class="headerlink" title="6.9、格式化hadoop"></a><a href="#6.9">6.9、格式化hadoop</a></h3><h3 id="6-10、查看端口状态"><a href="#6-10、查看端口状态" class="headerlink" title="6.10、查看端口状态"></a><a href="#6.10">6.10、查看端口状态</a></h3><h3 id="6-11、查看java状态"><a href="#6-11、查看java状态" class="headerlink" title="6.11、查看java状态"></a><a href="#6.11">6.11、查看java状态</a></h3><h2 id="七、Hbase配置"><a href="#七、Hbase配置" class="headerlink" title="七、Hbase配置"></a><a href="#7">七、Hbase配置</a></h2><h3 id="7-1、修改hbase变量配置文件"><a href="#7-1、修改hbase变量配置文件" class="headerlink" title="7.1、修改hbase变量配置文件"></a><a href="#7.1">7.1、修改hbase变量配置文件</a></h3><h3 id="7-2、修改hbase服务配置文件"><a href="#7-2、修改hbase服务配置文件" class="headerlink" title="7.2、修改hbase服务配置文件"></a><a href="#7.2">7.2、修改hbase服务配置文件</a></h3><h3 id="7-3、备用主节点与从节点配置文件"><a href="#7-3、备用主节点与从节点配置文件" class="headerlink" title="7.3、备用主节点与从节点配置文件"></a><a href="#7.3">7.3、备用主节点与从节点配置文件</a></h3><h3 id="7-3、分发-启动-初始化hbase"><a href="#7-3、分发-启动-初始化hbase" class="headerlink" title="7.3、分发,启动,初始化hbase"></a><a href="#7.4">7.3、分发,启动,初始化hbase</a></h3><h2 id="八、配置haproxy"><a href="#八、配置haproxy" class="headerlink" title="八、配置haproxy"></a><a href="#8">八、配置haproxy</a></h2><h3 id="8-1、安装haporxy"><a href="#8-1、安装haporxy" class="headerlink" title="8.1、安装haporxy"></a><a href="#8.1">8.1、安装haporxy</a></h3><h3 id="8-2、配置haporxy"><a href="#8-2、配置haporxy" class="headerlink" title="8.2、配置haporxy"></a><a href="#8.2">8.2、配置haporxy</a></h3><h3 id="8-3、查看状态"><a href="#8-3、查看状态" class="headerlink" title="8.3、查看状态"></a><a href="#8.3">8.3、查看状态</a></h3><h2 id="九、配置pinpoint"><a href="#九、配置pinpoint" class="headerlink" title="九、配置pinpoint"></a><a href="#9">九、配置pinpoint</a></h2><h3 id="9-1、解压tomcat"><a href="#9-1、解压tomcat" class="headerlink" title="9.1、解压tomcat"></a><a href="#9.1">9.1、解压tomcat</a></h3><h3 id="9-2、部署pinpoint-collector"><a href="#9-2、部署pinpoint-collector" class="headerlink" title="9.2、部署pinpoint-collector"></a><a href="#9.2">9.2、部署pinpoint-collector</a></h3><h3 id="9-3、修改配置文件"><a href="#9-3、修改配置文件" class="headerlink" title="9.3、修改配置文件"></a><a href="#9.3">9.3、修改配置文件</a></h3><h3 id="9-4、修改tomcat配置文件"><a href="#9-4、修改tomcat配置文件" class="headerlink" title="9.4、修改tomcat配置文件"></a><a href="#9.4">9.4、修改tomcat配置文件</a></h3><h3 id="9-5、修改server-xml"><a href="#9-5、修改server-xml" class="headerlink" title="9.5、修改server.xml"></a><a href="#9.5">9.5、修改server.xml</a></h3><h3 id="9-6、启动tomcat服务"><a href="#9-6、启动tomcat服务" class="headerlink" title="9.6、启动tomcat服务"></a><a href="#9.6">9.6、启动tomcat服务</a></h3><h2 id="十、配置mysql"><a href="#十、配置mysql" class="headerlink" title="十、配置mysql"></a><a href="#10">十、配置mysql</a></h2><h2 id="十一、部署pinpoint-web"><a href="#十一、部署pinpoint-web" class="headerlink" title="十一、部署pinpoint-web"></a><a href="#11">十一、部署pinpoint-web</a></h2><h3 id="11-1、修改tomcat配置文件"><a href="#11-1、修改tomcat配置文件" class="headerlink" title="11.1、修改tomcat配置文件"></a><a href="#11.1">11.1、修改tomcat配置文件</a></h3><h3 id="11-2、修改server-xml"><a href="#11-2、修改server-xml" class="headerlink" title="11.2、修改server.xml"></a><a href="#11.2">11.2、修改server.xml</a></h3><h3 id="11-3、部署pinpoint-web"><a href="#11-3、部署pinpoint-web" class="headerlink" title="11.3、部署pinpoint-web"></a><a href="#11.3">11.3、部署pinpoint-web</a></h3><h3 id="11-4、修改配置文件"><a href="#11-4、修改配置文件" class="headerlink" title="11.4、修改配置文件"></a><a href="#11.4">11.4、修改配置文件</a></h3><h3 id="11-5、配置数据库链接"><a href="#11-5、配置数据库链接" class="headerlink" title="11.5、配置数据库链接"></a><a href="#11.5">11.5、配置数据库链接</a></h3><h3 id="11-6、启动tomcat服务"><a href="#11-6、启动tomcat服务" class="headerlink" title="11.6、启动tomcat服务"></a><a href="#11.6">11.6、启动tomcat服务</a></h3><h3 id="11-7、分发tomcat-响应配置文件-并启动服务-此处不做修改。"><a href="#11-7、分发tomcat-响应配置文件-并启动服务-此处不做修改。" class="headerlink" title="11.7、分发tomcat,响应配置文件,并启动服务,此处不做修改。"></a><a href="#11.7">11.7、分发tomcat,响应配置文件,并启动服务,此处不做修改。</a></h3><h2 id="十二、haproxy配置"><a href="#十二、haproxy配置" class="headerlink" title="十二、haproxy配置"></a><a href="#12">十二、haproxy配置</a></h2><h3 id="12-1、修改hadoop配置文件"><a href="#12-1、修改hadoop配置文件" class="headerlink" title="12.1、修改hadoop配置文件 "></a><a href="#12.1">12.1、修改hadoop配置文件 </a></h3><h3 id="12-2、重启hadoop服务"><a href="#12-2、重启hadoop服务" class="headerlink" title="12.2、重启hadoop服务"></a><a href="#12.2">12.2、重启hadoop服务</a></h3><h3 id="12-3、查看端口"><a href="#12-3、查看端口" class="headerlink" title="12.3、查看端口"></a><a href="#12.3">12.3、查看端口</a></h3><h2 id="十三、pinpoint-agent"><a href="#十三、pinpoint-agent" class="headerlink" title="十三、pinpoint-agent"></a><a href="#1">十三、pinpoint-agent</a></h2><h3 id="13-1、将pinpoint的agent拷贝出来复制到客户端上"><a href="#13-1、将pinpoint的agent拷贝出来复制到客户端上" class="headerlink" title="13.1、将pinpoint的agent拷贝出来复制到客户端上"></a><a href="#1">13.1、将pinpoint的agent拷贝出来复制到客户端上</a></h3><h3 id="13-2、修改catalina文件"><a href="#13-2、修改catalina文件" class="headerlink" title="13.2、修改catalina文件"></a><a href="#1">13.2、修改catalina文件</a></h3><h3 id="13-3、启动tomcat即可"><a href="#13-3、启动tomcat即可" class="headerlink" title="13.3、启动tomcat即可"></a><a href="#1">13.3、启动tomcat即</a>可</h3><h2 id="一、环境准备-1"><a href="#一、环境准备-1" class="headerlink" title="一、环境准备"></a><a id="1">一、环境准备</a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">4台服务器</span><br><span class="line"></span><br><span class="line">haporxy 192.168.15.24</span><br><span class="line">pinpoint-1 192.168.15.30</span><br><span class="line">pinpoint-2 192.168.15.31</span><br><span class="line">pinpoint-2 192.168.15.32</span><br><span class="line">tomcat 192.168.6.150</span><br><span class="line">mysql 162.168.15.253</span><br></pre></td></tr></table></figure>
 <h2 id="二、搭建Pinpoint-1"><a href="#二、搭建Pinpoint-1" class="headerlink" title="二、搭建Pinpoint"></a><a id="2">二、搭建Pinpoint</a></h2><h3 id="2-1、安装配置ansible-1"><a href="#2-1、安装配置ansible-1" class="headerlink" title="2.1、安装配置ansible"></a><a id="2.1">2.1、安装配置ansible</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install ansible -y</span><br></pre></td></tr></table></figure>
 <h3 id="2-2、配置ansible-1"><a href="#2-2、配置ansible-1" class="headerlink" title="2.2、配置ansible"></a><a id="2.2">2.2、配置ansible</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#配置host文件</span><br><span class="line">vim /etc/hosts</span><br><span class="line">    192.168.15.30 pinpoint-1</span><br><span class="line">    192.168.15.31 pinpoint-2</span><br><span class="line">    192.168.15.32 pinpoint-3</span><br><span class="line"></span><br><span class="line">#配置ansible文件</span><br><span class="line">vim /etc/ansible/hosts</span><br><span class="line">    [pinpoint]</span><br><span class="line">    pinpoint-1</span><br><span class="line">    pinpoint-2</span><br><span class="line">    pinpoint-3</span><br><span class="line"></span><br><span class="line">#在每个节点上执行 相互认证</span><br><span class="line">ssh-keygen</span><br><span class="line">cd /root/.ssh</span><br><span class="line">for (( i=0 ; i&lt;4 ; i++ ));do ssh-copy-id -i .ssh/id_rsa.pub root@pinpoint-$i;done</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#修改主机名</span><br><span class="line">for (( i=1 ; i&lt;4 ; i++ ));do ansible pinpoint-$i -m hostname -a &quot;name=pinpoint-$i&quot; ;done</span><br></pre></td></tr></table></figure>
 <h3 id="2-3、挂在磁盘-1"><a href="#2-3、挂在磁盘-1" class="headerlink" title="2.3、挂在磁盘"></a><a id="2.3">2.3、挂在磁盘</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vim disk.sh</span><br><span class="line">    echo -e &quot;n\np\n\n\n\nw\n &quot;|fdisk /dev/vdc</span><br><span class="line">    mkfs.ext4 /dev/vdc1</span><br><span class="line">    echo -e &quot;`blkid|grep vdc1|awk &apos;&#123;print $2&#125;&apos; |tr -d &apos;\&quot;&apos;`\t/pinpoint\text4\tdefaults\t0 0&quot; &gt;&gt; /etc/fstab</span><br><span class="line">    mount -a</span><br><span class="line">    findmnt</span><br><span class="line">ansible all -m copy -a &quot;src=dist.sh dest=/root&quot;</span><br><span class="line">ansible all -m shell =a &quot;bash disk.sh&quot;</span><br></pre></td></tr></table></figure>
@@ -1766,186 +1963,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2018/12/18/other/HaPorxy/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="步荀仙">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/kyz.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="步荀仙的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/18/other/HaPorxy/" itemprop="url">HaProxy</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-18T17:36:17+08:00">
-                2018-12-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/other/" itemprop="url" rel="index">
-                    <span itemprop="name">other</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/12/18/other/HaPorxy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/18/other/HaPorxy/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="HAProxy"><a href="#HAProxy" class="headerlink" title="HAProxy:"></a>HAProxy:</h1><ul>
-<li>LB Cluster:<ul>
-<li>四层：</li>
-</ul>
-</li>
-<li><p>lvs, nginx(stream)，haproxy(mode tcp)</p>
-<ul>
-<li>七层：<ul>
-<li>http: nginx(http, ngx_http_upstream_module), haproxy(mode http), httpd, ats, perlbal, pound…</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>HAProxy：</p>
-<ul>
-<li><a href="http://www.haproxy.org" target="_blank" rel="noopener">http://www.haproxy.org</a></li>
-<li><a href="http://www.haproxy.com" target="_blank" rel="noopener">http://www.haproxy.com</a> </li>
-</ul>
-</li>
-<li><p>文档：</p>
-<ul>
-<li><a href="http://cbonte.github.io/haproxy-dconv/" target="_blank" rel="noopener">http://cbonte.github.io/haproxy-dconv/</a></li>
-</ul>
-</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/18/other/HaPorxy/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1998,7 +2015,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2009,7 +2026,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2020,7 +2037,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
