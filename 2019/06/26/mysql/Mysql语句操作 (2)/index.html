@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="3.数据库3.9 数据库基本概念1、关系：两个表的公共字段 2、行：也称记录，也称实体 3、列：也称字段，也称属性 123就表结构而言，表分为行和列；就表数据而言，分为记录和字段；就面向对象而言，一个记录就是一个实体，一个字段就是一个属性。 4、数据冗余：相同的数据存储在不同的地方 1234脚下留心：1、冗余只能减少，不能杜绝。2、减少冗余的方法是分表3、为减少数据查找的麻烦，允许数据有一定的冗">
+<meta name="description" content="3.数据库3.9 数据库基本概念1、关系：两个表的公共字段 2、行：也称记录，也称实体 3、列：也称字段，也称属性">
 <meta name="keywords" content="Mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mariadb 数据库操作-2">
 <meta property="og:url" content="http://boke.buxunxian.com/2019/06/26/mysql/Mysql语句操作 (2)/index.html">
 <meta property="og:site_name" content="步荀仙的博客">
-<meta property="og:description" content="3.数据库3.9 数据库基本概念1、关系：两个表的公共字段 2、行：也称记录，也称实体 3、列：也称字段，也称属性 123就表结构而言，表分为行和列；就表数据而言，分为记录和字段；就面向对象而言，一个记录就是一个实体，一个字段就是一个属性。 4、数据冗余：相同的数据存储在不同的地方 1234脚下留心：1、冗余只能减少，不能杜绝。2、减少冗余的方法是分表3、为减少数据查找的麻烦，允许数据有一定的冗">
+<meta property="og:description" content="3.数据库3.9 数据库基本概念1、关系：两个表的公共字段 2、行：也称记录，也称实体 3、列：也称字段，也称属性">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/TianRandai111/Projact_Image/master/Gopkg/database/database%20(1">
 <meta property="og:image" content="https://raw.githubusercontent.com/TianRandai111/Projact_Image/master/Gopkg/database/database%20(2">
@@ -113,10 +113,10 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/TianRandai111/Projact_Image/master/Gopkg/database/database%20(31">
 <meta property="og:image" content="https://raw.githubusercontent.com/TianRandai111/Projact_Image/master/Gopkg/database/database%20(32">
 <meta property="og:image" content="https://raw.githubusercontent.com/TianRandai111/Projact_Image/master/Gopkg/database/database%20(33">
-<meta property="og:updated_time" content="2019-06-26T01:54:11.194Z">
+<meta property="og:updated_time" content="2019-06-26T01:58:22.850Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mariadb 数据库操作-2">
-<meta name="twitter:description" content="3.数据库3.9 数据库基本概念1、关系：两个表的公共字段 2、行：也称记录，也称实体 3、列：也称字段，也称属性 123就表结构而言，表分为行和列；就表数据而言，分为记录和字段；就面向对象而言，一个记录就是一个实体，一个字段就是一个属性。 4、数据冗余：相同的数据存储在不同的地方 1234脚下留心：1、冗余只能减少，不能杜绝。2、减少冗余的方法是分表3、为减少数据查找的麻烦，允许数据有一定的冗">
+<meta name="twitter:description" content="3.数据库3.9 数据库基本概念1、关系：两个表的公共字段 2、行：也称记录，也称实体 3、列：也称字段，也称属性">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/TianRandai111/Projact_Image/master/Gopkg/database/database%20(1">
 
 
@@ -390,11 +390,9 @@
       
 
       
-        <a id="more"></a>
-<h2 id="3-数据库"><a href="#3-数据库" class="headerlink" title="3.数据库"></a>3.数据库</h2><h3 id="3-9-数据库基本概念"><a href="#3-9-数据库基本概念" class="headerlink" title="3.9 数据库基本概念"></a>3.9 数据库基本概念</h3><p>1、关系：两个表的公共字段</p>
+        <h2 id="3-数据库"><a href="#3-数据库" class="headerlink" title="3.数据库"></a>3.数据库</h2><h3 id="3-9-数据库基本概念"><a href="#3-9-数据库基本概念" class="headerlink" title="3.9 数据库基本概念"></a>3.9 数据库基本概念</h3><p>1、关系：两个表的公共字段</p>
 <p>2、行：也称记录，也称实体</p>
-<p>3、列：也称字段，也称属性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">就表结构而言，表分为行和列；</span><br><span class="line">就表数据而言，分为记录和字段；</span><br><span class="line">就面向对象而言，一个记录就是一个实体，一个字段就是一个属性。</span><br></pre></td></tr></table></figure>
+<p>3、列：也称字段，也称属性<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">就表结构而言，表分为行和列；</span><br><span class="line">就表数据而言，分为记录和字段；</span><br><span class="line">就面向对象而言，一个记录就是一个实体，一个字段就是一个属性。</span><br></pre></td></tr></table></figure></p>
 <p>4、数据冗余：相同的数据存储在不同的地方</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">脚下留心：</span><br><span class="line">1、冗余只能减少，不能杜绝。</span><br><span class="line">2、减少冗余的方法是分表</span><br><span class="line">3、为减少数据查找的麻烦，允许数据有一定的冗余</span><br></pre></td></tr></table></figure>
 <p>5、数据完整性：正确性+准确性=数据完整性</p>
