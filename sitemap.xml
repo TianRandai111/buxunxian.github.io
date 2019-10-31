@@ -2,6 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://boke.buxunxian.com/2019/10/31/golang/golang%20%E4%BD%BF%E7%94%A8map%E5%A4%84%E7%90%86%E5%A4%9A%E7%BA%A7json%E5%90%8E%E8%BE%93%E5%87%BAmap%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84/</loc>
+    
+    <lastmod>2019-10-31T01:45:30.811Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://boke.buxunxian.com/2018/12/18/golang/golang_language/</loc>
+    
+    <lastmod>2019-07-01T08:57:04.919Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://boke.buxunxian.com/2018/12/28/golang/go/</loc>
+    
+    <lastmod>2019-07-01T08:56:57.924Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://boke.buxunxian.com/2019/06/26/mysql/Mysql%E8%AF%AD%E5%8F%A5%E6%93%8D%E4%BD%9C%20(2)/</loc>
     
     <lastmod>2019-06-26T01:58:22.850Z</lastmod>
@@ -51,13 +72,6 @@
   </url>
   
   <url>
-    <loc>http://boke.buxunxian.com/2018/12/28/golang/go/</loc>
-    
-    <lastmod>2018-12-28T07:26:48.155Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://boke.buxunxian.com/2018/12/28/other/GitLab%E9%85%8D%E7%BD%AEssh-key%E4%B8%8A%E4%BC%A0%E6%8B%89%E5%8F%96%E4%BB%A3%E7%A0%81/</loc>
     
     <lastmod>2018-12-28T06:40:58.506Z</lastmod>
@@ -96,13 +110,6 @@
     <loc>http://boke.buxunxian.com/2018/12/18/other/Hexo+Github/</loc>
     
     <lastmod>2018-12-14T08:29:48.684Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://boke.buxunxian.com/2018/12/18/golang/golang_language/</loc>
-    
-    <lastmod>2018-12-14T01:59:12.315Z</lastmod>
     
   </url>
   
