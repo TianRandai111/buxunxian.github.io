@@ -81,7 +81,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="步荀仙的博客">
-<meta property="og:url" content="http://boke.buxunxian.com/categories/编程开发/Golang/index.html">
+<meta property="og:url" content="http://boke.buxunxian.com/categories/编程开发/golang/index.html">
 <meta property="og:site_name" content="步荀仙的博客">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
@@ -115,13 +115,13 @@
 
 
 
-  <link rel="canonical" href="http://boke.buxunxian.com/categories/编程开发/Golang/">
+  <link rel="canonical" href="http://boke.buxunxian.com/categories/编程开发/golang/">
 
 
 
 
 
-  <title>分类: Golang | 步荀仙的博客</title>
+  <title>分类: golang | 步荀仙的博客</title>
   
 
 
@@ -241,7 +241,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>Golang<small>分类</small>
+        <h1>golang<small>分类</small>
         </h1>
       </div>
 
@@ -253,9 +253,35 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2019/12/25/Golang/Go技术随笔/Go_Get/" itemprop="url">
+            <a class="post-title-link" href="/2019/12/25/Golang/笔记/golang_language/" itemprop="url">
               
-                <span itemprop="name">Go Get无法获取golang.org包解决办法</span>
+                <span itemprop="name">golang_language教程(LNH)</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-12-25T15:06:34+08:00" content="2019-12-25">
+          12-25
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2019/12/25/Golang/笔记/go/" itemprop="url">
+              
+                <span itemprop="name">Go教程(LNH)</span>
               
             </a>
         
@@ -664,47 +690,6 @@
               success: function(newcounter) {
                 var $element = $(document.getElementById(url));
                 $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
-e'));
               },
               error: function(newcounter, error) {
                 console.log('Failed to create');
