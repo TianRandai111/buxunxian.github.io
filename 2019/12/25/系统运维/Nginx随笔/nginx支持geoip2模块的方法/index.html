@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="nginx,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Centos系统yum安装的nginx如果何止GeoIP2模块前期步骤 nginx本身是没有GeoIP2的模块的需要对nginx进行重新编译才能使用   查看nginx模块的详细信息  nginx -V 仔细查看模块1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
+<meta name="keywords" content="nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Centos系统yum安装的nginx如果何止GeoIP2模块">
+<meta property="og:url" content="http://boke.buxunxian.com/2019/12/25/系统运维/Nginx随笔/nginx支持geoip2模块的方法/index.html">
+<meta property="og:site_name" content="步荀仙的博客">
+<meta property="og:description" content="Centos系统yum安装的nginx如果何止GeoIP2模块前期步骤 nginx本身是没有GeoIP2的模块的需要对nginx进行重新编译才能使用   查看nginx模块的详细信息  nginx -V 仔细查看模块1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-25T07:24:18.920Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Centos系统yum安装的nginx如果何止GeoIP2模块">
+<meta name="twitter:description" content="Centos系统yum安装的nginx如果何止GeoIP2模块前期步骤 nginx本身是没有GeoIP2的模块的需要对nginx进行重新编译才能使用   查看nginx模块的详细信息  nginx -V 仔细查看模块1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://boke.buxunxian.com/2019/12/25/系统运维/Nginx随笔/nginx支持geoip2模块的方法/">
+
+
+
+
+
+  <title>Centos系统yum安装的nginx如果何止GeoIP2模块 | 步荀仙的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">步荀仙的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/12/25/系统运维/Nginx随笔/nginx支持geoip2模块的方法/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="步荀仙">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kyz.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="步荀仙的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Centos系统yum安装的nginx如果何止GeoIP2模块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T15:06:34+08:00">
+                2019-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统运维/" itemprop="url" rel="index">
+                    <span itemprop="name">系统运维</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统运维/Nginx随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx随笔</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/25/系统运维/Nginx随笔/nginx支持geoip2模块的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/25/系统运维/Nginx随笔/nginx支持geoip2模块的方法/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/12/25/系统运维/Nginx随笔/nginx支持geoip2模块的方法/" class="leancloud_visitors" data-flag-title="Centos系统yum安装的nginx如果何止GeoIP2模块">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<h2 id="Centos系统yum安装的nginx如果何止GeoIP2模块"><a href="#Centos系统yum安装的nginx如果何止GeoIP2模块" class="headerlink" title="Centos系统yum安装的nginx如果何止GeoIP2模块"></a>Centos系统yum安装的nginx如果何止GeoIP2模块</h2><h4 id="前期步骤"><a href="#前期步骤" class="headerlink" title="前期步骤"></a>前期步骤</h4><blockquote>
+<p>nginx本身是没有GeoIP2的模块的需要对nginx进行重新编译才能使用</p>
+</blockquote>
+<blockquote>
+<p>查看nginx模块的详细信息</p>
+</blockquote>
+<p><code>nginx -V</code></p>
+<p><strong>仔细查看模块</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">nginx version: nginx/1.12.2</span><br><span class="line">built by gcc 4.8.5 20150623 (Red Hat 4.8.5-36) (GCC) </span><br><span class="line">built with OpenSSL 1.0.2k-fips  26 Jan 2017</span><br><span class="line">TLS SNI support enabled</span><br><span class="line">configure arguments: </span><br><span class="line">--prefix=/usr/share/nginx </span><br><span class="line">--sbin-path=/usr/sbin/nginx </span><br><span class="line">--modules-path=/usr/lib64/nginx/modules </span><br><span class="line">--conf-path=/etc/nginx/nginx.conf </span><br><span class="line">--error-log-path=/var/log/nginx/error.log </span><br><span class="line">--http-log-path=/var/log/nginx/access.log </span><br><span class="line">--http-client-body-temp-path=/var/lib/nginx/tmp/client_body </span><br><span class="line">--http-proxy-temp-path=/var/lib/nginx/tmp/proxy </span><br><span class="line">--http-fastcgi-temp-path=/var/lib/nginx/tmp/fastcgi </span><br><span class="line">--http-uwsgi-temp-path=/var/lib/nginx/tmp/uwsgi </span><br><span class="line">--http-scgi-temp-path=/var/lib/nginx/tmp/scgi </span><br><span class="line">--pid-path=/run/nginx.pid </span><br><span class="line">--lock-path=/run/lock/subsys/nginx </span><br><span class="line">--user=nginx </span><br><span class="line">--group=nginx </span><br><span class="line">--with-file-aio </span><br><span class="line">--with-ipv6 </span><br><span class="line">--with-http_auth_request_module </span><br><span class="line">--with-http_ssl_module </span><br><span class="line">--with-http_v2_module </span><br><span class="line">--with-http_realip_module </span><br><span class="line">--with-http_addition_module </span><br><span class="line">--with-http_xslt_module=dynamic </span><br><span class="line">--with-http_image_filter_module=dynamic </span><br><span class="line">--with-http_geoip_module=dynamic </span><br><span class="line">--with-http_sub_module </span><br><span class="line">--with-http_dav_module </span><br><span class="line">--with-http_flv_module </span><br><span class="line">--with-http_mp4_module </span><br><span class="line">--with-http_gunzip_module </span><br><span class="line">--with-http_gzip_static_module </span><br><span class="line">--with-http_random_index_module </span><br><span class="line">--with-http_secure_link_module </span><br><span class="line">--with-http_degradation_module </span><br><span class="line">--with-http_slice_module </span><br><span class="line">--with-http_stub_status_module </span><br><span class="line">--with-http_perl_module=dynamic </span><br><span class="line">--with-mail=dynamic </span><br><span class="line">--with-mail_ssl_module </span><br><span class="line">--with-pcre </span><br><span class="line">--with-pcre-jit </span><br><span class="line">--with-stream=dynamic </span><br><span class="line">--with-stream_ssl_module </span><br><span class="line">--with-google_perftools_module </span><br><span class="line">--with-debug </span><br><span class="line">--with-cc-opt=&apos;-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong </span><br><span class="line">--param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic&apos; </span><br><span class="line">--with-ld-opt=&apos;-Wl,-z,relro -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -Wl,-E&apos;</span><br></pre></td></tr></table></figure></p>
+<h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget perl-ExtUtils-Embed readline-devel zlib-devel pam-devel libxml2-devel libxslt-devel gd-devel GeoIP-devel autoconf-2.69-11.el7.noarch gcc libxml2 libxml2-dev openldap-devel python-devel gcc-c++  openssl-devel cmakepcre-develnanowget  gcc gcc-c++ ncurses-devel perl pcre-devel libtool libsysfs automake openssl openssl-devel redhat-rpm-config.noarch unzip libmaxminddb libunwind.x86_64  -y</span><br></pre></td></tr></table></figure>
+<h4 id="下载国家及城市数据"><a href="#下载国家及城市数据" class="headerlink" title="下载国家及城市数据"></a>下载国家及城市数据</h4><blockquote>
+<p>数据文件是.mmdb的文件，安装ngx_http_geoip2_module的依赖库libmaxminddb，libmaxminddb已经在yum安装依赖时安装，文章最后会在附录中拥有编译安装的方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz</span><br><span class="line">wget https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz</span><br><span class="line">mkdir /etc/nginx/GeoIP2/</span><br><span class="line">tar xvf GeoLite2-City.tar.gz -C /etc/nginx/GeoIP2/</span><br><span class="line">tar xvf GeoLite2-Country.tar.gz -C /etc/nginx/GeoIP2/</span><br><span class="line">mv /etc/nginx/GeoIP2/GeoLite2-City*/ /etc/nginx/GeoIP2/GeoLite2-City/ </span><br><span class="line">mv /etc/nginx/GeoIP2/GeoLite2-Country*/ /etc/nginx/GeoIP2/GeoLite2-Country/</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong><font cooler="#FF0000">验证数据文件</font></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">mmdblookup --file /etc/nginx/GeoIP2/GeoLite2-City/GeoLite2-City.mmdb --ip 8.8.8.8</span><br><span class="line">&#123;</span><br><span class="line">    &quot;continent&quot;: </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;code&quot;: </span><br><span class="line">          &quot;NA&quot; &lt;utf8_string&gt;</span><br><span class="line">        &quot;geoname_id&quot;: </span><br><span class="line">          6255149 &lt;uint32&gt;</span><br><span class="line">        &quot;names&quot;: </span><br><span class="line">          &#123;</span><br><span class="line">            &quot;de&quot;: </span><br><span class="line">              &quot;Nordamerika&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;en&quot;: </span><br><span class="line">              &quot;North America&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;es&quot;: </span><br><span class="line">              &quot;Norteamérica&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;fr&quot;: </span><br><span class="line">              &quot;Amérique du Nord&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ja&quot;: </span><br><span class="line">              &quot;北アメリカ&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;pt-BR&quot;: </span><br><span class="line">              &quot;América do Norte&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ru&quot;: </span><br><span class="line">              &quot;Северная Америка&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;zh-CN&quot;: </span><br><span class="line">              &quot;北美洲&quot; &lt;utf8_string&gt;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &quot;country&quot;: </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;geoname_id&quot;: </span><br><span class="line">          6252001 &lt;uint32&gt;</span><br><span class="line">        &quot;iso_code&quot;: </span><br><span class="line">          &quot;US&quot; &lt;utf8_string&gt;</span><br><span class="line">        &quot;names&quot;: </span><br><span class="line">          &#123;</span><br><span class="line">            &quot;de&quot;: </span><br><span class="line">              &quot;USA&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;en&quot;: </span><br><span class="line">              &quot;United States&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;es&quot;: </span><br><span class="line">              &quot;Estados Unidos&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;fr&quot;: </span><br><span class="line">              &quot;États-Unis&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ja&quot;: </span><br><span class="line">              &quot;アメリカ合衆国&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;pt-BR&quot;: </span><br><span class="line">              &quot;Estados Unidos&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ru&quot;: </span><br><span class="line">              &quot;США&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;zh-CN&quot;: </span><br><span class="line">              &quot;美国&quot; &lt;utf8_string&gt;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &quot;location&quot;: </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;accuracy_radius&quot;: </span><br><span class="line">          1000 &lt;uint16&gt;</span><br><span class="line">        &quot;latitude&quot;: </span><br><span class="line">          37.751000 &lt;double&gt;</span><br><span class="line">        &quot;longitude&quot;: </span><br><span class="line">          -97.822000 &lt;double&gt;</span><br><span class="line">        &quot;time_zone&quot;: </span><br><span class="line">          &quot;America/Chicago&quot; &lt;utf8_string&gt;</span><br><span class="line">      &#125;</span><br><span class="line">    &quot;registered_country&quot;: </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;geoname_id&quot;: </span><br><span class="line">          6252001 &lt;uint32&gt;</span><br><span class="line">        &quot;iso_code&quot;: </span><br><span class="line">          &quot;US&quot; &lt;utf8_string&gt;</span><br><span class="line">        &quot;names&quot;: </span><br><span class="line">          &#123;</span><br><span class="line">            &quot;de&quot;: </span><br><span class="line">              &quot;USA&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;en&quot;: </span><br><span class="line">              &quot;United States&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;es&quot;: </span><br><span class="line">              &quot;Estados Unidos&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;fr&quot;: </span><br><span class="line">              &quot;États-Unis&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ja&quot;: </span><br><span class="line">              &quot;アメリカ合衆国&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;pt-BR&quot;: </span><br><span class="line">              &quot;Estados Unidos&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ru&quot;: </span><br><span class="line">              &quot;США&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;zh-CN&quot;: </span><br><span class="line">              &quot;美国&quot; &lt;utf8_string&gt;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="下载geoip2模块的代码"><a href="#下载geoip2模块的代码" class="headerlink" title="下载geoip2模块的代码"></a>下载geoip2模块的代码</h4><blockquote>
+<p>此代码参与nginx的编译<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/leev/ngx_http_geoip2_module/archive/master.zip</span><br><span class="line">unzip master</span><br><span class="line">mv ngx_http_geoip2_module-master  /usr/local/src/ngx_http_geoip2_module</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>》</p>
+<h4 id="编译nginx需要-google-pertools进行辅助"><a href="#编译nginx需要-google-pertools进行辅助" class="headerlink" title="编译nginx需要 google-pertools进行辅助"></a>编译nginx需要 google-pertools进行辅助</h4><blockquote>
+<p>安装google-pertools前需要安装libunwind，libuwinde已经在yum安装依赖时安装，文章最后会在附录中拥有编译安装的方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">安装google-pertools</span><br><span class="line">wget -c -O gperftools-2.4.tar.gz  https://github.com/gperftools/gperftools/releases/download/gperftools-2.4/gperftools-2.4.tar.gz</span><br><span class="line">tar xvf gperftools-2.4.tar.gz</span><br><span class="line">cd gperftools-2.4</span><br><span class="line">./configure</span><br><span class="line">make check</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="下载nginx代码"><a href="#下载nginx代码" class="headerlink" title="下载nginx代码"></a>下载nginx代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-1.12.2.tar.gz</span><br><span class="line">tar xvf nginx-1.12.2.tar.gz</span><br><span class="line">cd nginx-1.12.2</span><br></pre></td></tr></table></figure>
+<h4 id="编译nginx代码"><a href="#编译nginx代码" class="headerlink" title="编译nginx代码"></a>编译nginx代码</h4><ul>
+<li><p>生成Markfile文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">./configure \</span><br><span class="line">--prefix=/usr/share/nginx \</span><br><span class="line">--sbin-path=/usr/sbin/nginx \</span><br><span class="line">--modules-path=/usr/lib64/nginx/modules \</span><br><span class="line">--conf-path=/etc/nginx/nginx.conf \</span><br><span class="line">--error-log-path=/var/<span class="built_in">log</span>/nginx/error.log \</span><br><span class="line">--http-log-path=/var/<span class="built_in">log</span>/nginx/access.log \</span><br><span class="line">--http-client-body-temp-path=/var/lib/nginx/tmp/client_body \</span><br><span class="line">--http-proxy-temp-path=/var/lib/nginx/tmp/proxy \</span><br><span class="line">--http-fastcgi-temp-path=/var/lib/nginx/tmp/fastcgi \</span><br><span class="line">--http-uwsgi-temp-path=/var/lib/nginx/tmp/uwsgi \</span><br><span class="line">--http-scgi-temp-path=/var/lib/nginx/tmp/scgi \</span><br><span class="line">--pid-path=/run/nginx.pid \</span><br><span class="line">--lock-path=/run/lock/subsys/nginx \</span><br><span class="line">--user=nginx \</span><br><span class="line">--group=nginx \</span><br><span class="line">--with-ipv6 \</span><br><span class="line">--with-http_auth_request_module \</span><br><span class="line">--with-http_ssl_module \</span><br><span class="line">--with-http_v2_module \</span><br><span class="line">--with-http_realip_module \</span><br><span class="line">--with-http_addition_module \</span><br><span class="line">--with-http_xslt_module=dynamic \</span><br><span class="line">--with-http_image_filter_module=dynamic \</span><br><span class="line">--with-http_sub_module \</span><br><span class="line">--with-file-aio \</span><br><span class="line">--with-http_dav_module \</span><br><span class="line">--with-http_flv_module \</span><br><span class="line">--with-http_mp4_module \</span><br><span class="line">--with-http_gunzip_module \</span><br><span class="line">--with-http_gzip_static_module \</span><br><span class="line">--with-http_random_index_module \</span><br><span class="line">--with-http_secure_link_module \</span><br><span class="line">--with-http_degradation_module \</span><br><span class="line">--with-http_slice_module \</span><br><span class="line">--with-http_stub_status_module \</span><br><span class="line">--with-http_perl_module=dynamic \</span><br><span class="line">--with-mail=dynamic \</span><br><span class="line">--with-mail_ssl_module \</span><br><span class="line">--with-pcre \</span><br><span class="line">--with-pcre-jit \</span><br><span class="line">--with-stream \</span><br><span class="line">--with-stream_ssl_module \</span><br><span class="line">--with-http_geoip_module=dynamic \</span><br><span class="line">--add-module=/usr/<span class="built_in">local</span>/src/ngx_http_geoip2_module \ <span class="comment">#源代码不懂加入此行</span></span><br><span class="line">--with-debug \</span><br><span class="line">--with-cc-opt=<span class="string">'-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic'</span> \</span><br><span class="line">--with-ld-opt=<span class="string">'-Wl,-z,relro -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -Wl,-E'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>加载动态链接库否则nginx 会报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;/usr/local/lib&quot; &gt;&gt; /etc/ld.so.conf</span><br><span class="line">ldconfig</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>编译好后执行编译出的nginx二进制文件,进行验证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>验证如果没有问题将nginx的二进制文件复制到/usr/sbin/即可，切记备份<font coler="#FF0000"><strong>源文件</strong></font></p>
+</blockquote>
+<h4 id="配置nginx配置文件"><a href="#配置nginx配置文件" class="headerlink" title="配置nginx配置文件"></a>配置nginx配置文件</h4><blockquote>
+<p>我们队GeoIP2的目的是输出到日志中</p>
+</blockquote>
+<p><code>vim /etc/nginx/nginx.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">user  nginx;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">error_log  /var/log/nginx/error.log warn;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    geoip2 /etc/nginx/GeoIP/GeoLite2-Country.mmdb&#123;</span><br><span class="line">        $geoip2_data_country_code  country iso_code ;</span><br><span class="line">        $geoip2_data_country_name  source=$http_x_forwarded_for default=中国 country names zh-CN;</span><br><span class="line">    &#125;</span><br><span class="line">    geoip2 /etc/nginx/GeoIP/GeoLite2-City.mmdb&#123;</span><br><span class="line">        $geoip2_data_city_name source=$http_x_forwarded_for default=北京 city names zh-CN;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">     </span><br><span class="line">    log_format  main escape=json &apos;$remote_addr - $remote_user [$time_local] &apos;</span><br><span class="line">                        &apos;&quot;$request&quot; $status $body_bytes_sent &apos;</span><br><span class="line">                        &apos;&quot;$http_referer&quot; &quot;$http_user_agent&quot; &apos;</span><br><span class="line">                        &apos;$request_time &apos;</span><br><span class="line">                        &apos;&quot;$geoip2_data_country_name&quot; &quot;$geoip2_data_city_name&quot; &apos;;</span><br><span class="line"></span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"></span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    #gzip  on;</span><br><span class="line"></span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>查看日志结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">192.168.138.0 -  [05/Jun/2019:11:14:59 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:09 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:16 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:27 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:28 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:29 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:29 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:29 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="附录-编译安装libmaxminddb与libunwind"><a href="#附录-编译安装libmaxminddb与libunwind" class="headerlink" title="附录 编译安装libmaxminddb与libunwind"></a>附录 编译安装libmaxminddb与libunwind</h2><h4 id="安装libmaxminddb"><a href="#安装libmaxminddb" class="headerlink" title="安装libmaxminddb"></a>安装libmaxminddb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/maxmind/libmaxminddb/releases/download/0.5.5/libmaxminddb-0.5.5.tar.gz</span><br><span class="line">tar -zxvf libmaxminddb-0.5.5.tar.gz</span><br><span class="line">cd libmaxminddb-0.5.5</span><br><span class="line">./configure</span><br><span class="line">make check</span><br><span class="line">make install</span><br><span class="line">ldconfig</span><br></pre></td></tr></table></figure>
+<p>####安装libunwind<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://ftp.yzu.edu.tw/nongnu/libunwind/libunwind-1.1.tar.gz</span><br><span class="line">tar xvf libunwind-1.1.tar.gz</span><br><span class="line">cd libunwind-1.1</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/25/系统运维/Pinpoint/pinpoint集群的安装配置/" rel="next" title="pinpoint集群的安装配置">
+                <i class="fa fa-chevron-left"></i> pinpoint集群的安装配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/25/云计算/Docker/容器中设置上海时区/" rel="prev" title="容器中设置上海时区">
+                容器中设置上海时区 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/kyz.jpg" alt="步荀仙">
+            
+              <p class="site-author-name" itemprop="name">步荀仙</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Centos系统yum安装的nginx如果何止GeoIP2模块"><span class="nav-number">1.</span> <span class="nav-text">Centos系统yum安装的nginx如果何止GeoIP2模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#前期步骤"><span class="nav-number">1.0.1.</span> <span class="nav-text">前期步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装依赖"><span class="nav-number">1.0.2.</span> <span class="nav-text">安装依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载国家及城市数据"><span class="nav-number">1.0.3.</span> <span class="nav-text">下载国家及城市数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载geoip2模块的代码"><span class="nav-number">1.0.4.</span> <span class="nav-text">下载geoip2模块的代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译nginx需要-google-pertools进行辅助"><span class="nav-number">1.0.5.</span> <span class="nav-text">编译nginx需要 google-pertools进行辅助</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下载nginx代码"><span class="nav-number">1.0.6.</span> <span class="nav-text">下载nginx代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译nginx代码"><span class="nav-number">1.0.7.</span> <span class="nav-text">编译nginx代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置nginx配置文件"><span class="nav-number">1.0.8.</span> <span class="nav-text">配置nginx配置文件</span></a></li></ol></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#附录-编译安装libmaxminddb与libunwind"><span class="nav-number">2.</span> <span class="nav-text">附录 编译安装libmaxminddb与libunwind</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装libmaxminddb"><span class="nav-number">2.0.1.</span> <span class="nav-text">安装libmaxminddb</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">步荀仙</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'bAurO2VRR5JU4OczVxDdlWLm-gzGzoHsz',
+        appKey: 'Qc603moQXDN5RvchufQ1kSta',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("bAurO2VRR5JU4OczVxDdlWLm-gzGzoHsz", "Qc603moQXDN5RvchufQ1kSta");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Pinpoint,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="pinpoint集群的安装配置 一、环境准备123456784台服务器haporxy 192.168.15.24pinpoint-1 192.168.15.30pinpoint-2 192.168.15.31pinpoint-2 192.168.15.32tomcat 192.168.6.150mysql 162.168.15.253 二、搭建Pinpoint2.1、安装配置ansible1yu">
+<meta name="keywords" content="Pinpoint">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pinpoint集群的安装配置">
+<meta property="og:url" content="http://boke.buxunxian.com/2019/12/25/系统运维/Pinpoint/pinpoint集群的安装配置/index.html">
+<meta property="og:site_name" content="步荀仙的博客">
+<meta property="og:description" content="pinpoint集群的安装配置 一、环境准备123456784台服务器haporxy 192.168.15.24pinpoint-1 192.168.15.30pinpoint-2 192.168.15.31pinpoint-2 192.168.15.32tomcat 192.168.6.150mysql 162.168.15.253 二、搭建Pinpoint2.1、安装配置ansible1yu">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-25T07:29:35.620Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="pinpoint集群的安装配置">
+<meta name="twitter:description" content="pinpoint集群的安装配置 一、环境准备123456784台服务器haporxy 192.168.15.24pinpoint-1 192.168.15.30pinpoint-2 192.168.15.31pinpoint-2 192.168.15.32tomcat 192.168.6.150mysql 162.168.15.253 二、搭建Pinpoint2.1、安装配置ansible1yu">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://boke.buxunxian.com/2019/12/25/系统运维/Pinpoint/pinpoint集群的安装配置/">
+
+
+
+
+
+  <title>pinpoint集群的安装配置 | 步荀仙的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">步荀仙的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/12/25/系统运维/Pinpoint/pinpoint集群的安装配置/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="步荀仙">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kyz.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="步荀仙的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">pinpoint集群的安装配置</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T15:06:34+08:00">
+                2019-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统运维/" itemprop="url" rel="index">
+                    <span itemprop="name">系统运维</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统运维/Pinpoint/" itemprop="url" rel="index">
+                    <span itemprop="name">Pinpoint</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/25/系统运维/Pinpoint/pinpoint集群的安装配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/25/系统运维/Pinpoint/pinpoint集群的安装配置/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/12/25/系统运维/Pinpoint/pinpoint集群的安装配置/" class="leancloud_visitors" data-flag-title="pinpoint集群的安装配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <a id="more"></a>
+<p>pinpoint集群的安装配置</p>
+<h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a><a id="1">一、环境准备</a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">4台服务器</span><br><span class="line"></span><br><span class="line">haporxy 192.168.15.24</span><br><span class="line">pinpoint-1 192.168.15.30</span><br><span class="line">pinpoint-2 192.168.15.31</span><br><span class="line">pinpoint-2 192.168.15.32</span><br><span class="line">tomcat 192.168.6.150</span><br><span class="line">mysql 162.168.15.253</span><br></pre></td></tr></table></figure>
+<h2 id="二、搭建Pinpoint"><a href="#二、搭建Pinpoint" class="headerlink" title="二、搭建Pinpoint"></a><a id="2">二、搭建Pinpoint</a></h2><h3 id="2-1、安装配置ansible"><a href="#2-1、安装配置ansible" class="headerlink" title="2.1、安装配置ansible"></a><a id="2.1">2.1、安装配置ansible</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install ansible -y</span><br></pre></td></tr></table></figure>
+<h3 id="2-2、配置ansible"><a href="#2-2、配置ansible" class="headerlink" title="2.2、配置ansible"></a><a id="2.2">2.2、配置ansible</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#配置host文件</span><br><span class="line">vim /etc/hosts</span><br><span class="line">    192.168.15.30 pinpoint-1</span><br><span class="line">    192.168.15.31 pinpoint-2</span><br><span class="line">    192.168.15.32 pinpoint-3</span><br><span class="line"></span><br><span class="line">#配置ansible文件</span><br><span class="line">vim /etc/ansible/hosts</span><br><span class="line">    [pinpoint]</span><br><span class="line">    pinpoint-1</span><br><span class="line">    pinpoint-2</span><br><span class="line">    pinpoint-3</span><br><span class="line"></span><br><span class="line">#在每个节点上执行 相互认证</span><br><span class="line">ssh-keygen</span><br><span class="line">cd /root/.ssh</span><br><span class="line">for (( i=0 ; i&lt;4 ; i++ ));do ssh-copy-id -i .ssh/id_rsa.pub root@pinpoint-$i;done</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#修改主机名</span><br><span class="line">for (( i=1 ; i&lt;4 ; i++ ));do ansible pinpoint-$i -m hostname -a &quot;name=pinpoint-$i&quot; ;done</span><br></pre></td></tr></table></figure>
+<h3 id="2-3、挂在磁盘"><a href="#2-3、挂在磁盘" class="headerlink" title="2.3、挂在磁盘"></a><a id="2.3">2.3、挂在磁盘</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">vim disk.sh</span><br><span class="line">    echo -e &quot;n\np\n\n\n\nw\n &quot;|fdisk /dev/vdc</span><br><span class="line">    mkfs.ext4 /dev/vdc1</span><br><span class="line">    echo -e &quot;`blkid|grep vdc1|awk &apos;&#123;print $2&#125;&apos; |tr -d &apos;\&quot;&apos;`\t/pinpoint\text4\tdefaults\t0 0&quot; &gt;&gt; /etc/fstab</span><br><span class="line">    mount -a</span><br><span class="line">    findmnt</span><br><span class="line">ansible all -m copy -a &quot;src=dist.sh dest=/root&quot;</span><br><span class="line">ansible all -m shell =a &quot;bash disk.sh&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="三、获取组件"><a href="#三、获取组件" class="headerlink" title="三、获取组件"></a><a id="3">三、获取组件</a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /root/buxunxian/hbase</span><br><span class="line">cd /root/buxunxian/hbase</span><br></pre></td></tr></table></figure>
+<h3 id="3-1、下载zookeeper"><a href="#3-1、下载zookeeper" class="headerlink" title="3.1、下载zookeeper"></a><a id="3.1">3.1、下载zookeeper</a></h3><p><code>wget http://mirrors.hust.edu.cn/apache/zookeeper/zookeeper-3.4.12/zookeeper-3.4.12.tar.gz</code></p>
+<h3 id="3-2、下载hadoop"><a href="#3-2、下载hadoop" class="headerlink" title="3.2、下载hadoop"></a><a id="3.2">3.2、下载hadoop</a></h3><p><code>wget https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-2.7.6/hadoop-2.7.6.tar.gz</code></p>
+<h3 id="3-3、下载hbase"><a href="#3-3、下载hbase" class="headerlink" title="3.3、下载hbase"></a><a id="3.3">3.3、下载hbase</a></h3><p><code>wget https://mirrors.tuna.tsinghua.edu.cn/apache/hbase/2.0.0/hbase-2.0.0-bin.tar.gz</code></p>
+<h3 id="3-4、下载jdk-手动打开该网址"><a href="#3-4、下载jdk-手动打开该网址" class="headerlink" title="3.4、下载jdk 手动打开该网址"></a><a id="3.4">3.4、下载jdk 手动打开该网址</a></h3><p><code>http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html</code></p>
+<h3 id="3-5、获取pinpoint"><a href="#3-5、获取pinpoint" class="headerlink" title="3.5、获取pinpoint"></a><a id="3.5">3.5、获取pinpoint</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /pinpoint/pinpoint</span><br><span class="line">git clone https://github.com/naver/pinpoint.git /pinpoint/pinpoint</span><br><span class="line">git checkout 1.7.3</span><br><span class="line">#相关编译请参考官网</span><br></pre></td></tr></table></figure>
+<h3 id="3-6、获取tomcat"><a href="#3-6、获取tomcat" class="headerlink" title="3.6、获取tomcat"></a><a id="3.6">3.6、获取tomcat</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansibel  pinpoint -m shell -a &quot;wget http://mirrors.shu.edu.cn/apache/tomcat/tomcat-8/v8.5.31/bin/apache-tomcat-8.5.31.tar.gz&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="四、分发解压各个组建"><a href="#四、分发解压各个组建" class="headerlink" title="四、分发解压各个组建"></a><a id="4">四、分发解压各个组建</a></h2><h3 id="4-1、分发软件"><a href="#4-1、分发软件" class="headerlink" title="4.1、分发软件"></a><a id="4.1">4.1、分发软件</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ansible pinpoint -m shell -a &quot;mkdir /root/buxunxian/&quot;</span><br><span class="line">ansible pinpoint -m copy -a &quot;src=/root/buxunxian/. dest=/root/&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="4-2、解压zoopeeper"><a href="#4-2、解压zoopeeper" class="headerlink" title="4.2、解压zoopeeper"></a><a id="4.2">4.2、解压zoopeeper</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#解压zookeeper并改名</span><br><span class="line">ansible pinpoint -m shell -a &quot;tar xvf /root/buxunxian/hbase/zookeeper-3.4.12.tar.gz -C /pinpoint&quot;</span><br><span class="line">ansible pinpoint -m shell -a &quot;mv /pinpoint/zookeeper-3.4.12   /pinpoint/zookeeper&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="4-3、解压hadoop"><a href="#4-3、解压hadoop" class="headerlink" title="4.3、解压hadoop"></a><a id="4.3">4.3、解压hadoop</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#解压hadoop并改名</span><br><span class="line">ansible pinpoint -m shell -a &quot;tar xvf /root/buxunxian/hbase/hadoop-2.7.6.tar.gz -C /pinpoint&quot;</span><br><span class="line">ansible pinpoint -m shell -a &quot;mv /pinpoint/hadoop-2.7.6   /pinpoint/hadoop&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="4-4、解压安装hadoop"><a href="#4-4、解压安装hadoop" class="headerlink" title="4.4、解压安装hadoop"></a><a id="4.4">4.4、解压安装hadoop</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#解压hbase并改名</span><br><span class="line">ansible pinpoint -m shell -a &quot;tar xvf /root/buxunxian/hbase/hbase-2.0.0-bin.tar.gz -C /pinpoint&quot;</span><br><span class="line">ansible pinpoint -m shell -a &quot;mv /pinpoint/hbase-2.0.0   /pinpoint/hbase&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="4-5、安装jdk与jvsc并配置变量"><a href="#4-5、安装jdk与jvsc并配置变量" class="headerlink" title="4.5、安装jdk与jvsc并配置变量"></a><a id="4.5">4.5、安装jdk与jvsc并配置变量</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ansible pinpoint -m shell -a &quot;yum localinstall /root/buxunxian/hbase/*.rpm -y&quot;</span><br><span class="line"></span><br><span class="line">vim java.sh</span><br><span class="line"></span><br><span class="line">    export JAVA_HOME=/usr</span><br><span class="line">    export ZOOKEEPER_HOME=/pinpoint/zookeeper</span><br><span class="line">    export HADOOP_HOME=/pinpoint/hadoop</span><br><span class="line">    export HBASE_HOME=/pinpoint/hbase</span><br><span class="line">    export JSVC_HOME=/usr</span><br><span class="line">    export PATH=$PATH:$HBASE_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_HOME/bin:$ZOOKEEPER_HOME/bin:$JAVA_HOME/bin:$JSVC_HOME/bin</span><br><span class="line"></span><br><span class="line">ansible pinpoint -m copy -a &quot;src=java.sh dest=/etc/profile.d&quot;</span><br><span class="line">ansible pinpoint -m shell -a &quot;source /etc/profile.d/java.sh&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="五、配置zookeeper"><a href="#五、配置zookeeper" class="headerlink" title="五、配置zookeeper"></a><a id="5">五、配置zookeeper</a></h2><h3 id="5-1、拷贝配置文件"><a href="#5-1、拷贝配置文件" class="headerlink" title="5.1、拷贝配置文件"></a><a id="5.1">5.1、拷贝配置文件</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp zoo_sample.cfg zoo.cfg</span><br></pre></td></tr></table></figure>
+<h3 id="5-2、修改配置文件"><a href="#5-2、修改配置文件" class="headerlink" title="5.2、修改配置文件"></a><a id="5.2">5.2、修改配置文件</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">vim zoo.cfg </span><br><span class="line"># The number of milliseconds of each tick</span><br><span class="line">tickTime=2000</span><br><span class="line"># The number of ticks that the initial </span><br><span class="line"># synchronization phase can take</span><br><span class="line">initLimit=10</span><br><span class="line"># The number of ticks that can pass between </span><br><span class="line"># sending a request and getting an acknowledgement</span><br><span class="line">syncLimit=5</span><br><span class="line"># the directory where the snapshot is stored.</span><br><span class="line"># do not use /tmp for storage, /tmp here is just </span><br><span class="line"># example sakes.</span><br><span class="line">dataDir=/pinpoint/data/zookeeper</span><br><span class="line"># the port at which the clients will connect</span><br><span class="line">clientPort=2181</span><br><span class="line"># the maximum number of client connections.</span><br><span class="line"># increase this if you need to handle more clients</span><br><span class="line">#maxClientCnxns=60</span><br><span class="line">#</span><br><span class="line"># Be sure to read the maintenance section of the </span><br><span class="line"># administrator guide before turning on autopurge.</span><br><span class="line">#</span><br><span class="line"># http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance</span><br><span class="line">#</span><br><span class="line"># The number of snapshots to retain in dataDir</span><br><span class="line">#autopurge.snapRetainCount=3</span><br><span class="line"># Purge task interval in hours</span><br><span class="line"># Set to &quot;0&quot; to disable auto purge feature</span><br><span class="line">#autopurge.purgeInterval=1</span><br><span class="line">server.1=pinpoint-1:2888:3888</span><br><span class="line">server.2=pinpoint-2:2888:3888</span><br><span class="line">server.3=pinpoint-3:2888:3888</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>tickTime：这个时间是作为 Zookeeper 服务器之间或客户端与服务器之间维持心跳的时间间隔,也就是每个 tickTime 时间就会发送一个心跳。</p>
+</blockquote>
+<blockquote>
+<p>dataDir：顾名思义就是 Zookeeper 保存数据的目录,默认情况下,Zookeeper 将写数据的日志文件也保存在这个目录里。</p>
+</blockquote>
+<blockquote>
+<p>clientPort：这个端口就是客户端连接 Zookeeper 服务器的端口,Zookeeper 会监听这个端口,接受客户端的访问请求。</p>
+</blockquote>
+<blockquote>
+<p>initLimit：这个配置项是用来配置 Zookeeper 接受客户端（这里所说的客户端不是用户连接 Zookeeper 服务器的客户端,而是 Zookeeper 服务器集群中连接到 Leader 的 Follower 服务器）初始化连接时最长能忍受多少个心跳时间间隔数。当已经超过 5个心跳的时间（也就是 tickTime）长度后 Zookeeper 服务器还没有收到客户端的返回信息,那么表明这个客户端连接失败。总的时间长度就是 5*2000=10 秒</p>
+</blockquote>
+<blockquote>
+<p>syncLimit：这个配置项标识 Leader 与 Follower 之间发送消息,请求和应答时间长度,最长不能超过多少个 tickTime 的时间长度,总的时间长度就是 2*2000=4 秒</p>
+</blockquote>
+<blockquote>
+<p>server.A=B：C：D：其中 A 是一个数字,表示这个是第几号服务器；B 是这个服务器的 ip 地址；C 表示的是这个服务器与集群中的 Leader 服务器交换信息的端口；D 表示的是万一集群中的 Leader 服务器挂了,需要一个端口来重新进行选举,选出一个新的 Leader,而这个端口就是用来执行选举时服务器相互通信的端口。如果是伪集群的配置方式,由于 B 都是一样,所以不同的 Zookeeper 实例通信端口号不能一样,所以要给它们分配不同的端口号。</p>
+</blockquote>
+<h3 id="5-3、批量配置"><a href="#5-3、批量配置" class="headerlink" title="5.3、批量配置"></a><a id="5.3">5.3、批量配置</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#复制文件到集群的每一个节点</span><br><span class="line">ansible pinpoint -m copy -a &quot;src=zoo.cfg dest=/pinpoint/zookeeper/conf/&quot;</span><br><span class="line"></span><br><span class="line">#建立data目录</span><br><span class="line">ansible pinpoint -m shell -a &quot;mkdir /pinpoint/data/zookeeper -p&quot;</span><br><span class="line"></span><br><span class="line">#在其他节点上执行这两条命令[echo n是与server.n对应的]</span><br><span class="line">for (( i=1 ;i &lt; 4 ; i++ ));do ansible pinpoint-$i -m shell -a &quot;echo $i &gt; /pinpoint/data/zookeeper/myid&quot; ;done</span><br><span class="line"></span><br><span class="line">#开启zookeeper服务[使用ansible批量执行]</span><br><span class="line"></span><br><span class="line">ansible pinpoint -m shell -a  &quot;zkServer.sh start&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="5-4、查看每个状态"><a href="#5-4、查看每个状态" class="headerlink" title="5.4、查看每个状态"></a><a id="5.4">5.4、查看每个状态</a></h3><p><code>ansible pinpoint -m shell -a &quot;jps;ss -tnl;zkServer.sh status&quot;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">pinpoint-1 | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">1845 QuorumPeerMain</span><br><span class="line">2238 Jps</span><br><span class="line">State      Recv-Q Send-Q Local Address:Port               Peer Address:Port              </span><br><span class="line">LISTEN     0      128          *:22                       *:*                  </span><br><span class="line">LISTEN     0      50      ::ffff:192.168.15.30:3888                    :::*                  </span><br><span class="line">LISTEN     0      128         :::22                      :::*                  </span><br><span class="line">LISTEN     0      50          :::54620                   :::*                  </span><br><span class="line">LISTEN     0      50          :::2181                    :::*                  </span><br><span class="line">Mode: follower</span><br><span class="line">Using config: /pinpoint/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line"></span><br><span class="line">pinpoint-2 | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">26634 QuorumPeerMain</span><br><span class="line">26879 Jps</span><br><span class="line">State      Recv-Q Send-Q Local Address:Port               Peer Address:Port              </span><br><span class="line">LISTEN     0      128          *:22                       *:*                  </span><br><span class="line">LISTEN     0      50      ::ffff:192.168.15.31:3888                    :::*                  </span><br><span class="line">LISTEN     0      128         :::22                      :::*                  </span><br><span class="line">LISTEN     0      50          :::2181                    :::*                  </span><br><span class="line">LISTEN     0      50          :::55462                   :::*                  </span><br><span class="line">Mode: follower</span><br><span class="line">Using config: /pinpoint/zookeeper/bin/../conf/zoo.cfg</span><br><span class="line"></span><br><span class="line">pinpoint-3 | SUCCESS | rc=0 &gt;&gt;</span><br><span class="line">5349 QuorumPeerMain</span><br><span class="line">5622 Jps</span><br><span class="line">State      Recv-Q Send-Q Local Address:Port               Peer Address:Port              </span><br><span class="line">LISTEN     0      128          *:22                       *:*                  </span><br><span class="line">LISTEN     0      50      ::ffff:192.168.15.32:2888                    :::*                  </span><br><span class="line">LISTEN     0      50          :::48142                   :::*                  </span><br><span class="line">LISTEN     0      50      ::ffff:192.168.15.32:3888                    :::*                  </span><br><span class="line">LISTEN     0      128         :::22                      :::*                  </span><br><span class="line">LISTEN     0      50          :::2181                    :::*                  </span><br><span class="line">Mode: leader</span><br><span class="line">Using config: /pinpoint/zookeeper/bin/../conf/zoo.cfg</span><br></pre></td></tr></table></figure>
+<h2 id="六、配置hadoop"><a href="#六、配置hadoop" class="headerlink" title="六、配置hadoop"></a><a id="6">六、配置hadoop</a></h2><h3 id="6-1、配置hdfs-site-xml文件"><a href="#6-1、配置hdfs-site-xml文件" class="headerlink" title="6.1、配置hdfs-site.xml文件"></a><a id="6.1">6.1、配置hdfs-site.xml文件</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /pinpoint/hadoop/etc/hadoop</span><br><span class="line">cp hdfs-site.xml&#123;,.bak&#125;</span><br><span class="line">cp yarn-site.xml&#123;,.bak&#125;</span><br><span class="line">cp mapred-site.xml.template mapred-site.xml</span><br><span class="line">cp  hadoop-env.sh&#123;,.bak&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-2、hadoop-env-sh变量文件"><a href="#6-2、hadoop-env-sh变量文件" class="headerlink" title="6.2、hadoop-env.sh变量文件"></a><a id="6.2">6.2、hadoop-env.sh变量文件</a></h3><p><code>vim hadoop-env.sh</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_171-amd64</span><br><span class="line">export JRE_HOME=/usr/java/jdk1.8.0_171-amd64/jre</span><br><span class="line">export JSVC_HOME=/usr/bin</span><br><span class="line">export HDFS_JOURNALNODE_USER=root</span><br><span class="line">export HDFS_ZKFC_USER=root </span><br><span class="line">export YARN_RESOURCEMANAGER_USER=root </span><br><span class="line">export YARN_NODEMANAGER_USER=root</span><br><span class="line">export HDFS_NAMENODE_USER=root</span><br></pre></td></tr></table></figure>
+<h3 id="6-3、配置hdfs-site-xml文件"><a href="#6-3、配置hdfs-site-xml文件" class="headerlink" title="6.3、配置hdfs-site.xml文件"></a><a id="6.3">6.3、配置hdfs-site.xml文件</a></h3><p><code>vim hdfs-site.xml{.bak}</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">                    &lt;!--指定hdfs的nameservice为ns1,需要和core-site.xml中的保持一致 --&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.replication&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;3&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.nameservices&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;ns1&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                    &lt;!-- ns1下面有两个NameNode,分别是nn1,nn2 --&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.ha.namenodes.ns1&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;nn1,nn2,nn3&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                    &lt;!-- nn1的RPC通信地址 --&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.rpc-address.ns1.nn1&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;pinpoint-1:9000&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                    &lt;!-- nn1的http通信地址 --&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.http-address.ns1.nn1&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;pinpoint-1:50070&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                    &lt;!-- nn2的RPC通信地址 --&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.rpc-address.ns1.nn2&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;pinpoint-2:9000&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.http-address.ns1.nn2&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;pinpoint-2:50070&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                    &lt;!-- nn3的RPC通信地址 --&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.rpc-address.ns1.nn3&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;pinpoint-3:9000&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.http-address.ns1.nn3&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;pinpoint-3:50070&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                    &lt;!-- 指定NameNode的元数据在JournalNode上的存放位置 --&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.namenode.shared.edits.dir&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;qjournal://pinpoint-1:8485;pinpoint-2:8485;pinpoint-3:8485/ns1&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                    &lt;!-- 指定JournalNode在本地磁盘存放数据的位置 --&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.journalnode.edits.dir&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;/pinpoint/data/zookeeper/hadoop/journaldata&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;/pinpoint/data/zookeeper/hadoop/dfs/data&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                    &lt;!-- 开启NameNode失败自动切换 --&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.ha.automatic-failover.enabled&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                    &lt;!-- 配置失败自动切换实现方式 --&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.client.failover.proxy.provider.ns1&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider&lt;/value&gt;                    </span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">                    &lt;!-- 配置隔离机制方法,多个机制用换行分割,即每个机制暂用一行--&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.ha.fencing.methods&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;</span><br><span class="line">     sshfence</span><br><span class="line">     shell(/bin/true)</span><br><span class="line">                        &lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                    &lt;!-- 使用sshfence隔离机制时需要ssh免登陆 --&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.ha.fencing.ssh.private-key-files&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;/root/.ssh/id_rsa&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">                    &lt;!-- 配置sshfence隔离机制超时时间 --&gt;</span><br><span class="line">                        &lt;property&gt;</span><br><span class="line">         &lt;name&gt;dfs.ha.fencing.ssh.connect-timeout&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;30000&lt;/value&gt;</span><br><span class="line">                        &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="6-4、配置yarn-site-xml"><a href="#6-4、配置yarn-site-xml" class="headerlink" title="6.4、配置yarn-site.xml"></a><a id="6.4">6.4、配置yarn-site.xml</a></h3><p><code>vim yarn-site.xml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">                    &lt;!-- 开启RM高可用 --&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;yarn.resourcemanager.ha.enabled&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">                        &lt;!-- 指定RM的cluster id --&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;yarn.resourcemanager.cluster-id&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;yrc&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">                        &lt;!-- 指定RM的名字 --&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;yarn.resourcemanager.ha.rm-ids&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;rm1,rm2,rm3&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">                        &lt;!-- 分别指定RM的地址 --&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;yarn.resourcemanager.hostname.rm1&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;pinpoint-1&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;yarn.resourcemanager.hostname.rm2&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;pinpoint-2&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;yarn.resourcemanager.hostname.rm3&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;pinpoint-3&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">                        &lt;!-- 指定zk集群地址 --&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;yarn.resourcemanager.zk-address&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;pinpoint-1:2181,pinpoint-2:2181,pinpoint-3:2181&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">         &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;</span><br><span class="line">         &lt;value&gt;mapreduce_shuffle&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">                        &lt;!-- 指定最大使用内存 根据实际内存指定--&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">             &lt;name&gt;yarn.nodemanager.resource.memory-mb&lt;/name&gt;</span><br><span class="line">             &lt;value&gt;15000&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">     &lt;property&gt;</span><br><span class="line">             &lt;name&gt;yarn.nodemanager.resource.cpu-vcores&lt;/name&gt;</span><br><span class="line">             &lt;value&gt;1&lt;/value&gt;</span><br><span class="line">     &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="6-5、配置mapred-site-xml"><a href="#6-5、配置mapred-site-xml" class="headerlink" title="6.5、配置mapred-site.xml"></a><a id="6.5">6.5、配置mapred-site.xml</a></h3><p><code>vim mapred-site.xml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">              &lt;!-- 指定mr框架为yarn方式 --&gt;</span><br><span class="line">                &lt;property&gt;</span><br><span class="line">                        &lt;name&gt;mapreduce.framework.name&lt;/name&gt;</span><br><span class="line">                        &lt;value&gt;yarn&lt;/value&gt;</span><br><span class="line">                &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="6-6、配置core-site-xml"><a href="#6-6、配置core-site-xml" class="headerlink" title="6.6、配置core-site.xml"></a><a id="1">6.6、配置core-site.xml</a></h3><p><code>vim core-site.xml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">        &lt;!--指定namenode的地址--&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">            &lt;name&gt;fs.defaultFS&lt;/name&gt;</span><br><span class="line">            &lt;value&gt;hdfs://ns1&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line">    &lt;!--用来指定使用hadoop时产生文件的存放目录--&gt;</span><br><span class="line">        &lt;property&gt;</span><br><span class="line">            &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;</span><br><span class="line">            &lt;value&gt;/pinpoint/data/zookeeper/hadoop/tmp&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">        &lt;property&gt;</span><br><span class="line">        &lt;!--用来设置检查点备份日志的最长时间--&gt;</span><br><span class="line">                &lt;name&gt;fs.checkpoint.period&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;3600&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">        &lt;property&gt;</span><br><span class="line">                &lt;name&gt;ha.zookeeper.quorum&lt;/name&gt;</span><br><span class="line">                &lt;value&gt;pinpoint-1:2181,pinpoint-2:2181,pinpoint-3:2181&lt;/value&gt;</span><br><span class="line">        &lt;/property&gt;</span><br><span class="line"> &lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="6-7、配置slave"><a href="#6-7、配置slave" class="headerlink" title="6.7、配置slave"></a><a id="6.7">6.7、配置slave</a></h3><p><code>vim slaves</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pinpoint-1</span><br><span class="line">pinpoint-2</span><br><span class="line">pinpoint-3</span><br></pre></td></tr></table></figure>
+<h3 id="6-8、分发配置文件"><a href="#6-8、分发配置文件" class="headerlink" title="6.8、分发配置文件"></a><a id="6.8">6.8、分发配置文件</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /pinpoint/hadoop/etc/hadoop</span><br><span class="line"></span><br><span class="line">ansible pinpoint -m copy -a &quot;src=. dest=/pinpoint/hadoop/etc/hadoop&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#开启journalnode服务</span><br><span class="line">ansible pinpoint -m shell -a &quot;hadoop-daemon.sh start journalnode&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="6-9、格式化hadoop"><a href="#6-9、格式化hadoop" class="headerlink" title="6.9、格式化hadoop"></a><a id="6.9">6.9、格式化hadoop</a></h3><ul>
+<li>仅在主节点执行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#格式化名称节点</span><br><span class="line">hdfs namenode -format</span><br><span class="line"></span><br><span class="line">#格式化数据节点</span><br><span class="line">hdfs datanode -format</span><br><span class="line"></span><br><span class="line">#格式化zkfc</span><br><span class="line">hdfs zkfc -formatZK</span><br><span class="line"></span><br><span class="line">#分发文件到其他节点</span><br><span class="line">scp -r /pinpoint/data/zookeeper/hadoop/tmp/ pinpoint-2:/pinpoint/data/zookeeper/hadoop/</span><br><span class="line">scp -r /pinpoint/data/zookeeper/hadoop/tmp/ pinpoint-3:/pinpoint/data/zookeeper/hadoop/</span><br><span class="line"></span><br><span class="line">#开启服务</span><br><span class="line">ansible pinpoint -m shell -a  &quot;start-all.sh&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="6-10、查看端口状态"><a href="#6-10、查看端口状态" class="headerlink" title="6.10、查看端口状态"></a><a id="6.10">6.10、查看端口状态</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[root@pinpoint-1 ~]# ss -tnl</span><br><span class="line">State      Recv-Q Send-Q    Local Address:Port                   Peer Address:Port              </span><br><span class="line">LISTEN     0      128                   *:8040     *:*                  </span><br><span class="line">LISTEN     0      128         192.168.15.30:9000     *:*                  </span><br><span class="line">LISTEN     0      128                   *:9864     *:*                  </span><br><span class="line">LISTEN     0      128                   *:8042     *:*                  </span><br><span class="line">LISTEN     0      128                   *:9866     *:*                  </span><br><span class="line">LISTEN     0      128                   *:9867     *:*                  </span><br><span class="line">LISTEN     0      128         192.168.15.30:8019     *:*                  </span><br><span class="line">LISTEN     0      128                   *:55156    *:*                  </span><br><span class="line">LISTEN     0      128           127.0.0.1:48628    *:*                  </span><br><span class="line">LISTEN     0      128         192.168.15.30:50070    *:*                  </span><br><span class="line">LISTEN     0      128                   *:22       *:*                  </span><br><span class="line">LISTEN     0      128         192.168.15.30:8088     *:*                  </span><br><span class="line">LISTEN     0      128                   *:13562    *:*                  </span><br><span class="line">LISTEN     0      128         192.168.15.30:8030     *:*                  </span><br><span class="line">LISTEN     0      128         192.168.15.30:8031     *:*                  </span><br><span class="line">LISTEN     0      128         192.168.15.30:8032     *:*                  </span><br><span class="line">LISTEN     0      128                   *:8480     *:*                  </span><br><span class="line">LISTEN     0      128         192.168.15.30:8033     *:*                  </span><br><span class="line">LISTEN     0      128                   *:8485     *:*                  </span><br><span class="line">LISTEN     0      50                   :::33256   :::*                  </span><br><span class="line">LISTEN     0      50   ::ffff:192.168.15.30:3888    :::*                  </span><br><span class="line">LISTEN     0      128                  :::22      :::*                  </span><br><span class="line">LISTEN     0      50                   :::2181    :::*</span><br></pre></td></tr></table></figure>
+<h3 id="6-11、查看java状态"><a href="#6-11、查看java状态" class="headerlink" title="6.11、查看java状态"></a><a id="6.11">6.11、查看java状态</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@pinpoint-1 ~]# jps</span><br><span class="line">3122 JournalNode</span><br><span class="line">2724 NameNode</span><br><span class="line">3286 DFSZKFailoverController</span><br><span class="line">5047 Jps</span><br><span class="line">4489 NodeManager</span><br><span class="line">4234 ResourceManager</span><br><span class="line">2378 QuorumPeerMain</span><br><span class="line">2957 DataNode</span><br></pre></td></tr></table></figure>
+<h2 id="七、Hbase配置"><a href="#七、Hbase配置" class="headerlink" title="七、Hbase配置"></a><a id="7">七、Hbase配置</a></h2><h3 id="7-1、修改hbase变量配置文件"><a href="#7-1、修改hbase变量配置文件" class="headerlink" title="7.1、修改hbase变量配置文件"></a><a id="7.1">7.1、修改hbase变量配置文件</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /pinpoint/hbase/conf</span><br><span class="line">vim hbase-env.sh</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/java/jdk1.8.0_171-amd64/</span><br><span class="line">export HBASE_MANAGES_ZK=false</span><br></pre></td></tr></table></figure>
+<h3 id="7-2、修改hbase服务配置文件"><a href="#7-2、修改hbase服务配置文件" class="headerlink" title="7.2、修改hbase服务配置文件"></a><a id="1">7.2、修改hbase服务配置文件</a></h3><p><code>hbase-site.xml</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.procedure.store.wal.use.hsync&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.procedure.check.owner.set&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">            &lt;description&gt;Whether ProcedureExecutor should enforce that each</span><br><span class="line">                procedure to have an owner</span><br><span class="line">            &lt;/description&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.unsafe.stream.capability.enforce&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;false&lt;/value&gt;</span><br><span class="line">            &lt;description&gt;</span><br><span class="line">                Controls whether HBase will check for stream capabilities (hflush/hsync).</span><br><span class="line">                Disable this if you intend to run on LocalFileSystem.</span><br><span class="line">                WARNING: Doing so may expose you to additional risk of data loss!</span><br><span class="line">            &lt;/description&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.cluster.distributed&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.rootdir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;hdfs://ns1/hbase&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.zookeeper.quorum&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;pinpoint-1,pinpoint-2,pinpoint-3&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line"></span><br><span class="line">    &lt;property&gt;</span><br><span class="line">        &lt;name&gt;hbase.zookeeper.property.dataDir&lt;/name&gt;</span><br><span class="line">        &lt;value&gt;/pinpoint/data/zookeeper&lt;/value&gt;</span><br><span class="line">    &lt;/property&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="7-3、备用主节点与从节点配置文件"><a href="#7-3、备用主节点与从节点配置文件" class="headerlink" title="7.3、备用主节点与从节点配置文件"></a><a id="7.2">7.3、备用主节点与从节点配置文件</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &apos;pinpoint-2&apos; &gt; backup-masters</span><br><span class="line">echo &apos;pinpoint-3&apos; &gt; regionservers</span><br></pre></td></tr></table></figure>
+<h3 id="7-3、分发-启动-初始化hbase"><a href="#7-3、分发-启动-初始化hbase" class="headerlink" title="7.3、分发,启动,初始化hbase"></a><a id="7.3">7.3、分发,启动,初始化hbase</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cd /pinpoint/hbase/conf</span><br><span class="line"></span><br><span class="line">#分发配置文件</span><br><span class="line">ansible pinpoint -m copy -a &quot;src=. dest=/pinpoint/hbase/conf&quot;</span><br><span class="line"></span><br><span class="line">#启动数据库</span><br><span class="line">./start-hbase.sh</span><br><span class="line"></span><br><span class="line">#初始化hbase</span><br><span class="line">hbase shell /pinpoint/pinpoint/hbase/scripts/hbase-create.hbase</span><br></pre></td></tr></table></figure>
+<h2 id="八、配置haproxy"><a href="#八、配置haproxy" class="headerlink" title="八、配置haproxy"></a><a id="8">八、配置haproxy</a></h2><h3 id="8-1、安装haporxy"><a href="#8-1、安装haporxy" class="headerlink" title="8.1、安装haporxy"></a><a id="8.1">8.1、安装haporxy</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install haproxy -y</span><br><span class="line">cp /etc/haproxy/haproxy.cnf&#123;,.bak&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="8-2、配置haporxy"><a href="#8-2、配置haporxy" class="headerlink" title="8.2、配置haporxy"></a><a id="8.2">8.2、配置haporxy</a></h3><p><code>vim /etc/haproxy/haproxy.cnf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">frontend zookeeper</span><br><span class="line">        bind *:2181</span><br><span class="line">        default_backend zookeeper_back</span><br><span class="line"></span><br><span class="line">backend zookeeper_back</span><br><span class="line">        balance leastconn</span><br><span class="line">        server pinpoint-1 10.39.15.30:2181</span><br><span class="line">        server pinpoint-2 10.39.15.31:2181</span><br><span class="line">        server pinpoint-2 10.39.15.32:2181</span><br></pre></td></tr></table></figure>
+<h3 id="8-3、查看状态"><a href="#8-3、查看状态" class="headerlink" title="8.3、查看状态"></a><a id="8.3">8.3、查看状态</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart haproxy</span><br><span class="line">[root@haproxy ~]# ss -tnl</span><br><span class="line">State      Recv-Q Send-Q      Local Address:Port                     Peer Address:Port              </span><br><span class="line">LISTEN     0      128                     *:5000         *:*                                   </span><br><span class="line">LISTEN     0      128                     *:22           *:*                  </span><br><span class="line">LISTEN     0      128                     *:2181         *:*                  </span><br><span class="line">LISTEN     0      128                    :::22          :::*</span><br></pre></td></tr></table></figure>
+<h2 id="九、配置pinpoint"><a href="#九、配置pinpoint" class="headerlink" title="九、配置pinpoint"></a><a id="9">九、配置pinpoint</a></h2><h3 id="9-1、解压tomcat"><a href="#9-1、解压tomcat" class="headerlink" title="9.1、解压tomcat"></a><a id="9.1">9.1、解压tomcat</a></h3><ul>
+<li>pinpoint需要两个tomcat来启动服务<ul>
+<li>pinpoint-collector需要tomcat</li>
+<li>pinpoint-web需要tomcat</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar xvf apache-tomcat-8.5.31.tar.gz -C /pinpoint</span><br><span class="line">mv /pinpoint/apache-tomcat-8.5.31/ /pinpoint/tomcat-pincol</span><br><span class="line">cp -r /pinpoint/tomcat-pincol /pinpoint/tomcat-pinweb</span><br></pre></td></tr></table></figure>
+<h3 id="9-2、部署pinpoint-collector"><a href="#9-2、部署pinpoint-collector" class="headerlink" title="9.2、部署pinpoint-collector"></a><a id="9.2">9.2、部署pinpoint-collector</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#删除tomcat原来的数据</span><br><span class="line">rm -rf /pinpoint/tomcat-pincol/webapps/*</span><br><span class="line"></span><br><span class="line">#创建一个ROOT</span><br><span class="line">mkdir cd /pinpoint/tomcat-pincol/webapps/ROOT</span><br><span class="line"></span><br><span class="line">#复制pinpoint-collector-1.7.3.war包</span><br><span class="line">cd /pinpoint/tomcat-pincol/webapps/ROOT</span><br><span class="line">cp /pinpoint/pinpoint/collector/target/pinpoint-collector-1.7.3.war .</span><br><span class="line"></span><br><span class="line">#解压war包</span><br><span class="line">unzip pinpoint-collector-1.7.3.war</span><br><span class="line">rm -rf pinpoint-collector-1.7.3.war</span><br></pre></td></tr></table></figure>
+<h3 id="9-3、修改配置文件"><a href="#9-3、修改配置文件" class="headerlink" title="9.3、修改配置文件"></a><a id="9.3">9.3、修改配置文件</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd tomcat-pincol/webapps/ROOT/WEB-INF/classes/</span><br><span class="line">vim hbase.properties</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#填写haproxy的地址</span><br><span class="line">hbase.client.host=192.168.15.24</span><br><span class="line">hbase.client.port=2181</span><br><span class="line"></span><br><span class="line"># hbase default:/hbase  #此参数在hbase中设置若没有设置默认为/hbase</span><br><span class="line">hbase.zookeeper.znode.parent=/hbase</span><br></pre></td></tr></table></figure>
+<h3 id="9-4、修改tomcat配置文件"><a href="#9-4、修改tomcat配置文件" class="headerlink" title="9.4、修改tomcat配置文件"></a><a id="9.4">9.4、修改tomcat配置文件</a></h3><p><code>cd /pinpoint/tomcat-pincol/conf</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sed -i &apos;s/port=&quot;8005&quot;/port=&quot;18005&quot;/g&apos; server.xml</span><br><span class="line">sed -i &apos;s/port=&quot;8080&quot;/port=&quot;18080&quot;/g&apos; server.xml</span><br><span class="line">sed -i &apos;s/port=&quot;8443&quot;/port=&quot;18443&quot;/g&apos; server.xml</span><br><span class="line">sed -i &apos;s/port=&quot;8009&quot;/port=&quot;18009&quot;/g&apos; server.xml</span><br><span class="line">sed -i &apos;s/redirectPort=&quot;8443&quot;/redirectPort=&quot;18443&quot;/g&apos; server.xml</span><br></pre></td></tr></table></figure>
+<h3 id="9-5、修改server-xml"><a href="#9-5、修改server-xml" class="headerlink" title="9.5、修改server.xml"></a><a id="9.5">9.5、修改server.xml</a></h3><p><code>vim server.xml</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">修改defaultHost</span><br><span class="line">修改Host name</span><br><span class="line">修改prefix</span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Engine name=&quot;Catalina&quot; defaultHost=&quot;192.168.15.30&quot;&gt;</span><br><span class="line"></span><br><span class="line">      &lt;!--For clustering, please take a look at documentation at:</span><br><span class="line">          /docs/cluster-howto.html  (simple how to)</span><br><span class="line">          /docs/config/cluster.html (reference documentation) --&gt;</span><br><span class="line">      &lt;!--</span><br><span class="line">      &lt;Cluster className=&quot;org.apache.catalina.ha.tcp.SimpleTcpCluster&quot;/&gt;</span><br><span class="line">      --&gt;</span><br><span class="line"></span><br><span class="line">      &lt;!-- Use the LockOutRealm to prevent attempts to guess user passwords</span><br><span class="line">           via a brute-force attack --&gt;</span><br><span class="line">      &lt;Realm className=&quot;org.apache.catalina.realm.LockOutRealm&quot;&gt;</span><br><span class="line">        &lt;!-- This Realm uses the UserDatabase configured in the global JNDI</span><br><span class="line">             resources under the key &quot;UserDatabase&quot;.  Any edits</span><br><span class="line">             that are performed against this UserDatabase are immediately</span><br><span class="line">             available for use by the Realm.  --&gt;</span><br><span class="line">        &lt;Realm className=&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;</span><br><span class="line">               resourceName=&quot;UserDatabase&quot;/&gt;</span><br><span class="line">      &lt;/Realm&gt;</span><br><span class="line"></span><br><span class="line">      &lt;Host name=&quot;192.168.15.30&quot;  appBase=&quot;webapps&quot;</span><br><span class="line">            unpackWARs=&quot;true&quot; autoDeploy=&quot;true&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- SingleSignOn valve, share authentication between web applications</span><br><span class="line">             Documentation at: /docs/config/valve.html --&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">        &lt;Valve className=&quot;org.apache.catalina.authenticator.SingleSignOn&quot; /&gt;</span><br><span class="line">        --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- Access log processes all example.</span><br><span class="line">             Documentation at: /docs/config/valve.html</span><br><span class="line">             Note: The pattern used is equivalent to using pattern=&quot;common&quot; --&gt;</span><br><span class="line">        &lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot;</span><br><span class="line">               prefix=&quot;pinpoint-1_access_log&quot; suffix=&quot;.txt&quot;</span><br><span class="line">               pattern=&quot;%h %l %u %t &quot;%r&quot; %s %b&quot; /&gt;</span><br><span class="line"></span><br><span class="line">      &lt;/Host&gt;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">#配置pinpoint的配置文件</span><br><span class="line">vim /pinpoint/tomcat-pincol/webapps/ROOT/WEB-INF/classes/pinpoint-collector.properties </span><br><span class="line"></span><br><span class="line">collector.receiver.stat.tcp=true</span><br><span class="line">collector.receiver.span.tcp=true</span><br><span class="line"></span><br><span class="line">#配置hbase连接文件</span><br><span class="line">vim /pinpoint/tomcat-pincol/webapps/ROOT/WEB-INF/classes/hbase.properties </span><br><span class="line"></span><br><span class="line">hbase.client.host=10.39.15.30</span><br><span class="line">hbase.client.port=2181</span><br><span class="line"></span><br><span class="line"># hbase default:/hbase</span><br><span class="line">hbase.zookeeper.znode.parent=/hbase</span><br></pre></td></tr></table></figure>
+<h3 id="9-6、启动tomcat服务"><a href="#9-6、启动tomcat服务" class="headerlink" title="9.6、启动tomcat服务"></a><a id="9.6">9.6、启动tomcat服务</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /pinpoint/tomcat-pincol/bin</span><br><span class="line">./startup.sh</span><br></pre></td></tr></table></figure>
+<h2 id="十、配置mysql"><a href="#十、配置mysql" class="headerlink" title="十、配置mysql"></a><a id="10">十、配置mysql</a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">#下载mysql</span><br><span class="line">yum install mariadb-serber</span><br><span class="line"></span><br><span class="line">#启动并配置开机自启动</span><br><span class="line">systemctl start mariadb</span><br><span class="line">systemctl enable mariadb</span><br><span class="line"></span><br><span class="line">#初始化数据库</span><br><span class="line">mysql_secure_installation</span><br><span class="line"></span><br><span class="line">#连接数据库</span><br><span class="line">mysql -u[username] -p[password] -h[hostip]</span><br><span class="line"></span><br><span class="line">#创建数据库</span><br><span class="line">CREATE DATABASE pinpoint CHARACTER SET &apos;utf8&apos;;</span><br><span class="line"></span><br><span class="line">#下载pinpointSQL文件(手动下载)</span><br><span class="line">#将下载内容放到CreateTableStatement-mysql.sql,SpringBatchJobRepositorySchema-mysql.sql</span><br><span class="line">https://github.com/naver/pinpoint/blob/master/web/src/main/resources/sql/SpringBatchJobRepositorySchema-mysql.sql#L96</span><br><span class="line">https://github.com/naver/pinpoint/blob/master/web/src/main/resources/sql/CreateTableStatement-mysql.sql</span><br><span class="line">touch CreateTableStatement-mysql.sql SpringBatchJobRepositorySchema-mysql.sql</span><br><span class="line"></span><br><span class="line">#导入表</span><br><span class="line">mysql -upinpoint -p -h192.168.15.253 pinpoint &lt; CreateTableStatement-mysql.sql</span><br><span class="line">mysql -upinpoint -p -h192.168.15.253 pinpoint &lt; SpringBatchJobRepositorySchema-mysql.sql#L96</span><br></pre></td></tr></table></figure>
+<h2 id="十一、部署pinpoint-web"><a href="#十一、部署pinpoint-web" class="headerlink" title="十一、部署pinpoint-web"></a><a id="11">十一、部署pinpoint-web</a></h2><h3 id="11-1、修改tomcat配置文件"><a href="#11-1、修改tomcat配置文件" class="headerlink" title="11.1、修改tomcat配置文件"></a><a id="11.1">11.1、修改tomcat配置文件</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">cd /pinpoint/tomcat-pinweb/conf/</span><br><span class="line"></span><br><span class="line">sed -i &apos;s/port=&quot;8005&quot;/port=&quot;18005&quot;/g&apos; server.xml</span><br><span class="line">sed -i &apos;s/port=&quot;8080&quot;/port=&quot;18080&quot;/g&apos; server.xml</span><br><span class="line">sed -i &apos;s/port=&quot;8443&quot;/port=&quot;18443&quot;/g&apos; server.xml</span><br><span class="line">sed -i &apos;s/port=&quot;8009&quot;/port=&quot;18009&quot;/g&apos; server.xml</span><br><span class="line">sed -i &apos;s/redirectPort=&quot;8443&quot;/redirectPort=&quot;18443&quot;/g&apos; server.xml</span><br></pre></td></tr></table></figure>
+<h3 id="11-2、修改server-xml"><a href="#11-2、修改server-xml" class="headerlink" title="11.2、修改server.xml"></a><a id="11.2">11.2、修改server.xml</a></h3><p><code>vi server.xml</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">修改defaultHost</span><br><span class="line">修改Host name</span><br><span class="line">修改prefix</span><br><span class="line">--&gt;</span><br><span class="line">    &lt;Engine name=&quot;Catalina&quot; defaultHost=&quot;192.168.15.30&quot;&gt;</span><br><span class="line"></span><br><span class="line">      &lt;!--For clustering, please take a look at documentation at:</span><br><span class="line">          /docs/cluster-howto.html  (simple how to)</span><br><span class="line">          /docs/config/cluster.html (reference documentation) --&gt;</span><br><span class="line">      &lt;!--</span><br><span class="line">      &lt;Cluster className=&quot;org.apache.catalina.ha.tcp.SimpleTcpCluster&quot;/&gt;</span><br><span class="line">      --&gt;</span><br><span class="line"></span><br><span class="line">      &lt;!-- Use the LockOutRealm to prevent attempts to guess user passwords</span><br><span class="line">           via a brute-force attack --&gt;</span><br><span class="line">      &lt;Realm className=&quot;org.apache.catalina.realm.LockOutRealm&quot;&gt;</span><br><span class="line">        &lt;!-- This Realm uses the UserDatabase configured in the global JNDI</span><br><span class="line">             resources under the key &quot;UserDatabase&quot;.  Any edits</span><br><span class="line">             that are performed against this UserDatabase are immediately</span><br><span class="line">             available for use by the Realm.  --&gt;</span><br><span class="line">        &lt;Realm className=&quot;org.apache.catalina.realm.UserDatabaseRealm&quot;</span><br><span class="line">               resourceName=&quot;UserDatabase&quot;/&gt;</span><br><span class="line">      &lt;/Realm&gt;</span><br><span class="line"></span><br><span class="line">      &lt;Host name=&quot;192.168.15.30&quot;  appBase=&quot;webapps&quot;</span><br><span class="line">            unpackWARs=&quot;true&quot; autoDeploy=&quot;true&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- SingleSignOn valve, share authentication between web applications</span><br><span class="line">             Documentation at: /docs/config/valve.html --&gt;</span><br><span class="line">        &lt;!--</span><br><span class="line">        &lt;Valve className=&quot;org.apache.catalina.authenticator.SingleSignOn&quot; /&gt;</span><br><span class="line">        --&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- Access log processes all example.</span><br><span class="line">             Documentation at: /docs/config/valve.html</span><br><span class="line">             Note: The pattern used is equivalent to using pattern=&quot;common&quot; --&gt;</span><br><span class="line">        &lt;Valve className=&quot;org.apache.catalina.valves.AccessLogValve&quot; directory=&quot;logs&quot;</span><br><span class="line">               prefix=&quot;pinpoint-1_access_log&quot; suffix=&quot;.txt&quot;</span><br><span class="line">               pattern=&quot;%h %l %u %t &quot;%r&quot; %s %b&quot; /&gt;</span><br><span class="line"></span><br><span class="line">      &lt;/Host&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="11-3、部署pinpoint-web"><a href="#11-3、部署pinpoint-web" class="headerlink" title="11.3、部署pinpoint-web"></a><a id="11.3">11.3、部署pinpoint-web</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">rm -rf /pinpoint/tomcat-pinweb/webapps/*</span><br><span class="line"></span><br><span class="line">mkdir cd /pinpoint/tomcat-pinweb/webapps/ROOT</span><br><span class="line"></span><br><span class="line">cd /pinpoint/tomcat-pinweb/webapps/ROOT/</span><br><span class="line"></span><br><span class="line">cp /pinpoint/pinpoint/web/target/pinpoint-web-1.7.3.war .</span><br><span class="line"></span><br><span class="line">unzip target/pinpoint-web-1.7.3.war</span><br><span class="line"></span><br><span class="line">rm -rf pinpoint-web-1.7.3.war</span><br></pre></td></tr></table></figure>
+<h3 id="11-4、修改配置文件"><a href="#11-4、修改配置文件" class="headerlink" title="11.4、修改配置文件"></a><a id="11.4">11.4、修改配置文件</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">cd /pinpoint/tomcat-pinweb/webapps/ROOT/WEB-INF/classes/</span><br><span class="line"></span><br><span class="line">vim batch.properties </span><br><span class="line"></span><br><span class="line">#batch enable config</span><br><span class="line">batch.enable=true</span><br><span class="line"></span><br><span class="line">#batch server ip to execute batch</span><br><span class="line">batch.server.ip=127.0.0.1</span><br><span class="line"></span><br><span class="line">#flink server list</span><br><span class="line">batch.flink.server=</span><br></pre></td></tr></table></figure>
+<h3 id="11-5、配置数据库链接"><a href="#11-5、配置数据库链接" class="headerlink" title="11.5、配置数据库链接"></a><a id="11.5">11.5、配置数据库链接</a></h3><p><code>vim jdbc.properties</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jdbc.driverClassName=com.mysql.jdbc.Driver</span><br><span class="line">jdbc.url=jdbc:mysql://192.168.15.253:3306/pinpoint?characterEncoding=UTF-8</span><br><span class="line">jdbc.username=root</span><br><span class="line">#此处修改为自己的mysql密码</span><br><span class="line">jdbc.password=[MysqlPassword]</span><br></pre></td></tr></table></figure></p>
+<h3 id="11-6、启动tomcat服务"><a href="#11-6、启动tomcat服务" class="headerlink" title="11.6、启动tomcat服务"></a><a id="11.6">11.6、启动tomcat服务</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /pinpoint/tomcat-pinweb/bin</span><br><span class="line">./startup.sh</span><br></pre></td></tr></table></figure>
+<h3 id="11-7、分发tomcat-响应配置文件-并启动服务-此处不做修改。"><a href="#11-7、分发tomcat-响应配置文件-并启动服务-此处不做修改。" class="headerlink" title="11.7、分发tomcat,响应配置文件,并启动服务,此处不做修改。"></a><a id="11.7">11.7、分发tomcat,响应配置文件,并启动服务,此处不做修改。</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r tomcat-pincol tomcat-pinweb 192.168.15.31:/pinpoint/</span><br><span class="line">scp -r tomcat-pincol tomcat-pinweb 192.168.15.31:/pinpoint/</span><br></pre></td></tr></table></figure>
+<h2 id="十二、haproxy配置"><a href="#十二、haproxy配置" class="headerlink" title="十二、haproxy配置"></a><a id="12">十二、haproxy配置</a></h2><h3 id="12-1、修改hadoop配置文件"><a href="#12-1、修改hadoop配置文件" class="headerlink" title="12.1、修改hadoop配置文件 "></a><a id="12.1">12.1、修改hadoop配置文件 </a></h3><p><code>vim /etc/haproxy/haproxy.cnf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">frontend pinpoint</span><br><span class="line">        bind *:80</span><br><span class="line">        default_backend pinpoint_back</span><br><span class="line">backend pinpoint_back</span><br><span class="line">        balance roundrobin</span><br><span class="line">        server pinpoint-1 10.39.15.30:28080</span><br><span class="line">        server pinpoint-2 10.39.15.31:28080</span><br><span class="line">        server pinpoint-2 10.39.15.32:28080</span><br></pre></td></tr></table></figure></p>
+<h3 id="12-2、重启hadoop服务"><a href="#12-2、重启hadoop服务" class="headerlink" title="12.2、重启hadoop服务"></a><a id="12.2">12.2、重启hadoop服务</a></h3><p><code>systemctl restart haproxy</code></p>
+<h3 id="12-3、查看端口"><a href="#12-3、查看端口" class="headerlink" title="12.3、查看端口"></a><a id="1">12.3、查看端口</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@haproxy ~]# ss -tnl</span><br><span class="line">State      Recv-Q Send-Q      Local Address:Port                     Peer Address:Port              </span><br><span class="line">LISTEN     0      128                     *:5000         *:*                      </span><br><span class="line">LISTEN     0      128                     *:80           *:*                  </span><br><span class="line">LISTEN     0      128                     *:22           *:*                  </span><br><span class="line">LISTEN     0      128                     *:2181         *:*                  </span><br><span class="line">LISTEN     0      128                    :::22          :::*</span><br></pre></td></tr></table></figure>
+<h2 id="十三、pinpoint-agent"><a href="#十三、pinpoint-agent" class="headerlink" title="十三、pinpoint-agent"></a><a id="13">十三、pinpoint-agent</a></h2><h3 id="13-1、将pinpoint的agent拷贝出来复制到客户端上"><a href="#13-1、将pinpoint的agent拷贝出来复制到客户端上" class="headerlink" title="13.1、将pinpoint的agent拷贝出来复制到客户端上"></a><a id="13.1">13.1、将pinpoint的agent拷贝出来复制到客户端上</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">scd /pinpoint/pinpoint/agent/target/pinpoint-agent-1.7.3.tar.gz  10.39.6.150:/pinpoint/</span><br><span class="line">cd /pinpoint</span><br><span class="line">tar xvf pinpoint-agent-1.7.3.tar.gz</span><br><span class="line">cd /tomcat/bin</span><br></pre></td></tr></table></figure>
+<h3 id="13-2修改catalina文件"><a href="#13-2修改catalina文件" class="headerlink" title="13.2修改catalina文件"></a><a id="13.2">13.2修改catalina文件</a></h3><p><code>vim catalina.sh</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SERVER_NAME=[You Server Name]</span><br><span class="line">CATALINA_OPTS= &quot; -javaagent:/pinpoint/pinpoint-bootstrap-1.7.3.jar -Dpinpoint.agentId=$SERVER_NAME-agent -Dpinpoint.applicationName=$SERVER_NAME&quot;</span><br></pre></td></tr></table></figure></p>
+<h3 id="13-3启动tomcat即可"><a href="#13-3启动tomcat即可" class="headerlink" title="13.3启动tomcat即可"></a><a id="13.3">13.3启动tomcat即可</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /tomcat/bin</span><br><span class="line">./startup.sh</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Pinpoint/" rel="tag"># Pinpoint</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/12/25/其他/Hexo/Hexo+Github/" rel="next" title="Hexo+Github部署自己的博客">
+                <i class="fa fa-chevron-left"></i> Hexo+Github部署自己的博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/12/25/系统运维/Nginx随笔/nginx支持geoip2模块的方法/" rel="prev" title="Centos系统yum安装的nginx如果何止GeoIP2模块">
+                Centos系统yum安装的nginx如果何止GeoIP2模块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/kyz.jpg" alt="步荀仙">
+            
+              <p class="site-author-name" itemprop="name">步荀仙</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、环境准备"><span class="nav-number">1.</span> <span class="nav-text">一、环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、搭建Pinpoint"><span class="nav-number">2.</span> <span class="nav-text">二、搭建Pinpoint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1、安装配置ansible"><span class="nav-number">2.1.</span> <span class="nav-text">2.1、安装配置ansible</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2、配置ansible"><span class="nav-number">2.2.</span> <span class="nav-text">2.2、配置ansible</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3、挂在磁盘"><span class="nav-number">2.3.</span> <span class="nav-text">2.3、挂在磁盘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、获取组件"><span class="nav-number">3.</span> <span class="nav-text">三、获取组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1、下载zookeeper"><span class="nav-number">3.1.</span> <span class="nav-text">3.1、下载zookeeper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2、下载hadoop"><span class="nav-number">3.2.</span> <span class="nav-text">3.2、下载hadoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3、下载hbase"><span class="nav-number">3.3.</span> <span class="nav-text">3.3、下载hbase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4、下载jdk-手动打开该网址"><span class="nav-number">3.4.</span> <span class="nav-text">3.4、下载jdk 手动打开该网址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5、获取pinpoint"><span class="nav-number">3.5.</span> <span class="nav-text">3.5、获取pinpoint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6、获取tomcat"><span class="nav-number">3.6.</span> <span class="nav-text">3.6、获取tomcat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、分发解压各个组建"><span class="nav-number">4.</span> <span class="nav-text">四、分发解压各个组建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1、分发软件"><span class="nav-number">4.1.</span> <span class="nav-text">4.1、分发软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2、解压zoopeeper"><span class="nav-number">4.2.</span> <span class="nav-text">4.2、解压zoopeeper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3、解压hadoop"><span class="nav-number">4.3.</span> <span class="nav-text">4.3、解压hadoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4、解压安装hadoop"><span class="nav-number">4.4.</span> <span class="nav-text">4.4、解压安装hadoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5、安装jdk与jvsc并配置变量"><span class="nav-number">4.5.</span> <span class="nav-text">4.5、安装jdk与jvsc并配置变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、配置zookeeper"><span class="nav-number">5.</span> <span class="nav-text">五、配置zookeeper</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1、拷贝配置文件"><span class="nav-number">5.1.</span> <span class="nav-text">5.1、拷贝配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2、修改配置文件"><span class="nav-number">5.2.</span> <span class="nav-text">5.2、修改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3、批量配置"><span class="nav-number">5.3.</span> <span class="nav-text">5.3、批量配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4、查看每个状态"><span class="nav-number">5.4.</span> <span class="nav-text">5.4、查看每个状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、配置hadoop"><span class="nav-number">6.</span> <span class="nav-text">六、配置hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1、配置hdfs-site-xml文件"><span class="nav-number">6.1.</span> <span class="nav-text">6.1、配置hdfs-site.xml文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2、hadoop-env-sh变量文件"><span class="nav-number">6.2.</span> <span class="nav-text">6.2、hadoop-env.sh变量文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3、配置hdfs-site-xml文件"><span class="nav-number">6.3.</span> <span class="nav-text">6.3、配置hdfs-site.xml文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4、配置yarn-site-xml"><span class="nav-number">6.4.</span> <span class="nav-text">6.4、配置yarn-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5、配置mapred-site-xml"><span class="nav-number">6.5.</span> <span class="nav-text">6.5、配置mapred-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6、配置core-site-xml"><span class="nav-number">6.6.</span> <span class="nav-text">6.6、配置core-site.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-7、配置slave"><span class="nav-number">6.7.</span> <span class="nav-text">6.7、配置slave</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-8、分发配置文件"><span class="nav-number">6.8.</span> <span class="nav-text">6.8、分发配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-9、格式化hadoop"><span class="nav-number">6.9.</span> <span class="nav-text">6.9、格式化hadoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-10、查看端口状态"><span class="nav-number">6.10.</span> <span class="nav-text">6.10、查看端口状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-11、查看java状态"><span class="nav-number">6.11.</span> <span class="nav-text">6.11、查看java状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、Hbase配置"><span class="nav-number">7.</span> <span class="nav-text">七、Hbase配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1、修改hbase变量配置文件"><span class="nav-number">7.1.</span> <span class="nav-text">7.1、修改hbase变量配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2、修改hbase服务配置文件"><span class="nav-number">7.2.</span> <span class="nav-text">7.2、修改hbase服务配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3、备用主节点与从节点配置文件"><span class="nav-number">7.3.</span> <span class="nav-text">7.3、备用主节点与从节点配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3、分发-启动-初始化hbase"><span class="nav-number">7.4.</span> <span class="nav-text">7.3、分发,启动,初始化hbase</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、配置haproxy"><span class="nav-number">8.</span> <span class="nav-text">八、配置haproxy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1、安装haporxy"><span class="nav-number">8.1.</span> <span class="nav-text">8.1、安装haporxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2、配置haporxy"><span class="nav-number">8.2.</span> <span class="nav-text">8.2、配置haporxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3、查看状态"><span class="nav-number">8.3.</span> <span class="nav-text">8.3、查看状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、配置pinpoint"><span class="nav-number">9.</span> <span class="nav-text">九、配置pinpoint</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1、解压tomcat"><span class="nav-number">9.1.</span> <span class="nav-text">9.1、解压tomcat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2、部署pinpoint-collector"><span class="nav-number">9.2.</span> <span class="nav-text">9.2、部署pinpoint-collector</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3、修改配置文件"><span class="nav-number">9.3.</span> <span class="nav-text">9.3、修改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4、修改tomcat配置文件"><span class="nav-number">9.4.</span> <span class="nav-text">9.4、修改tomcat配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-5、修改server-xml"><span class="nav-number">9.5.</span> <span class="nav-text">9.5、修改server.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-6、启动tomcat服务"><span class="nav-number">9.6.</span> <span class="nav-text">9.6、启动tomcat服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十、配置mysql"><span class="nav-number">10.</span> <span class="nav-text">十、配置mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十一、部署pinpoint-web"><span class="nav-number">11.</span> <span class="nav-text">十一、部署pinpoint-web</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1、修改tomcat配置文件"><span class="nav-number">11.1.</span> <span class="nav-text">11.1、修改tomcat配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-2、修改server-xml"><span class="nav-number">11.2.</span> <span class="nav-text">11.2、修改server.xml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-3、部署pinpoint-web"><span class="nav-number">11.3.</span> <span class="nav-text">11.3、部署pinpoint-web</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-4、修改配置文件"><span class="nav-number">11.4.</span> <span class="nav-text">11.4、修改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-5、配置数据库链接"><span class="nav-number">11.5.</span> <span class="nav-text">11.5、配置数据库链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-6、启动tomcat服务"><span class="nav-number">11.6.</span> <span class="nav-text">11.6、启动tomcat服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-7、分发tomcat-响应配置文件-并启动服务-此处不做修改。"><span class="nav-number">11.7.</span> <span class="nav-text">11.7、分发tomcat,响应配置文件,并启动服务,此处不做修改。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十二、haproxy配置"><span class="nav-number">12.</span> <span class="nav-text">十二、haproxy配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#12-1、修改hadoop配置文件"><span class="nav-number">12.1.</span> <span class="nav-text">12.1、修改hadoop配置文件 </span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-2、重启hadoop服务"><span class="nav-number">12.2.</span> <span class="nav-text">12.2、重启hadoop服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#12-3、查看端口"><span class="nav-number">12.3.</span> <span class="nav-text">12.3、查看端口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十三、pinpoint-agent"><span class="nav-number">13.</span> <span class="nav-text">十三、pinpoint-agent</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#13-1、将pinpoint的agent拷贝出来复制到客户端上"><span class="nav-number">13.1.</span> <span class="nav-text">13.1、将pinpoint的agent拷贝出来复制到客户端上</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-2修改catalina文件"><span class="nav-number">13.2.</span> <span class="nav-text">13.2修改catalina文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#13-3启动tomcat即可"><span class="nav-number">13.3.</span> <span class="nav-text">13.3启动tomcat即可</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">步荀仙</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'bAurO2VRR5JU4OczVxDdlWLm-gzGzoHsz',
+        appKey: 'Qc603moQXDN5RvchufQ1kSta',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("bAurO2VRR5JU4OczVxDdlWLm-gzGzoHsz", "Qc603moQXDN5RvchufQ1kSta");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

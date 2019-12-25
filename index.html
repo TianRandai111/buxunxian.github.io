@@ -249,7 +249,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/10/31/golang/golang 使用map处理多级json后输出map中的数组/">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/12/25/云计算/Kubernetes/设置deploy中pod的数量/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="步荀仙">
@@ -268,7 +268,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/10/31/golang/golang 使用map处理多级json后输出map中的数组/" itemprop="url">golang 使用map处理多级json后输出map中的数组</a></h1>
+                <a class="post-title-link" href="/2019/12/25/云计算/Kubernetes/设置deploy中pod的数量/" itemprop="url">设置deploy中pod的数量</a></h1>
         
 
         <div class="post-meta">
@@ -280,8 +280,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-31T09:41:08+08:00">
-                2019-10-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T15:06:34+08:00">
+                2019-12-25
               </time>
             
 
@@ -303,8 +303,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发/" itemprop="url" rel="index">
-                    <span itemprop="name">开发</span>
+                  <a href="/categories/云计算/" itemprop="url" rel="index">
+                    <span itemprop="name">云计算</span>
                   </a>
                 </span>
 
@@ -314,8 +314,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发/golang/" itemprop="url" rel="index">
-                    <span itemprop="name">golang</span>
+                  <a href="/categories/云计算/kubernetes/" itemprop="url" rel="index">
+                    <span itemprop="name">kubernetes</span>
                   </a>
                 </span>
 
@@ -332,8 +332,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/10/31/golang/golang 使用map处理多级json后输出map中的数组/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/31/golang/golang 使用map处理多级json后输出map中的数组/" itemprop="commentCount"></span>
+                <a href="/2019/12/25/云计算/Kubernetes/设置deploy中pod的数量/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/25/云计算/Kubernetes/设置deploy中pod的数量/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -341,7 +341,7 @@
 
           
           
-             <span id="/2019/10/31/golang/golang 使用map处理多级json后输出map中的数组/" class="leancloud_visitors" data-flag-title="golang 使用map处理多级json后输出map中的数组">
+             <span id="/2019/12/25/云计算/Kubernetes/设置deploy中pod的数量/" class="leancloud_visitors" data-flag-title="设置deploy中pod的数量">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -375,9 +375,7 @@
         
           
             <a id="more"></a>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @Descripttion:</span></span><br><span class="line"><span class="comment"> * @version:</span></span><br><span class="line"><span class="comment"> * @Author: 步荀仙</span></span><br><span class="line"><span class="comment"> * @Date: 2019-10-30 15:41:34</span></span><br><span class="line"><span class="comment"> * @LastEditors: 步荀仙</span></span><br><span class="line"><span class="comment"> * @LastEditTime: 2019-10-31 09:15:59</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"encoding/json"</span></span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"><span class="comment">//定义一个接受json的结构退</span></span><br><span class="line"><span class="keyword">type</span> testjson <span class="keyword">struct</span> &#123;</span><br><span class="line">	Test1 <span class="keyword">string</span>  <span class="string">`json:"test1"`</span></span><br><span class="line">	Test2 <span class="keyword">int</span>     <span class="string">`json:"test2"`</span></span><br><span class="line">	Test3 []test3 <span class="string">`json:"test3"`</span></span><br><span class="line">	Test6 test6   <span class="string">`json:"test6"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> test3 <span class="keyword">struct</span> &#123;</span><br><span class="line">	Test4 <span class="keyword">string</span> <span class="string">`json:"test4"`</span></span><br><span class="line">	Test5 <span class="keyword">int</span>    <span class="string">`json:"test5"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> test6 <span class="keyword">struct</span> &#123;</span><br><span class="line">	Test7 <span class="keyword">string</span> <span class="string">`json:"test7"`</span></span><br><span class="line">	Test8 <span class="keyword">int</span>    <span class="string">`json:"test8"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// 想结构体中添加数据</span></span><br><span class="line">	jsonData := testjson&#123;</span><br><span class="line">		Test1: <span class="string">"步荀仙"</span>,</span><br><span class="line">		Test2: <span class="number">999</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	jsonData2 := test3&#123;</span><br><span class="line">		Test4: <span class="string">"南宫恨"</span>,</span><br><span class="line">		Test5: <span class="number">888</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	jsonData3 := test3&#123;</span><br><span class="line">		Test4: <span class="string">"俏如来"</span>,</span><br><span class="line">		Test5: <span class="number">777</span>,</span><br><span class="line">	&#125;</span><br><span class="line">	jsonData.Test6.Test7 = <span class="string">"锦烟霞"</span></span><br><span class="line">	jsonData.Test6.Test8 = <span class="number">123</span></span><br><span class="line">	jsonData.Test3 = <span class="built_in">append</span>(jsonData.Test3, jsonData2)</span><br><span class="line">	jsonData.Test3 = <span class="built_in">append</span>(jsonData.Test3, jsonData3)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 格式化为json数据</span></span><br><span class="line">	mapTestData := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">	jsonInfo, _ := json.Marshal(jsonData)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 反格式化为map</span></span><br><span class="line">	_ = json.Unmarshal(jsonInfo, &amp;mapTestData)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 输出map中的数据</span></span><br><span class="line">	fmt.Println(mapTestData)</span><br><span class="line">	<span class="comment">// 输出map["test3"]中数组索引为0的map["test4"]中的value</span></span><br><span class="line">	fmt.Println(mapTestData[<span class="string">"test3"</span>].([]<span class="keyword">interface</span>&#123;&#125;)[<span class="number">0</span>].(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)[<span class="string">"test4"</span>])</span><br><span class="line">	<span class="comment">// 输出map["test6中"]结构体map["test7"]中的数据</span></span><br><span class="line">	fmt.Println(mapTestData[<span class="string">"test6"</span>].(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)[<span class="string">"test7"</span>])</span><br><span class="line">	<span class="comment">// 循环输出map["test3"]中数组的值</span></span><br><span class="line">	<span class="keyword">for</span> _, j := <span class="keyword">range</span> mapTestData[<span class="string">"test3"</span>].([]<span class="keyword">interface</span>&#123;&#125;) &#123;</span><br><span class="line">		fmt.Println(j.(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@ main [master] $ go run service.go </span><br><span class="line">map[test1:步荀仙 test2:999 test3:[map[test4:南宫恨 test5:888] map[test4:俏如来 test5:777]] test6:map[test7:锦烟霞 test8:123]]</span><br><span class="line">南宫恨</span><br><span class="line">锦烟霞</span><br><span class="line">map[test4:南宫恨 test5:888]</span><br><span class="line">map[test4:俏如来 test5:777]</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl scale deploy -n  myweb --replicas=1</span><br></pre></td></tr></table></figure>
           
         
       
@@ -425,7 +423,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/06/26/mysql/Mysql语句操作 (1)/">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/12/25/云计算/Docker/容器中设置上海时区/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="步荀仙">
@@ -444,7 +442,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/26/mysql/Mysql语句操作 (1)/" itemprop="url">Mariadb 数据库操作-1</a></h1>
+                <a class="post-title-link" href="/2019/12/25/云计算/Docker/容器中设置上海时区/" itemprop="url">容器中设置上海时区</a></h1>
         
 
         <div class="post-meta">
@@ -456,8 +454,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T09:47:17+08:00">
-                2019-06-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T15:06:34+08:00">
+                2019-12-25
               </time>
             
 
@@ -479,8 +477,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/云计算/" itemprop="url" rel="index">
+                    <span itemprop="name">云计算</span>
                   </a>
                 </span>
 
@@ -490,8 +488,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/Mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">Mysql</span>
+                  <a href="/categories/云计算/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
                   </a>
                 </span>
 
@@ -508,8 +506,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/26/mysql/Mysql语句操作 (1)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/26/mysql/Mysql语句操作 (1)/" itemprop="commentCount"></span>
+                <a href="/2019/12/25/云计算/Docker/容器中设置上海时区/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/25/云计算/Docker/容器中设置上海时区/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -517,7 +515,7 @@
 
           
           
-             <span id="/2019/06/26/mysql/Mysql语句操作 (1)/" class="leancloud_visitors" data-flag-title="Mariadb 数据库操作-1">
+             <span id="/2019/12/25/云计算/Docker/容器中设置上海时区/" class="leancloud_visitors" data-flag-title="容器中设置上海时区">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -549,10 +547,10 @@
 
       
         
-          <h3 id="3-1-数据库操作"><a href="#3-1-数据库操作" class="headerlink" title="3.1 数据库操作"></a>3.1 数据库操作</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查询数据库</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">#查看数据库创建语句</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">database</span> [库名]</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建数据库</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> [库名]</span><br><span class="line"></span><br><span class="line"><span class="comment">#选择数据库</span></span><br><span class="line"><span class="keyword">use</span> <span class="keyword">database</span> [库名]</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改数据库</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">database</span> [库名] <span class="keyword">charset</span>=[字符编码]</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除数据库</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> [库名]</span><br></pre></td></tr></table></figure>
+          <p>在<code>dockerfile</code>中将时区调整为上海时区</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/06/26/mysql/Mysql语句操作 (1)/#more" rel="contents">
+            <a class="btn" href="/2019/12/25/云计算/Docker/容器中设置上海时区/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -603,7 +601,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/06/26/mysql/Mysql语句操作 (2)/">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/12/25/系统运维/Nginx随笔/nginx支持geoip2模块的方法/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="步荀仙">
@@ -622,7 +620,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/26/mysql/Mysql语句操作 (2)/" itemprop="url">Mariadb 数据库操作-2</a></h1>
+                <a class="post-title-link" href="/2019/12/25/系统运维/Nginx随笔/nginx支持geoip2模块的方法/" itemprop="url">Centos系统yum安装的nginx如果何止GeoIP2模块</a></h1>
         
 
         <div class="post-meta">
@@ -634,8 +632,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-26T09:47:17+08:00">
-                2019-06-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T15:06:34+08:00">
+                2019-12-25
               </time>
             
 
@@ -657,8 +655,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/系统运维/" itemprop="url" rel="index">
+                    <span itemprop="name">系统运维</span>
                   </a>
                 </span>
 
@@ -668,8 +666,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/Mysql/" itemprop="url" rel="index">
-                    <span itemprop="name">Mysql</span>
+                  <a href="/categories/系统运维/Nginx随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">Nginx随笔</span>
                   </a>
                 </span>
 
@@ -686,8 +684,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/26/mysql/Mysql语句操作 (2)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/26/mysql/Mysql语句操作 (2)/" itemprop="commentCount"></span>
+                <a href="/2019/12/25/系统运维/Nginx随笔/nginx支持geoip2模块的方法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/25/系统运维/Nginx随笔/nginx支持geoip2模块的方法/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -695,7 +693,7 @@
 
           
           
-             <span id="/2019/06/26/mysql/Mysql语句操作 (2)/" class="leancloud_visitors" data-flag-title="Mariadb 数据库操作-2">
+             <span id="/2019/12/25/系统运维/Nginx随笔/nginx支持geoip2模块的方法/" class="leancloud_visitors" data-flag-title="Centos系统yum安装的nginx如果何止GeoIP2模块">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -727,188 +725,57 @@
 
       
         
-          <h2 id="3-数据库"><a href="#3-数据库" class="headerlink" title="3.数据库"></a>3.数据库</h2><h3 id="3-9-数据库基本概念"><a href="#3-9-数据库基本概念" class="headerlink" title="3.9 数据库基本概念"></a>3.9 数据库基本概念</h3><p>1、关系：两个表的公共字段</p>
-<p>2、行：也称记录，也称实体</p>
-<p>3、列：也称字段，也称属性<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/06/26/mysql/Mysql语句操作 (2)/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/06/06/other/yum安装的nginx支持geoip2模块的方法/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="步荀仙">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/kyz.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="步荀仙的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/06/other/yum安装的nginx支持geoip2模块的方法/" itemprop="url">Centos系统yum安装的nginx如果何止GeoIP2模块</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-06T11:53:22+08:00">
-                2019-06-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Centos/" itemprop="url" rel="index">
-                    <span itemprop="name">Centos</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/06/06/other/yum安装的nginx支持geoip2模块的方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/06/other/yum安装的nginx支持geoip2模块的方法/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/06/06/other/yum安装的nginx支持geoip2模块的方法/" class="leancloud_visitors" data-flag-title="Centos系统yum安装的nginx如果何止GeoIP2模块">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Centos系统yum安装的nginx如果何止GeoIP2模块"><a href="#Centos系统yum安装的nginx如果何止GeoIP2模块" class="headerlink" title="Centos系统yum安装的nginx如果何止GeoIP2模块"></a>Centos系统yum安装的nginx如果何止GeoIP2模块</h2><h4 id="前期步骤"><a href="#前期步骤" class="headerlink" title="前期步骤"></a>前期步骤</h4><blockquote>
+            <a id="more"></a>
+<h2 id="Centos系统yum安装的nginx如果何止GeoIP2模块"><a href="#Centos系统yum安装的nginx如果何止GeoIP2模块" class="headerlink" title="Centos系统yum安装的nginx如果何止GeoIP2模块"></a>Centos系统yum安装的nginx如果何止GeoIP2模块</h2><h4 id="前期步骤"><a href="#前期步骤" class="headerlink" title="前期步骤"></a>前期步骤</h4><blockquote>
 <p>nginx本身是没有GeoIP2的模块的需要对nginx进行重新编译才能使用</p>
 </blockquote>
 <blockquote>
 <p>查看nginx模块的详细信息</p>
 </blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/06/06/other/yum安装的nginx支持geoip2模块的方法/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+<p><code>nginx -V</code></p>
+<p><strong>仔细查看模块</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">nginx version: nginx/1.12.2</span><br><span class="line">built by gcc 4.8.5 20150623 (Red Hat 4.8.5-36) (GCC) </span><br><span class="line">built with OpenSSL 1.0.2k-fips  26 Jan 2017</span><br><span class="line">TLS SNI support enabled</span><br><span class="line">configure arguments: </span><br><span class="line">--prefix=/usr/share/nginx </span><br><span class="line">--sbin-path=/usr/sbin/nginx </span><br><span class="line">--modules-path=/usr/lib64/nginx/modules </span><br><span class="line">--conf-path=/etc/nginx/nginx.conf </span><br><span class="line">--error-log-path=/var/log/nginx/error.log </span><br><span class="line">--http-log-path=/var/log/nginx/access.log </span><br><span class="line">--http-client-body-temp-path=/var/lib/nginx/tmp/client_body </span><br><span class="line">--http-proxy-temp-path=/var/lib/nginx/tmp/proxy </span><br><span class="line">--http-fastcgi-temp-path=/var/lib/nginx/tmp/fastcgi </span><br><span class="line">--http-uwsgi-temp-path=/var/lib/nginx/tmp/uwsgi </span><br><span class="line">--http-scgi-temp-path=/var/lib/nginx/tmp/scgi </span><br><span class="line">--pid-path=/run/nginx.pid </span><br><span class="line">--lock-path=/run/lock/subsys/nginx </span><br><span class="line">--user=nginx </span><br><span class="line">--group=nginx </span><br><span class="line">--with-file-aio </span><br><span class="line">--with-ipv6 </span><br><span class="line">--with-http_auth_request_module </span><br><span class="line">--with-http_ssl_module </span><br><span class="line">--with-http_v2_module </span><br><span class="line">--with-http_realip_module </span><br><span class="line">--with-http_addition_module </span><br><span class="line">--with-http_xslt_module=dynamic </span><br><span class="line">--with-http_image_filter_module=dynamic </span><br><span class="line">--with-http_geoip_module=dynamic </span><br><span class="line">--with-http_sub_module </span><br><span class="line">--with-http_dav_module </span><br><span class="line">--with-http_flv_module </span><br><span class="line">--with-http_mp4_module </span><br><span class="line">--with-http_gunzip_module </span><br><span class="line">--with-http_gzip_static_module </span><br><span class="line">--with-http_random_index_module </span><br><span class="line">--with-http_secure_link_module </span><br><span class="line">--with-http_degradation_module </span><br><span class="line">--with-http_slice_module </span><br><span class="line">--with-http_stub_status_module </span><br><span class="line">--with-http_perl_module=dynamic </span><br><span class="line">--with-mail=dynamic </span><br><span class="line">--with-mail_ssl_module </span><br><span class="line">--with-pcre </span><br><span class="line">--with-pcre-jit </span><br><span class="line">--with-stream=dynamic </span><br><span class="line">--with-stream_ssl_module </span><br><span class="line">--with-google_perftools_module </span><br><span class="line">--with-debug </span><br><span class="line">--with-cc-opt=&apos;-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong </span><br><span class="line">--param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic&apos; </span><br><span class="line">--with-ld-opt=&apos;-Wl,-z,relro -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -Wl,-E&apos;</span><br></pre></td></tr></table></figure></p>
+<h4 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget perl-ExtUtils-Embed readline-devel zlib-devel pam-devel libxml2-devel libxslt-devel gd-devel GeoIP-devel autoconf-2.69-11.el7.noarch gcc libxml2 libxml2-dev openldap-devel python-devel gcc-c++  openssl-devel cmakepcre-develnanowget  gcc gcc-c++ ncurses-devel perl pcre-devel libtool libsysfs automake openssl openssl-devel redhat-rpm-config.noarch unzip libmaxminddb libunwind.x86_64  -y</span><br></pre></td></tr></table></figure>
+<h4 id="下载国家及城市数据"><a href="#下载国家及城市数据" class="headerlink" title="下载国家及城市数据"></a>下载国家及城市数据</h4><blockquote>
+<p>数据文件是.mmdb的文件，安装ngx_http_geoip2_module的依赖库libmaxminddb，libmaxminddb已经在yum安装依赖时安装，文章最后会在附录中拥有编译安装的方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://geolite.maxmind.com/download/geoip/database/GeoLite2-City.tar.gz</span><br><span class="line">wget https://geolite.maxmind.com/download/geoip/database/GeoLite2-Country.tar.gz</span><br><span class="line">mkdir /etc/nginx/GeoIP2/</span><br><span class="line">tar xvf GeoLite2-City.tar.gz -C /etc/nginx/GeoIP2/</span><br><span class="line">tar xvf GeoLite2-Country.tar.gz -C /etc/nginx/GeoIP2/</span><br><span class="line">mv /etc/nginx/GeoIP2/GeoLite2-City*/ /etc/nginx/GeoIP2/GeoLite2-City/ </span><br><span class="line">mv /etc/nginx/GeoIP2/GeoLite2-Country*/ /etc/nginx/GeoIP2/GeoLite2-Country/</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p><strong><font cooler="#FF0000">验证数据文件</font></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">mmdblookup --file /etc/nginx/GeoIP2/GeoLite2-City/GeoLite2-City.mmdb --ip 8.8.8.8</span><br><span class="line">&#123;</span><br><span class="line">    &quot;continent&quot;: </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;code&quot;: </span><br><span class="line">          &quot;NA&quot; &lt;utf8_string&gt;</span><br><span class="line">        &quot;geoname_id&quot;: </span><br><span class="line">          6255149 &lt;uint32&gt;</span><br><span class="line">        &quot;names&quot;: </span><br><span class="line">          &#123;</span><br><span class="line">            &quot;de&quot;: </span><br><span class="line">              &quot;Nordamerika&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;en&quot;: </span><br><span class="line">              &quot;North America&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;es&quot;: </span><br><span class="line">              &quot;Norteamérica&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;fr&quot;: </span><br><span class="line">              &quot;Amérique du Nord&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ja&quot;: </span><br><span class="line">              &quot;北アメリカ&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;pt-BR&quot;: </span><br><span class="line">              &quot;América do Norte&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ru&quot;: </span><br><span class="line">              &quot;Северная Америка&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;zh-CN&quot;: </span><br><span class="line">              &quot;北美洲&quot; &lt;utf8_string&gt;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &quot;country&quot;: </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;geoname_id&quot;: </span><br><span class="line">          6252001 &lt;uint32&gt;</span><br><span class="line">        &quot;iso_code&quot;: </span><br><span class="line">          &quot;US&quot; &lt;utf8_string&gt;</span><br><span class="line">        &quot;names&quot;: </span><br><span class="line">          &#123;</span><br><span class="line">            &quot;de&quot;: </span><br><span class="line">              &quot;USA&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;en&quot;: </span><br><span class="line">              &quot;United States&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;es&quot;: </span><br><span class="line">              &quot;Estados Unidos&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;fr&quot;: </span><br><span class="line">              &quot;États-Unis&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ja&quot;: </span><br><span class="line">              &quot;アメリカ合衆国&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;pt-BR&quot;: </span><br><span class="line">              &quot;Estados Unidos&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ru&quot;: </span><br><span class="line">              &quot;США&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;zh-CN&quot;: </span><br><span class="line">              &quot;美国&quot; &lt;utf8_string&gt;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &quot;location&quot;: </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;accuracy_radius&quot;: </span><br><span class="line">          1000 &lt;uint16&gt;</span><br><span class="line">        &quot;latitude&quot;: </span><br><span class="line">          37.751000 &lt;double&gt;</span><br><span class="line">        &quot;longitude&quot;: </span><br><span class="line">          -97.822000 &lt;double&gt;</span><br><span class="line">        &quot;time_zone&quot;: </span><br><span class="line">          &quot;America/Chicago&quot; &lt;utf8_string&gt;</span><br><span class="line">      &#125;</span><br><span class="line">    &quot;registered_country&quot;: </span><br><span class="line">      &#123;</span><br><span class="line">        &quot;geoname_id&quot;: </span><br><span class="line">          6252001 &lt;uint32&gt;</span><br><span class="line">        &quot;iso_code&quot;: </span><br><span class="line">          &quot;US&quot; &lt;utf8_string&gt;</span><br><span class="line">        &quot;names&quot;: </span><br><span class="line">          &#123;</span><br><span class="line">            &quot;de&quot;: </span><br><span class="line">              &quot;USA&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;en&quot;: </span><br><span class="line">              &quot;United States&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;es&quot;: </span><br><span class="line">              &quot;Estados Unidos&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;fr&quot;: </span><br><span class="line">              &quot;États-Unis&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ja&quot;: </span><br><span class="line">              &quot;アメリカ合衆国&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;pt-BR&quot;: </span><br><span class="line">              &quot;Estados Unidos&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;ru&quot;: </span><br><span class="line">              &quot;США&quot; &lt;utf8_string&gt;</span><br><span class="line">            &quot;zh-CN&quot;: </span><br><span class="line">              &quot;美国&quot; &lt;utf8_string&gt;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="下载geoip2模块的代码"><a href="#下载geoip2模块的代码" class="headerlink" title="下载geoip2模块的代码"></a>下载geoip2模块的代码</h4><blockquote>
+<p>此代码参与nginx的编译<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/leev/ngx_http_geoip2_module/archive/master.zip</span><br><span class="line">unzip master</span><br><span class="line">mv ngx_http_geoip2_module-master  /usr/local/src/ngx_http_geoip2_module</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>》</p>
+<h4 id="编译nginx需要-google-pertools进行辅助"><a href="#编译nginx需要-google-pertools进行辅助" class="headerlink" title="编译nginx需要 google-pertools进行辅助"></a>编译nginx需要 google-pertools进行辅助</h4><blockquote>
+<p>安装google-pertools前需要安装libunwind，libuwinde已经在yum安装依赖时安装，文章最后会在附录中拥有编译安装的方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">安装google-pertools</span><br><span class="line">wget -c -O gperftools-2.4.tar.gz  https://github.com/gperftools/gperftools/releases/download/gperftools-2.4/gperftools-2.4.tar.gz</span><br><span class="line">tar xvf gperftools-2.4.tar.gz</span><br><span class="line">cd gperftools-2.4</span><br><span class="line">./configure</span><br><span class="line">make check</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h4 id="下载nginx代码"><a href="#下载nginx代码" class="headerlink" title="下载nginx代码"></a>下载nginx代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://nginx.org/download/nginx-1.12.2.tar.gz</span><br><span class="line">tar xvf nginx-1.12.2.tar.gz</span><br><span class="line">cd nginx-1.12.2</span><br></pre></td></tr></table></figure>
+<h4 id="编译nginx代码"><a href="#编译nginx代码" class="headerlink" title="编译nginx代码"></a>编译nginx代码</h4><ul>
+<li><p>生成Markfile文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">./configure \</span><br><span class="line">--prefix=/usr/share/nginx \</span><br><span class="line">--sbin-path=/usr/sbin/nginx \</span><br><span class="line">--modules-path=/usr/lib64/nginx/modules \</span><br><span class="line">--conf-path=/etc/nginx/nginx.conf \</span><br><span class="line">--error-log-path=/var/<span class="built_in">log</span>/nginx/error.log \</span><br><span class="line">--http-log-path=/var/<span class="built_in">log</span>/nginx/access.log \</span><br><span class="line">--http-client-body-temp-path=/var/lib/nginx/tmp/client_body \</span><br><span class="line">--http-proxy-temp-path=/var/lib/nginx/tmp/proxy \</span><br><span class="line">--http-fastcgi-temp-path=/var/lib/nginx/tmp/fastcgi \</span><br><span class="line">--http-uwsgi-temp-path=/var/lib/nginx/tmp/uwsgi \</span><br><span class="line">--http-scgi-temp-path=/var/lib/nginx/tmp/scgi \</span><br><span class="line">--pid-path=/run/nginx.pid \</span><br><span class="line">--lock-path=/run/lock/subsys/nginx \</span><br><span class="line">--user=nginx \</span><br><span class="line">--group=nginx \</span><br><span class="line">--with-ipv6 \</span><br><span class="line">--with-http_auth_request_module \</span><br><span class="line">--with-http_ssl_module \</span><br><span class="line">--with-http_v2_module \</span><br><span class="line">--with-http_realip_module \</span><br><span class="line">--with-http_addition_module \</span><br><span class="line">--with-http_xslt_module=dynamic \</span><br><span class="line">--with-http_image_filter_module=dynamic \</span><br><span class="line">--with-http_sub_module \</span><br><span class="line">--with-file-aio \</span><br><span class="line">--with-http_dav_module \</span><br><span class="line">--with-http_flv_module \</span><br><span class="line">--with-http_mp4_module \</span><br><span class="line">--with-http_gunzip_module \</span><br><span class="line">--with-http_gzip_static_module \</span><br><span class="line">--with-http_random_index_module \</span><br><span class="line">--with-http_secure_link_module \</span><br><span class="line">--with-http_degradation_module \</span><br><span class="line">--with-http_slice_module \</span><br><span class="line">--with-http_stub_status_module \</span><br><span class="line">--with-http_perl_module=dynamic \</span><br><span class="line">--with-mail=dynamic \</span><br><span class="line">--with-mail_ssl_module \</span><br><span class="line">--with-pcre \</span><br><span class="line">--with-pcre-jit \</span><br><span class="line">--with-stream \</span><br><span class="line">--with-stream_ssl_module \</span><br><span class="line">--with-http_geoip_module=dynamic \</span><br><span class="line">--add-module=/usr/<span class="built_in">local</span>/src/ngx_http_geoip2_module \ <span class="comment">#源代码不懂加入此行</span></span><br><span class="line">--with-debug \</span><br><span class="line">--with-cc-opt=<span class="string">'-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic'</span> \</span><br><span class="line">--with-ld-opt=<span class="string">'-Wl,-z,relro -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -Wl,-E'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编译</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>加载动态链接库否则nginx 会报错<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;/usr/local/lib&quot; &gt;&gt; /etc/ld.so.conf</span><br><span class="line">ldconfig</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>编译好后执行编译出的nginx二进制文件,进行验证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<blockquote>
+<p>验证如果没有问题将nginx的二进制文件复制到/usr/sbin/即可，切记备份<font coler="#FF0000"><strong>源文件</strong></font></p>
+</blockquote>
+<h4 id="配置nginx配置文件"><a href="#配置nginx配置文件" class="headerlink" title="配置nginx配置文件"></a>配置nginx配置文件</h4><blockquote>
+<p>我们队GeoIP2的目的是输出到日志中</p>
+</blockquote>
+<p><code>vim /etc/nginx/nginx.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">user  nginx;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">error_log  /var/log/nginx/error.log warn;</span><br><span class="line">pid        /var/run/nginx.pid;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    geoip2 /etc/nginx/GeoIP/GeoLite2-Country.mmdb&#123;</span><br><span class="line">        $geoip2_data_country_code  country iso_code ;</span><br><span class="line">        $geoip2_data_country_name  source=$http_x_forwarded_for default=中国 country names zh-CN;</span><br><span class="line">    &#125;</span><br><span class="line">    geoip2 /etc/nginx/GeoIP/GeoLite2-City.mmdb&#123;</span><br><span class="line">        $geoip2_data_city_name source=$http_x_forwarded_for default=北京 city names zh-CN;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">    include       /etc/nginx/mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line">     </span><br><span class="line">    log_format  main escape=json &apos;$remote_addr - $remote_user [$time_local] &apos;</span><br><span class="line">                        &apos;&quot;$request&quot; $status $body_bytes_sent &apos;</span><br><span class="line">                        &apos;&quot;$http_referer&quot; &quot;$http_user_agent&quot; &apos;</span><br><span class="line">                        &apos;$request_time &apos;</span><br><span class="line">                        &apos;&quot;$geoip2_data_country_name&quot; &quot;$geoip2_data_city_name&quot; &apos;;</span><br><span class="line"></span><br><span class="line">    access_log  /var/log/nginx/access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"></span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    #gzip  on;</span><br><span class="line"></span><br><span class="line">    include /etc/nginx/conf.d/*.conf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>查看日志结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">192.168.138.0 -  [05/Jun/2019:11:14:59 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:09 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:16 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:27 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:28 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:29 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:29 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br><span class="line">192.168.138.0 -  [05/Jun/2019:11:20:29 +0000] &quot;GET / HTTP/1.1&quot; 304 0 &quot;&quot; &quot;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWe</span><br><span class="line">bKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36&quot; 0.000 &quot;中国&quot; &quot;北京&quot;</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="附录-编译安装libmaxminddb与libunwind"><a href="#附录-编译安装libmaxminddb与libunwind" class="headerlink" title="附录 编译安装libmaxminddb与libunwind"></a>附录 编译安装libmaxminddb与libunwind</h2><h4 id="安装libmaxminddb"><a href="#安装libmaxminddb" class="headerlink" title="安装libmaxminddb"></a>安装libmaxminddb</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/maxmind/libmaxminddb/releases/download/0.5.5/libmaxminddb-0.5.5.tar.gz</span><br><span class="line">tar -zxvf libmaxminddb-0.5.5.tar.gz</span><br><span class="line">cd libmaxminddb-0.5.5</span><br><span class="line">./configure</span><br><span class="line">make check</span><br><span class="line">make install</span><br><span class="line">ldconfig</span><br></pre></td></tr></table></figure>
+<p>####安装libunwind<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wget http://ftp.yzu.edu.tw/nongnu/libunwind/libunwind-1.1.tar.gz</span><br><span class="line">tar xvf libunwind-1.1.tar.gz</span><br><span class="line">cd libunwind-1.1</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
+
+          
         
       
     </div>
@@ -955,7 +822,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/06/05/other/pinpoint集群的安装配置/">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/12/25/系统运维/Pinpoint/pinpoint集群的安装配置/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="步荀仙">
@@ -974,7 +841,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/06/05/other/pinpoint集群的安装配置/" itemprop="url">pinpoint集群的安装配置</a></h1>
+                <a class="post-title-link" href="/2019/12/25/系统运维/Pinpoint/pinpoint集群的安装配置/" itemprop="url">pinpoint集群的安装配置</a></h1>
         
 
         <div class="post-meta">
@@ -986,8 +853,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-05T09:42:18+08:00">
-                2019-06-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T15:06:34+08:00">
+                2019-12-25
               </time>
             
 
@@ -1009,8 +876,19 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/other/" itemprop="url" rel="index">
-                    <span itemprop="name">other</span>
+                  <a href="/categories/系统运维/" itemprop="url" rel="index">
+                    <span itemprop="name">系统运维</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/系统运维/Pinpoint/" itemprop="url" rel="index">
+                    <span itemprop="name">Pinpoint</span>
                   </a>
                 </span>
 
@@ -1027,8 +905,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/06/05/other/pinpoint集群的安装配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/05/other/pinpoint集群的安装配置/" itemprop="commentCount"></span>
+                <a href="/2019/12/25/系统运维/Pinpoint/pinpoint集群的安装配置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/25/系统运维/Pinpoint/pinpoint集群的安装配置/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1036,7 +914,7 @@
 
           
           
-             <span id="/2019/06/05/other/pinpoint集群的安装配置/" class="leancloud_visitors" data-flag-title="pinpoint集群的安装配置">
+             <span id="/2019/12/25/系统运维/Pinpoint/pinpoint集群的安装配置/" class="leancloud_visitors" data-flag-title="pinpoint集群的安装配置">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1069,8 +947,8 @@
       
         
           
-            <p>pinpoint集群的安装配置</p>
-<!--mode-->
+            <a id="more"></a>
+<p>pinpoint集群的安装配置</p>
 <h2 id="一、环境准备"><a href="#一、环境准备" class="headerlink" title="一、环境准备"></a><a id="1">一、环境准备</a></h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">4台服务器</span><br><span class="line"></span><br><span class="line">haporxy 192.168.15.24</span><br><span class="line">pinpoint-1 192.168.15.30</span><br><span class="line">pinpoint-2 192.168.15.31</span><br><span class="line">pinpoint-2 192.168.15.32</span><br><span class="line">tomcat 192.168.6.150</span><br><span class="line">mysql 162.168.15.253</span><br></pre></td></tr></table></figure>
 <h2 id="二、搭建Pinpoint"><a href="#二、搭建Pinpoint" class="headerlink" title="二、搭建Pinpoint"></a><a id="2">二、搭建Pinpoint</a></h2><h3 id="2-1、安装配置ansible"><a href="#2-1、安装配置ansible" class="headerlink" title="2.1、安装配置ansible"></a><a id="2.1">2.1、安装配置ansible</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install ansible -y</span><br></pre></td></tr></table></figure>
 <h3 id="2-2、配置ansible"><a href="#2-2、配置ansible" class="headerlink" title="2.2、配置ansible"></a><a id="2.2">2.2、配置ansible</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#配置host文件</span><br><span class="line">vim /etc/hosts</span><br><span class="line">    192.168.15.30 pinpoint-1</span><br><span class="line">    192.168.15.31 pinpoint-2</span><br><span class="line">    192.168.15.32 pinpoint-3</span><br><span class="line"></span><br><span class="line">#配置ansible文件</span><br><span class="line">vim /etc/ansible/hosts</span><br><span class="line">    [pinpoint]</span><br><span class="line">    pinpoint-1</span><br><span class="line">    pinpoint-2</span><br><span class="line">    pinpoint-3</span><br><span class="line"></span><br><span class="line">#在每个节点上执行 相互认证</span><br><span class="line">ssh-keygen</span><br><span class="line">cd /root/.ssh</span><br><span class="line">for (( i=0 ; i&lt;4 ; i++ ));do ssh-copy-id -i .ssh/id_rsa.pub root@pinpoint-$i;done</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#修改主机名</span><br><span class="line">for (( i=1 ; i&lt;4 ; i++ ));do ansible pinpoint-$i -m hostname -a &quot;name=pinpoint-$i&quot; ;done</span><br></pre></td></tr></table></figure>
@@ -1217,7 +1095,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/05/28/centos/Centos 7下安装使用ClamAV/">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/12/25/其他/Hexo/Hexo+Github/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="步荀仙">
@@ -1236,7 +1114,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/28/centos/Centos 7下安装使用ClamAV/" itemprop="url">Centos 7下安装使用ClamAV</a></h1>
+                <a class="post-title-link" href="/2019/12/25/其他/Hexo/Hexo+Github/" itemprop="url">Hexo+Github部署自己的博客</a></h1>
         
 
         <div class="post-meta">
@@ -1248,8 +1126,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-28T11:25:16+08:00">
-                2019-05-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T15:06:34+08:00">
+                2019-12-25
               </time>
             
 
@@ -1271,177 +1149,19 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux系统工具/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux系统工具</span>
+                  <a href="/categories/其他/" itemprop="url" rel="index">
+                    <span itemprop="name">其他</span>
                   </a>
                 </span>
 
                 
                 
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/28/centos/Centos 7下安装使用ClamAV/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/28/centos/Centos 7下安装使用ClamAV/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/05/28/centos/Centos 7下安装使用ClamAV/" class="leancloud_visitors" data-flag-title="Centos 7下安装使用ClamAV">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="Centos-7下安装使用ClamAV"><a href="#Centos-7下安装使用ClamAV" class="headerlink" title="Centos 7下安装使用ClamAV"></a>Centos 7下安装使用ClamAV</h1><h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><h3 id="1-下载地址"><a href="#1-下载地址" class="headerlink" title="1 下载地址"></a>1 下载地址</h3><p><a href="http://www.clamav.net" target="_blank" rel="noopener">clamav下载地址</a></p>
-<p>选择一个版本下载</p>
-<p><img src="https://github.com/TianRandai111/Projact_Image/blob/master/clamavl/clamav1.jpg?raw=true" alt="images"></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/28/centos/Centos 7下安装使用ClamAV/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/05/24/centos/Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="步荀仙">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/kyz.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="步荀仙的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+                  ， 
                 
-                <a class="post-title-link" href="/2019/05/24/centos/Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错/" itemprop="url">Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-24T18:18:46+08:00">
-                2019-05-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux系统工具/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux系统工具</span>
+                  <a href="/categories/其他/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
                   </a>
                 </span>
 
@@ -1458,8 +1178,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/05/24/centos/Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/24/centos/Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错/" itemprop="commentCount"></span>
+                <a href="/2019/12/25/其他/Hexo/Hexo+Github/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/25/其他/Hexo/Hexo+Github/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1467,175 +1187,7 @@
 
           
           
-             <span id="/2019/05/24/centos/Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错/" class="leancloud_visitors" data-flag-title="Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Cenos-7-2-升级OpenSSH-8-0-升级步骤及排错"><a href="#Cenos-7-2-升级OpenSSH-8-0-升级步骤及排错" class="headerlink" title="Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错"></a>Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错</h2><h5 id="1-获取OpenSSH-8-0"><a href="#1-获取OpenSSH-8-0" class="headerlink" title="1.获取OpenSSH 8.0"></a>1.获取OpenSSH 8.0</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://openbsd.hk/pub/OpenBSD/OpenSSH/portable/openssh-8.0p1.tar.gz</span><br></pre></td></tr></table></figure>
-<h5 id="2-安装依赖并解压"><a href="#2-安装依赖并解压" class="headerlink" title="2.安装依赖并解压"></a>2.安装依赖并解压</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install openssl-devel -y</span><br><span class="line">tar xvf openssh-8.0p1.tar.gz</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/24/centos/Cenos 7.2 升级OpenSSH 8.0 升级步骤及排错/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/01/08/ansible/Ansible批量分发key/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="步荀仙">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/kyz.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="步荀仙的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/08/ansible/Ansible批量分发key/" itemprop="url">Ansible批量分发key</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-08T11:10:09+08:00">
-                2019-01-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Ansible/" itemprop="url" rel="index">
-                    <span itemprop="name">Ansible</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/01/08/ansible/Ansible批量分发key/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/08/ansible/Ansible批量分发key/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2019/01/08/ansible/Ansible批量分发key/" class="leancloud_visitors" data-flag-title="Ansible批量分发key">
+             <span id="/2019/12/25/其他/Hexo/Hexo+Github/" class="leancloud_visitors" data-flag-title="Hexo+Github部署自己的博客">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1669,8 +1221,49 @@
         
           
             <a id="more"></a>
-<p><code>vi /etc/ansible/hosts</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[test]</span><br><span class="line">10.10.10.34</span><br><span class="line">[test:vars]</span><br><span class="line">ansible_ssh_usaer=&quot;root&quot;</span><br><span class="line">ansible_ssh_pass=&quot;012345&quot;</span><br></pre></td></tr></table></figure></p>
-<p><code>cat ssh-key.yaml</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- hosts: all</span><br><span class="line">  become: yes</span><br><span class="line">  tasks: </span><br><span class="line">   - name: Auth</span><br><span class="line">     authorized_key: </span><br><span class="line">      user: root</span><br><span class="line">      key: &quot;&#123;&#123;lookup(&apos;file&apos;,&apos;~/.ssh/id_rsa.pub&apos;)&#125;&#125;&quot;</span><br></pre></td></tr></table></figure></p>
+<p>让我们使用github来搭建一个hexo吧</p>
+<p>我们配置好本机的环境</p>
+<h3 id="一、配置GitHub"><a href="#一、配置GitHub" class="headerlink" title="一、配置GitHub"></a>一、配置GitHub</h3><p>首先需要有一个GitHub的账户，这里不介绍怎么注册GitHub了</p>
+<h5 id="1-1-选自自己的镜像库"><a href="#1-1-选自自己的镜像库" class="headerlink" title="1.1 选自自己的镜像库"></a>1.1 选自自己的镜像库</h5><p><img src="https://github.com/TianRandai111/Projact_Image/blob/master/hexo/1.jpg?raw=true" alt="image"></p>
+<h5 id="1-2-现则创建新的镜像库"><a href="#1-2-现则创建新的镜像库" class="headerlink" title="1.2 现则创建新的镜像库"></a>1.2 现则创建新的镜像库</h5><p><img src="https://github.com/TianRandai111/Projact_Image/blob/master/hexo/2.jpg?raw=true" alt="image"></p>
+<h5 id="1-3-创建新的镜像库"><a href="#1-3-创建新的镜像库" class="headerlink" title="1.3 创建新的镜像库"></a>1.3 创建新的镜像库</h5><p><img src="https://github.com/TianRandai111/Projact_Image/blob/master/hexo/3.jpg?raw=true" alt="image"></p>
+<h3 id="二、Linux环境的配置方式"><a href="#二、Linux环境的配置方式" class="headerlink" title="二、Linux环境的配置方式"></a>二、Linux环境的配置方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#下载nodeJS二进制包</span><br><span class="line">wget http://cdn.npm.taobao.org/dist/node/v10.14.1/node-v10.14.1-linux-x64.tar.xz</span><br><span class="line"></span><br><span class="line">#移动到一个放置配置好的目录，或者本目录解压也可以</span><br><span class="line">mv /buxunxian/Computer_Language/</span><br><span class="line"></span><br><span class="line">#解压tar.xz文件</span><br><span class="line">tar xvf node-v10.14.1-linux-x64.tar.xz</span><br><span class="line"></span><br><span class="line">#修改目录名称</span><br><span class="line">mv node-v10.14.1-linux-x64.tar.xz node </span><br><span class="line"></span><br><span class="line">#删除原tar.xz文件</span><br><span class="line">rm node-v10.14.1-linux-x64.tar.xz</span><br><span class="line"></span><br><span class="line">#配置环境变量</span><br><span class="line">echo -e &quot;export NODE_HOME=/buxunxian/Computer_Language/node\nexport PATH=$PATH:$GOROOT/bin:$NODE_HOME/bin\n&quot; &gt; /etc/profile.d/language.sh</span><br><span class="line"></span><br><span class="line">#刷新环境变量</span><br><span class="line">source /etc/profile.d/language.sh</span><br></pre></td></tr></table></figure>
+<h3 id="三、安装hexo"><a href="#三、安装hexo" class="headerlink" title="三、安装hexo"></a>三、安装hexo</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#创建一个目录</span><br><span class="line">mkdir /buxunxian/Git_Project/buxunxian.boke.io</span><br><span class="line">cd /buxunxian/Git_Project/buxunxian.boke.io</span><br><span class="line"></span><br><span class="line">#安装hexo</span><br><span class="line">npm i -g hexo</span><br><span class="line"></span><br><span class="line">#安装hexo-deployer-git</span><br><span class="line">npm install hexo-deployer-git</span><br><span class="line"></span><br><span class="line">#初始化hexo文件</span><br><span class="line">hexo init</span><br><span class="line"></span><br><span class="line">#查看一下目录</span><br><span class="line">ll | awk &apos;&#123;print $9&#125;&apos;</span><br><span class="line">_config.yml    #主配置文件</span><br><span class="line">node_modules   #node包</span><br><span class="line">package.json   </span><br><span class="line">package-lock.json</span><br><span class="line">README.md</span><br><span class="line">scaffolds</span><br><span class="line">source         #文章放置目录</span><br><span class="line">themes         #主题放置目录</span><br><span class="line"></span><br><span class="line">#启动hexo测试</span><br><span class="line">hexo server -p 80</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/TianRandai111/Projact_Image/blob/master/hexo/4.jpg?raw=true" alt="image"></p>
+<h3 id="四、下载主题"><a href="#四、下载主题" class="headerlink" title="四、下载主题"></a>四、下载主题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /buxunxian/Git_Project</span><br><span class="line">mkdir buxunxian.boke.io/themes/next</span><br><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br><span class="line">cp -r themes/next/* buxunxian.github.io/themes/next</span><br></pre></td></tr></table></figure>
+<h3 id="五、配置站点"><a href="#五、配置站点" class="headerlink" title="五、配置站点"></a>五、配置站点</h3><p><code>vim /buxunxian/Git_Projack/buxunxian.boke.io/_config.yml</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Hexo Configuration</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/configuration.html</span></span><br><span class="line"><span class="comment">## Source: https://github.com/hexojs/hexo/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">步荀仙的博客</span></span><br><span class="line"><span class="attr">subtitle:</span></span><br><span class="line"><span class="attr">description:</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">步荀仙</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-Hans</span></span><br><span class="line"><span class="attr">timezone:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'</span></span><br><span class="line"><span class="attr">url:</span> <span class="attr">http://boke.buxunxian.com</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Directory</span></span><br><span class="line"><span class="attr">source_dir:</span> <span class="string">source</span></span><br><span class="line"><span class="attr">public_dir:</span> <span class="string">public</span></span><br><span class="line"><span class="attr">tag_dir:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">archive_dir:</span> <span class="string">archives</span></span><br><span class="line"><span class="attr">category_dir:</span> <span class="string">categories</span></span><br><span class="line"><span class="attr">code_dir:</span> <span class="string">downloads/code</span></span><br><span class="line"><span class="attr">i18n_dir:</span> <span class="string">:lang</span></span><br><span class="line"><span class="attr">skip_render:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">new_post_name:</span> <span class="string">:title.md</span> <span class="comment"># File name of new posts</span></span><br><span class="line"><span class="attr">default_layout:</span> <span class="string">post</span></span><br><span class="line"><span class="attr">titlecase:</span> <span class="literal">false</span> <span class="comment"># Transform title into titlecase</span></span><br><span class="line"><span class="attr">external_link:</span> <span class="literal">true</span> <span class="comment"># Open external links in new tab</span></span><br><span class="line"><span class="attr">filename_case:</span> <span class="number">0</span></span><br><span class="line"><span class="attr">render_drafts:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">relative_link:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">future:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">highlight:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  line_number:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  auto_detect:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  tab_replace:</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># Home page setting</span></span><br><span class="line"><span class="comment"># path: Root path for your blogs index page. (default = '')</span></span><br><span class="line"><span class="comment"># per_page: Posts displayed per page. (0 = disable pagination)</span></span><br><span class="line"><span class="comment"># order_by: Posts order. (Order by date descending by default)</span></span><br><span class="line"><span class="attr">index_generator:</span></span><br><span class="line"><span class="attr">  path:</span> <span class="string">''</span></span><br><span class="line"><span class="attr">  per_page:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">  order_by:</span> <span class="bullet">-date</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># Category &amp; Tag</span></span><br><span class="line"><span class="attr">default_category:</span> <span class="string">uncategorized</span></span><br><span class="line"><span class="attr">category_map:</span></span><br><span class="line"><span class="attr">tag_map:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Date / Time format</span></span><br><span class="line"><span class="comment">## Hexo uses Moment.js to parse and display date</span></span><br><span class="line"><span class="comment">## You can customize the date format as defined in</span></span><br><span class="line"><span class="comment">## http://momentjs.com/docs/#/displaying/format/</span></span><br><span class="line"><span class="attr">date_format:</span> <span class="string">YYYY-MM-DD</span></span><br><span class="line"><span class="attr">time_format:</span> <span class="attr">HH:mm:ss</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Pagination</span></span><br><span class="line"><span class="comment">## Set per_page to 0 to disable pagination</span></span><br><span class="line"><span class="attr">per_page:</span> <span class="number">10</span></span><br><span class="line"><span class="attr">pagination_dir:</span> <span class="string">page</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line"><span class="comment">## Plugins: https://hexo.io/plugins/</span></span><br><span class="line"><span class="comment">## Themes: https://hexo.io/themes/</span></span><br><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">    repository:</span> <span class="attr">https://github.com/TianRandai111/buxunxian.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<p><strong>重要配置段</strong></p>
+<p><code>language: zh-Hans //[中文]语言</code></p>
+<p><code>theme: next //主题</code></p>
+<p>配置GIt<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="comment"># 可选择同时部署到 GitHub 和 coding 或者只部署到 Github</span></span><br><span class="line"><span class="attr">    repository:</span> <span class="attr">https://github.com/TianRandai111/buxunxian.github.io.git</span></span><br><span class="line">    <span class="string">[此处未提示信息应删除]#repository:</span> <span class="attr">https://github.com/你的git账号/你的hexo库名</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></p>
+<p>配置好后测试启动一下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server -p 80</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://github.com/TianRandai111/Projact_Image/blob/master/hexo/4.jpg?raw=true" alt="image"></p>
+<h3 id="六、修改主题"><a href="#六、修改主题" class="headerlink" title="六、修改主题"></a>六、修改主题</h3><p><code>vim /buxunxian/Git_Projack/buxunxian.boke.io/themes/next/_config.yml</code></p>
+<p>配置菜单</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">  home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="comment">#about: /about/ || user</span></span><br><span class="line"><span class="attr">  tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">  categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line"><span class="attr">  archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || heartbeat</span></span><br></pre></td></tr></table></figure>
+<p>配置主题样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheme: Muse</span><br></pre></td></tr></table></figure>
+<p>设置头像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">avatar:</span><br></pre></td></tr></table></figure>
+<p>替换好主题在次启动<br><img src="https://github.com/TianRandai111/Projact_Image/blob/master/hexo/5.jpg?raw=true" alt="image"></p>
+<p>修改主题样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheme: Pisces</span><br></pre></td></tr></table></figure>
+<p><img src="https://github.com/TianRandai111/Projact_Image/blob/master/hexo/6.jpg?raw=true" alt="image"></p>
+<p>个人喜好样式按照官方提供的配置修改一下就可以</p>
+<p><a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">next主题页面结构的详细配置</a></p>
+<p><a href="http://theme-next.iissnan.com/theme-settings.html" target="_blank" rel="noopener">next主题内容样式的详细配置</a></p>
+<p>头像的放置目录在<code>/buxunxian/Git_Projack/buxunxian.boke.io/themes/next/source/images/</code></p>
+<p>文章的放置目录在<code>/buxunxian/Git_Projack/buxunxian.boke.io/source/_posts</code></p>
+<h3 id="七、将代码放到GIt库上"><a href="#七、将代码放到GIt库上" class="headerlink" title="七、将代码放到GIt库上"></a>七、将代码放到GIt库上</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /buxunxian/Git_Projact/buxunxian.buke.io</span><br><span class="line">hexo g  # 编译成静态文件</span><br><span class="line">hexo d  # 上传静态文件到Git库上</span><br></pre></td></tr></table></figure>
+<h3 id="八、Git部署hexo"><a href="#八、Git部署hexo" class="headerlink" title="八、Git部署hexo"></a>八、Git部署hexo</h3><p>再次访问GIt并到代码库下点击Settings</p>
+<p><img src="https://github.com/TianRandai111/Projact_Image/blob/master/hexo/8.jpg?raw=true" alt="image"></p>
+<p>GitHub Pages设置使用的分支，Master分支节课，填写域名(如果没有域名不需要填写，github会自动生成一个域名)，选择https访问<br><img src="https://github.com/TianRandai111/Projact_Image/blob/master/hexo/9.jpg?raw=true" alt="image"></p>
+<p>到阿里云上进行CNAME解析，如果不需要单独的域名这一步不需要</p>
+<p><img src="https://github.com/TianRandai111/Projact_Image/blob/master/hexo/10.jpg?raw=true" alt="image"></p>
+<p>最后的样式<br><img src="https://github.com/TianRandai111/Projact_Image/blob/master/hexo/11.jpg?raw=true" alt="image"></p>
+<p>部署成功</p>
+<p>如果有CNAME的话需要在buxunxian.github.io/source/下创建CANME命名的文件，该文件无后缀内容为你想提供的域名</p>
 
           
         
@@ -1719,7 +1312,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2018/12/28/golang/go/">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/12/25/系统运维/HaProxy/HaPorxy/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="步荀仙">
@@ -1738,7 +1331,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/28/golang/go/" itemprop="url">Go教程</a></h1>
+                <a class="post-title-link" href="/2019/12/25/系统运维/HaProxy/HaPorxy/" itemprop="url">HaProxy参数与配置</a></h1>
         
 
         <div class="post-meta">
@@ -1750,8 +1343,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-28T14:55:22+08:00">
-                2018-12-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T15:06:34+08:00">
+                2019-12-25
               </time>
             
 
@@ -1773,8 +1366,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发/" itemprop="url" rel="index">
-                    <span itemprop="name">开发</span>
+                  <a href="/categories/系统运维/" itemprop="url" rel="index">
+                    <span itemprop="name">系统运维</span>
                   </a>
                 </span>
 
@@ -1784,8 +1377,8 @@
                 
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/开发/golang/" itemprop="url" rel="index">
-                    <span itemprop="name">golang</span>
+                  <a href="/categories/系统运维/HaProxy/" itemprop="url" rel="index">
+                    <span itemprop="name">HaProxy</span>
                   </a>
                 </span>
 
@@ -1802,8 +1395,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/28/golang/go/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/28/golang/go/" itemprop="commentCount"></span>
+                <a href="/2019/12/25/系统运维/HaProxy/HaPorxy/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/25/系统运维/HaProxy/HaPorxy/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1811,7 +1404,7 @@
 
           
           
-             <span id="/2018/12/28/golang/go/" class="leancloud_visitors" data-flag-title="Go教程">
+             <span id="/2019/12/25/系统运维/HaProxy/HaPorxy/" class="leancloud_visitors" data-flag-title="HaProxy参数与配置">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1843,36 +1436,34 @@
 
       
         
-          <p><a href="#1">Day-1 golang语言基础</a></p>
-<p><a href="#2">Day-2 数据类型与操作符</a></p>
-<p><a href="#3">Day-3 字符串处理包与函数</a></p>
-<p><a href="#4">Day-4 数组、切片、map、package介绍</a></p>
-<p><a href="#5">Day-5 结构体、方法</a></p>
-<p><a href="#6">Day-6 接口、反射</a></p>
-<p><a href="#7">Day-7 终端读写</a>&gt;</p>
-<p><a href="#8">Day-8 并发与Chan</a></p>
-<p><a href="#3333">Day-1 golang语言基础</a></p>
-<p><a id="3333">Day-1笔记</a></p>
-<h2 id="Day-1笔记"><a href="#Day-1笔记" class="headerlink" title="Day-1笔记"></a><a id="1">Day-1笔记</a></h2><h3 id="Golang语言的特性"><a href="#Golang语言的特性" class="headerlink" title="Golang语言的特性"></a>Golang语言的特性</h3><ul>
-<li><p>1.垃圾回收</p>
-<ul>
-<li>a.内存自动回收，再也不需要开发人员管理内存</li>
-<li>b.开发人员专注业务实现，降低了心智负担</li>
-<li>c.只需要new分配内存，不需要释放</li>
+          <h1 id="HAProxy"><a href="#HAProxy" class="headerlink" title="HAProxy:"></a>HAProxy:</h1><ul>
+<li>LB Cluster:<ul>
+<li>四层：</li>
 </ul>
 </li>
-<li><p>2.天然并发</p>
+<li><p>lvs, nginx(stream)，haproxy(mode tcp)</p>
 <ul>
-<li>a.从语言层面支持并发，非常简单</li>
-<li>b.goroute，轻量级线程，创建成千上万个goroute成为可能</li>
-<li>c.基于CSP(Communicating Sequential Process)模型实现</li>
+<li>七层：<ul>
+<li>http: nginx(http, ngx_http_upstream_module), haproxy(mode http), httpd, ats, perlbal, pound…</li>
 </ul>
 </li>
 </ul>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">go</span> fmt.Println(<span class="string">"hello"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>HAProxy：</p>
+<ul>
+<li><a href="http://www.haproxy.org" target="_blank" rel="noopener">http://www.haproxy.org</a></li>
+<li><a href="http://www.haproxy.com" target="_blank" rel="noopener">http://www.haproxy.com</a> </li>
+</ul>
+</li>
+<li><p>文档：</p>
+<ul>
+<li><a href="http://cbonte.github.io/haproxy-dconv/" target="_blank" rel="noopener">http://cbonte.github.io/haproxy-dconv/</a></li>
+</ul>
+</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/12/28/golang/go/#more" rel="contents">
+            <a class="btn" href="/2019/12/25/系统运维/HaProxy/HaPorxy/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1923,7 +1514,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2018/12/28/other/GitLab配置ssh-key上传拉取代码/">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/12/25/Golang/Go技术随笔/Go_Get/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="步荀仙">
@@ -1942,7 +1533,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/12/28/other/GitLab配置ssh-key上传拉取代码/" itemprop="url">GitLab配置ssh-key上传拉取代码</a></h1>
+                <a class="post-title-link" href="/2019/12/25/Golang/Go技术随笔/Go_Get/" itemprop="url">Go Get无法获取golang.org包解决办法</a></h1>
         
 
         <div class="post-meta">
@@ -1954,8 +1545,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-28T14:22:32+08:00">
-                2018-12-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T15:06:34+08:00">
+                2019-12-25
               </time>
             
 
@@ -1977,8 +1568,30 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Git/" itemprop="url" rel="index">
-                    <span itemprop="name">Git</span>
+                  <a href="/categories/编程开发/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程开发/Golang/" itemprop="url" rel="index">
+                    <span itemprop="name">Golang</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程开发/Golang/Golang技术随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">Golang技术随笔</span>
                   </a>
                 </span>
 
@@ -1995,8 +1608,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/28/other/GitLab配置ssh-key上传拉取代码/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/28/other/GitLab配置ssh-key上传拉取代码/" itemprop="commentCount"></span>
+                <a href="/2019/12/25/Golang/Go技术随笔/Go_Get/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/25/Golang/Go技术随笔/Go_Get/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -2004,7 +1617,7 @@
 
           
           
-             <span id="/2018/12/28/other/GitLab配置ssh-key上传拉取代码/" class="leancloud_visitors" data-flag-title="GitLab配置ssh-key上传拉取代码">
+             <span id="/2019/12/25/Golang/Go技术随笔/Go_Get/" class="leancloud_visitors" data-flag-title="Go Get无法获取golang.org包解决办法">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -2036,14 +1649,581 @@
 
       
         
-          <p>##配置本机ssh-key</p>
+          <p><code>go get</code>下载golang.org包的时候会出现timeout的情况，国内把这个网站给墙了，所以下载不下来，我们可以使用其他方法来代替<code>go get</code>,使用<code>gopm</code><br>先使用<code>go get</code>从github上获取<code>gopm</code>，然后编译好。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/12/25/Golang/Go技术随笔/Go_Get/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/12/25/编程开发/Git工具/GitLab配置ssh-key上传拉取代码/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="步荀仙">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kyz.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="步荀仙的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/25/编程开发/Git工具/GitLab配置ssh-key上传拉取代码/" itemprop="url">GitLab配置ssh-key上传拉取代码</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T15:06:34+08:00">
+                2019-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程开发/" itemprop="url" rel="index">
+                    <span itemprop="name">编程开发</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程开发/Git工具/" itemprop="url" rel="index">
+                    <span itemprop="name">Git工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/25/编程开发/Git工具/GitLab配置ssh-key上传拉取代码/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/25/编程开发/Git工具/GitLab配置ssh-key上传拉取代码/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/12/25/编程开发/Git工具/GitLab配置ssh-key上传拉取代码/" class="leancloud_visitors" data-flag-title="GitLab配置ssh-key上传拉取代码">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<p>##配置本机ssh-key</p>
 <ul>
 <li>1.本机生成<code>ssh-key</code></li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen </span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/home/test/.ssh/id_rsa): </span><br><span class="line">Created directory &apos;/home/test/.ssh&apos;.</span><br><span class="line">Enter passphrase (empty for no passphrase): </span><br><span class="line">Enter same passphrase again: </span><br><span class="line">Your identification has been saved in /home/test/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /home/test/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">86:3d:01:f5:3b:87:94:2f:7c:da:4b:d3:75:2c:38:02 test@test</span><br><span class="line">The key&apos;s randomart image is:</span><br><span class="line">+--[ RSA 2048]----+</span><br><span class="line">|      ...        |</span><br><span class="line">|       . . .     |</span><br><span class="line">|        E +      |</span><br><span class="line">|       o = + . . |</span><br><span class="line">|      . S B * . +|</span><br><span class="line">|       . . O o o.|</span><br><span class="line">|          . + .  |</span><br><span class="line">|           . o   |</span><br><span class="line">|            .    |</span><br><span class="line">+-----------------+</span><br></pre></td></tr></table></figure>
+<ul>
+<li>2.查看本地私钥文件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$cat ~/.ssh/id_rsa.pub </span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCe57DV59eFlBu9905C3fs3ZiDaYJXGnBT5AGxy68OWDNj2i8Qf51/4pL21lVhOsfTpgcJp0elrsi+EiGAnvJnWeddaEXMceMrTU7YJd8Ki4BtAXa6nWRR9H/jQqKUImlf9RtIW4SFlNwa+Bmkh7pGQz1E8bIhSpcf9vZr331/BJLl4bz8SwffP9AKdc6+BRcOyzwRe+sLdi0QwBj489BxTCn8mhyzWejfRhZMCNE1vFLn9UMUQvZf49sLmXu8LW4jIZIWDVvvDlv31vZP+DSlL3CnLRu87t5ctzUbapuec7NIeAhoX3GNw123456789489asdf8aq79e test@test</span><br></pre></td></tr></table></figure>
+<ul>
+<li>3.登陆Gitlab找到Settings配置选项</li>
+</ul>
+<p><img src="https://github.com/TianRandai111/Projact_Image/blob/master/GItlab/gitlab-sshkey/1.png?raw=true" alt="image"></p>
+<ul>
+<li>4.配置ssh-key访问<ul>
+<li><ol>
+<li>选择<code>SSH-Keys</code>选项 </li>
+</ol>
+</li>
+<li><ol start="2">
+<li>在<code>Add an SSH key</code>中添加刚刚在本机生成的<code>ssh-key</code></li>
+</ol>
+</li>
+<li><ol start="3">
+<li>填写<code>ssh-key</code>的名称</li>
+</ol>
+</li>
+<li><ol start="4">
+<li>添加<code>ssh-key</code></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://github.com/TianRandai111/Projact_Image/blob/master/GItlab/gitlab-sshkey/2.png?raw=true" alt="image"></p>
+<ul>
+<li>5.回到项目主页选择ssh链接</li>
+</ul>
+<p><img src="https://github.com/TianRandai111/Projact_Image/blob/master/GItlab/gitlab-sshkey/3.png?raw=true" alt="image"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/12/25/数据库/Mysql/Mysql语句操作 (2)/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="步荀仙">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kyz.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="步荀仙的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/25/数据库/Mysql/Mysql语句操作 (2)/" itemprop="url">Mariadb 数据库操作-2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T15:06:34+08:00">
+                2019-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/Mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/25/数据库/Mysql/Mysql语句操作 (2)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/25/数据库/Mysql/Mysql语句操作 (2)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/12/25/数据库/Mysql/Mysql语句操作 (2)/" class="leancloud_visitors" data-flag-title="Mariadb 数据库操作-2">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="3-数据库"><a href="#3-数据库" class="headerlink" title="3.数据库"></a>3.数据库</h2><h3 id="3-9-数据库基本概念"><a href="#3-9-数据库基本概念" class="headerlink" title="3.9 数据库基本概念"></a>3.9 数据库基本概念</h3><p>1、关系：两个表的公共字段</p>
+<p>2、行：也称记录，也称实体</p>
+<p>3、列：也称字段，也称属性<br>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/12/28/other/GitLab配置ssh-key上传拉取代码/#more" rel="contents">
+            <a class="btn" href="/2019/12/25/数据库/Mysql/Mysql语句操作 (2)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </p></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://boke.buxunxian.com/2019/12/25/数据库/Mysql/Mysql语句操作 (1)/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="步荀仙">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/kyz.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="步荀仙的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/25/数据库/Mysql/Mysql语句操作 (1)/" itemprop="url">Mariadb 数据库操作-1</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-25T15:06:34+08:00">
+                2019-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/Mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">Mysql</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/12/25/数据库/Mysql/Mysql语句操作 (1)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/12/25/数据库/Mysql/Mysql语句操作 (1)/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/12/25/数据库/Mysql/Mysql语句操作 (1)/" class="leancloud_visitors" data-flag-title="Mariadb 数据库操作-1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="3-1-数据库操作"><a href="#3-1-数据库操作" class="headerlink" title="3.1 数据库操作"></a>3.1 数据库操作</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查询数据库</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span> </span><br><span class="line"></span><br><span class="line"><span class="comment">#查看数据库创建语句</span></span><br><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">database</span> [库名]</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建数据库</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> [库名]</span><br><span class="line"></span><br><span class="line"><span class="comment">#选择数据库</span></span><br><span class="line"><span class="keyword">use</span> <span class="keyword">database</span> [库名]</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改数据库</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">database</span> [库名] <span class="keyword">charset</span>=[字符编码]</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除数据库</span></span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> [库名]</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/12/25/数据库/Mysql/Mysql语句操作 (1)/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -2144,7 +2324,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
