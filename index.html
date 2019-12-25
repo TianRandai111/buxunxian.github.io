@@ -547,14 +547,13 @@
 
       
         
-          <p>在<code>dockerfile</code>中将时区调整为上海时区</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/12/25/云计算/Docker/容器中设置上海时区/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <a id="more"></a>
+<p>在<code>dockerfile</code>中将时区调整为上海时区</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span> ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">RUN echo 'Asia/Shanghai' &gt;/etc/timezone</span><br></pre></td></tr></table></figure>
+<p>在dockerfile中添加两行代码即可</p>
+
+          
         
       
     </div>

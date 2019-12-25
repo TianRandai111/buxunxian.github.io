@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="在dockerfile中将时区调整为上海时区">
+<meta name="description" content="在dockerfile中将时区调整为上海时区 12RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtimeRUN echo &apos;Asia/Shanghai&apos; &amp;gt;/etc/timezone 在dockerfile中添加两行代码即可">
 <meta name="keywords" content="云计算,docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="容器中设置上海时区">
 <meta property="og:url" content="http://boke.buxunxian.com/2019/12/25/云计算/Docker/容器中设置上海时区/index.html">
 <meta property="og:site_name" content="步荀仙的博客">
-<meta property="og:description" content="在dockerfile中将时区调整为上海时区">
+<meta property="og:description" content="在dockerfile中将时区调整为上海时区 12RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtimeRUN echo &apos;Asia/Shanghai&apos; &amp;gt;/etc/timezone 在dockerfile中添加两行代码即可">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-25T07:19:08.057Z">
+<meta property="og:updated_time" content="2019-12-25T07:38:31.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="容器中设置上海时区">
-<meta name="twitter:description" content="在dockerfile中将时区调整为上海时区">
+<meta name="twitter:description" content="在dockerfile中将时区调整为上海时区 12RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtimeRUN echo &apos;Asia/Shanghai&apos; &amp;gt;/etc/timezone 在dockerfile中添加两行代码即可">
 
 
 
@@ -374,8 +374,8 @@
       
 
       
-        <p>在<code>dockerfile</code>中将时区调整为上海时区</p>
-<a id="more"></a>
+        <a id="more"></a>
+<p>在<code>dockerfile</code>中将时区调整为上海时区</p>
 <figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">RUN</span> ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">RUN echo 'Asia/Shanghai' &gt;/etc/timezone</span><br></pre></td></tr></table></figure>
 <p>在dockerfile中添加两行代码即可</p>
 
